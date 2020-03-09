@@ -1,0 +1,1078 @@
+@import url("https://fonts.googleapis.com/css?family=Girassol|Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Oswald:600&display=swap");
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  line-height: 2;
+  margin: 0px;
+  font-family: "Roboto", sans-serif;
+  background: #16191e;
+  overflow-y: none;
+}
+
+p {
+  color: white;
+  font-weight: normal;
+  font-size: 0.8em;
+}
+
+/* ===================================Navigation Bar==================================== */
+nav {
+  margin: 0px;
+  padding: 10px;
+  /* background: black; */
+  z-index: 2;
+}
+
+nav a {
+  color: rgba(255, 166, 0, 0.678);
+  font-size: 16px;
+  padding: 0px 14px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.navbar-logo {
+  width: 50px;
+}
+
+a .active {
+  border-bottom: solid 3px orange;
+}
+
+.collapse li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+nav a:hover {
+  color: rgb(255, 166, 0);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgba(255, 251, 251, 0.39);
+}
+
+/* =================================Banner====================================== */
+header {
+  min-height: 640px;
+  color: orange;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: url("../img/unnamed.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: scroll;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: multiply;
+  text-shadow: rgba(88, 81, 81, 0.699) 2px 2px;
+}
+
+.title-wraper {
+  margin: 2em 1em 0 1em;
+}
+
+header h1,
+h1 {
+  font-size: 2em;
+  color: rgb(255, 154, 0);
+  font-family: "Oswald", sans-serif;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+header p {
+  text-align: left;
+  color: rgb(255, 154, 0);
+}
+
+header h4 {
+  color: orange;
+  font-size: 1em;
+}
+
+.btn-wraper {
+  margin-top: -90px;
+}
+
+.btn-wraper span {
+  color: orange;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.btn {
+  width: 180px;
+  height: 45px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 10px;
+  border: 1px orange solid;
+  background-color: orange;
+  text-transform: uppercase;
+  color: black;
+  text-shadow: none;
+}
+
+.specialFont-wraper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.specialFont {
+  font-family: "Oswald", sans-serif;
+  font-size: 2em;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  color: rgb(255, 154, 0);
+}
+
+/* Logo PUBG di tengah */
+div img {
+  margin: 50px auto;
+  width: 150px;
+  margin-top: 0px;
+  margin-bottom: -60px;
+}
+
+img {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+
+/* ======================================Welcome================================================= */
+.welcome {
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.welcome span {
+  display: block;
+  margin-top: -10px;
+  font-size: 11px;
+  color: white;
+}
+
+/* ======================================Tourney Format and Prize================================================= */
+.tourneyInfoPrize {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.tournamentFormat {
+  width: 90%;
+}
+
+.prize {
+  width: 90%;
+  justify-content: baseline;
+}
+
+.param-wraper {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#prize-table {
+  color: white;
+  font-size: 1em;
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px 20px;
+  text-align: center;
+  border-bottom: solid 1px orange;
+}
+
+#prize-table tr {
+  text-align: center;
+  border-bottom: solid 1px orange;
+}
+
+#gold:before {
+  content: url("../img/iconmonstr-trophy-13-16\ gold.png");
+}
+
+#silver:before {
+  content: url("../img/iconmonstr-trophy-13-16\ silver.png");
+}
+
+#bronze:before {
+  content: url("../img/iconmonstr-trophy-13-16\ bronze.png");
+}
+
+#prize-table tr:hover {
+  background: rgba(104, 104, 102, 0.397);
+}
+
+/* ======================================Schedule================================================= */
+
+.container-sm-fluid {
+  background: url("../img/erangel-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  background-blend-mode: multiply;
+}
+
+#map-container {
+  margin: 0px auto 0;
+  height: 450px;
+  width: 100%;
+}
+
+[data-tab-content] {
+  display: none;
+}
+
+.active-tab[data-tab-content] {
+  display: block;
+}
+
+[data-tab-content2] {
+  display: none;
+}
+
+.active-tab[data-tab-content2] {
+  display: block;
+}
+
+.button-wraper {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid orange;
+  width: 96%;
+  margin: 2em auto 0;
+}
+
+.button2-wraper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid orange;
+  width: 96%;
+  margin-bottom: 10px;
+}
+
+.button-wraper button {
+  background: none;
+  color: rgba(255, 251, 251, 0.747);
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  width: 100%;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+}
+
+.button2-wraper button {
+  background: none;
+  color: rgba(255, 251, 251, 0.747);
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  width: 100%;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+}
+
+.button-wraper button:hover {
+  color: black;
+  background: orange;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  text-decoration: none;
+}
+
+.button2-wraper button:hover {
+  color: black;
+  background: orange;
+  border-radius: 0.25rem;
+  text-decoration: none;
+}
+
+.qualifier-wraper {
+  color: white;
+}
+
+.button-wraper .qualifier-active {
+  background: orange;
+  color: black;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.button2-wraper .qualifier-active {
+  background: orange;
+  color: black;
+  border-radius: 0.25rem;
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.jadwal-kiri,
+.jadwal-kanan {
+  padding: 29px 20px 0;
+}
+
+.jadwal-kiri li,
+.jadwal-kanan li {
+  list-style: none;
+}
+
+.qualifier-map-wraper {
+  text-align: center;
+}
+
+.groups {
+  color: orange;
+}
+
+#grandfinal {
+  margin: 29px auto 0;
+}
+
+#grandfinal::-webkit-scrollbar {
+  display: none;
+}
+
+#grandfinal h3 {
+  color: white;
+}
+
+#grandfinal h3 {
+  text-align: left;
+  margin-left: 35px;
+}
+
+.card {
+  position: relative;
+  width: 50%;
+  border: none;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: none;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.text {
+  color: black;
+  font-size: 20px;
+  top: 50%;
+  left: 50%;
+}
+
+.card button {
+  margin-top: 30px;
+  padding: 5px;
+  border-radius: 5px;
+  color: orange;
+  background-color: black;
+  border: none;
+  font-size: 12px;
+}
+
+.card a {
+  color: orange;
+}
+
+.card-text {
+  font-size: 1.2em;
+}
+
+/* ======================================Tournament info=============================== */
+
+.info {
+  padding: 0px;
+  margin: 0px auto;
+  min-width: 90%;
+  background-color: #16191e;
+}
+
+#menu3 li {
+  font-size: 0.8em;
+}
+
+#menu h5 {
+  font-size: 1em;
+}
+
+/* =====================================Participant=================================== */
+.kop-participant {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: -10px;
+}
+
+.info {
+  margin: 0 10px;
+}
+
+.team-card {
+  border-radius: 20px;
+  width: 280px;
+  height: 210px;
+  max-width: 96%;
+  background-color: #0e1013;
+  color: white;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.team-card img {
+  border-radius: 5px 5px 0 0;
+}
+
+.team-img {
+  height: 40%;
+}
+
+.team-container {
+  padding: 10px 0px;
+}
+
+.team-card ul {
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  /* padding: 5px; */
+}
+
+.team-card span {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.team-card li {
+  position: relative;
+  width: 50%;
+  font-size: 14px;
+}
+
+a .active :hover {
+  color: orange;
+}
+
+.home-wraper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#home,
+#menu1,
+#menu2,
+#menu3 {
+  margin: 0;
+}
+
+/* =====================================Pagination=================================== */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.pagination a {
+  color: orange;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  transition: border-radius .3s;
+}
+
+.pagination a.active {
+  background-color: orange;
+  color: black;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: rgba(104, 104, 102, 0.397);
+  color: white;
+  border-radius: 5px;
+
+}
+
+/* =====================================Table Standings=================================== */
+.collapsible {
+  width: 100%;
+  height: 40px;
+  background-color: #0e1013;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  margin: 5px auto 0;
+}
+
+.collapsible:after {
+  content: url("../img/iconmonstr-arrow-66-16.png");
+  float: right;
+  margin: 0 10px;
+}
+
+.collapsible-active:after {
+  content: url("../img/iconmonstr-arrow-65-16.png");
+  float: right;
+  margin: 0 10px;
+}
+
+.content {
+  width: 100%;
+  display: none;
+  overflow: auto;
+}
+
+.content table {
+  display: table;
+}
+
+.collapsible:hover {
+  background-color: #0e101377;
+}
+
+#menu1 th,
+#menu2 th,
+#menu3 th {
+  color: orange;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#menu2 {
+  background-color: #16191e;
+  color: #16191e;
+}
+
+#menu3 p,
+#menu3 li {
+  color: black;
+  font-weight: normal;
+  margin-left: 6px;
+  color: white;
+}
+
+table td {
+  font-size: 14px;
+  font-weight: normal;
+  text-align: center;
+}
+
+/* ==============================================Registrasi============================================ */
+.pendaftaran-title {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1.25em;
+}
+
+input#namaPemain,
+input#idPemain,
+input#namaTeam,
+input#singkatanTeam,
+input#noHP,
+input#email,
+select {
+  border-radius: 6px;
+  width: 250px;
+  height: 40px;
+  text-align: left;
+  text-indent: 10px;
+  margin: 5px auto;
+  border: none;
+  outline: none;
+}
+
+input#singkatanTeam {
+  text-transform: uppercase;
+}
+
+label {
+  margin-left: 7px;
+}
+
+.form {
+  background-color: rgb(175, 175, 175);
+  padding: 70px 0;
+  margin: 0px auto;
+  transition: background-color 0.7s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.kiri {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0px 30px;
+}
+
+.kanan {
+  width: 90%;
+  margin: 2em 30px 0;
+  text-align: center;
+}
+
+.kanan img {
+  width: 240px;
+  height: 240px;
+  border-radius: 280px;
+}
+
+.form p {
+  color: black;
+}
+
+.form li {
+  list-style: none;
+}
+
+.form:hover {
+  background-color: #fba421;
+}
+
+.team {
+  margin-bottom: 2em;
+  /* width: 250px; */
+}
+
+#submit {
+  border-radius: 6px;
+  width: 250px;
+  height: 40px;
+  margin: 2em auto;
+  background-color: black;
+  border: none;
+  font-size: 20px;
+  font-weight: bolder;
+  cursor: pointer;
+  color: orange;
+}
+
+.submit,
+.teamname,
+.abbrteam,
+.logotim,
+.id1,
+.player1,
+.id2,
+.player2,
+.id3,
+.player3,
+.id4,
+.player4,
+.noHP,
+.email {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+/* =======================================Footer================================ */
+footer {
+  background: url("../img/3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-blend-mode: multiply;
+  height: 400px;
+  margin: 0px;
+  padding: 20px;
+  width: 100%;
+  color: #ffa500;
+  line-height: 45px;
+  clear: both;
+  font-size: 16px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+footer h4 {
+  font-size: 1.25em;
+  color: white;
+  font-weight: bold;
+}
+
+footer p {
+  margin: 0;
+}
+
+.footer-content {
+  position: absolute;
+  width: 90%;
+  margin: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.content-1 {
+  width: 90%;
+  padding: 1.5em;
+}
+
+.content-2-wraper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.content-2 {
+  width: 90%;
+  padding: 1.5em;
+}
+
+.content-2 h5 {
+  margin-left: -100px;
+}
+
+.profile {
+  width: 32px;
+  height: 32px;
+  border-radius: 100px;
+}
+
+.icon-social {
+  width: 32px;
+  height: 32px;
+}
+
+.icon-social-wraper {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: center;
+  padding: 1.5em;
+}
+
+.icon-social-wraper a {
+  margin: 0 10px;
+}
+
+.background-overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 400px;
+  bottom: 0;
+  left: 0;
+}
+
+/* =======================================Tombol back to top================================= */
+.backtotop button {
+  color: orange;
+  background-color: black;
+  border-style: none;
+  font-weight: bolder;
+  font-size: 16px;
+  float: right;
+  margin: 20px;
+  background-color: black;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.backtotop button:hover {
+  color: black;
+  background-color: orange;
+  border-color: aqua;
+  border-style: solid 16px;
+}
+
+@media screen and (max-width: 576px) {
+  /* Home */
+
+  h1 {
+    font-size: 3em;
+  }
+
+  .container-sm-fluid .card .card-body {
+    padding: -30px;
+  }
+
+  .home-wraper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ===============================================Registration===================================================== */
+  .team {
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .logotim,
+  input#logo {
+    width: 250px;
+  }
+
+  .submit,
+  .teamname,
+  .abbrteam,
+  .logotim,
+  .id1,
+  .player1,
+  .id2,
+  .player2,
+  .id3,
+  .player3,
+  .id4,
+  .player4,
+  .noHP,
+  .email {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  #submit {
+    width: 505px;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  p {
+    font-size: 1em;
+  }
+
+  #menu3 li {
+    font-size: 1em;
+  }
+
+  #menu h5 {
+    font-size: 1em;
+  }
+
+  /* ===============================================Navbar===================================================== */
+
+  .navbar-logo {
+    width: 85px;
+    height: 62.5px;
+  }
+
+  /* ===============================================Format & Prize===================================================== */
+
+  .tourneyInfoPrize {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .tournamentFormat {
+    width: 50%;
+  }
+
+  .prize {
+    border-left: 1px solid orange;
+    width: 50%;
+  }
+
+  .param-wraper {
+    width: 80%;
+  }
+
+  .info {
+    margin: 0 20px;
+  }
+
+  /* ===============================================Tournament Information===================================================== */
+
+  #home,
+  #menu1,
+  #menu2,
+  #menu3 {
+    margin: 0 20px;
+  }
+
+  /* ===============================================Banner===================================================== */
+
+  header {
+    display: flex;
+    flex-direction: row;
+    min-height: 360px;
+    background-attachment: fixed;
+  }
+
+  .title-wraper {
+    margin: 20em 2em 5em 2em;
+    display: block;
+    width: 50%;
+  }
+
+  header h1 {
+    font-size: 3em;
+  }
+
+  header p {
+    font-size: 1em;
+  }
+
+  .btn-wraper {
+    margin-top: 16em;
+    justify-content: center;
+    align-self: center;
+    width: 40%;
+  }
+
+  .btn-wraper span {
+    font-size: 2em;
+  }
+
+  .btn {
+    background-color: transparent;
+    color: orange;
+    width: 220px;
+    font-size: 18px;
+  }
+
+  .btn:hover {
+    background: rgb(255, 154, 0);
+    color: black;
+  }
+
+  .specialFont {
+    font-size: 2.5em;
+  }
+
+  .button2-wraper {
+    flex-direction: row;
+  }
+
+  .button2-wraper button:hover {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .button2-wraper .qualifier-active {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  /* ===============================================Footer===================================================== */
+  footer {
+    height: 250px;
+    background-attachment: fixed;
+  }
+
+  .background-overlay {
+    height: 250px;
+  }
+
+  .footer-content {
+    flex-direction: row;
+  }
+
+  .content-1 {
+    width: 33%;
+  }
+
+  .content-2 {
+    width: 33%;
+  }
+
+  .icon-social-wraper {
+    width: 33%;
+  }
+
+  /* ===============================================Registration===================================================== */
+
+  div img {
+    padding: 20px;
+  }
+
+  .kanan img {
+    width: 300px;
+    height: 300px;
+    border-radius: 280px;
+  }
+
+}
+
+@media screen and (min-width: 1140px) {
+  .form {
+    flex-direction: row;
+  }
+
+  .kanan {
+    width: 50%;
+    margin: 0 30px;
+  }
+
+  .kiri {
+    width: 50%;
+  }
+
+  header {
+    min-height: 100vh;
+  }
+}

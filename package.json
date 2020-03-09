@@ -1,0 +1,19 @@
+{
+  "name": "pubgmwc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "Rey Mooy",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.1"
+  }
+}

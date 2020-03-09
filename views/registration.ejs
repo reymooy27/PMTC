@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>PUBG Mobile Terminator Weekly Challenge - Pendaftaran</title>
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+
+</head>
+
+<body>
+  <!-- NavBar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+    <a href="/" style="color: orange;"><img src="./img/logo.png" class="navbar-logo" alt="">
+    </a>
+    <button class="btn-warning navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="btn-warning navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="navbar-item">
+          <a href="/">Home</a>
+        </li>
+        <li class="navbar-item">
+          <a class="active" href="/registration">Registration</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <br>
+  <br>
+  <!-- Pendaftaran -->
+  <div class="form">
+    <form class="kiri" action="/register" method="POST">
+      <!--Info Team-->
+      <h2 class="pendaftaran-title">Pendaftaran</h2>
+      <div class="team">
+        <h4>Data Team</h4>
+        <div class="teamname">
+          <label for="namaTeam">Nama Tim </label>
+          <br>
+          <input data-toggle="tooltip" data-placement="top" title="Masukan Nama Tim Anda" type="text" name="teamName"
+            id="namaTeam" placeholder="Bigetron" required />
+        </div>
+        <div class="abbrteam">
+          <label for="singkatanTeam">Abbr </label>
+          <br>
+          <input data-toggle="tooltip" data-placement="top" title="Masukan Singkatan Tim Anda" type="text" required
+            name="singkatanTeam" id="singkatanTeam" maxlength="5" placeholder="BTR" />
+
+        </div>
+        <br>
+        <div class="logotim">
+          <label for="logo">Logo Tim (Optional) </label>
+          <br>
+          <input data-toggle="tooltip" data-placement="top" title="Masukan Logo Tim Anda (150x150px)" type="file"
+            id="logo" name="logo" />
+        </div>
+      </div>
+
+      <!--Roster-->
+      <div class="roster">
+        <h4>Data Pemain</h4>
+        <ul>
+          <li>
+            <div class="id1">
+              <label for="idPemain">ID In Game </label>
+              <br>
+              <input data-toggle="tooltip" data-placement="top" title="Masukan ID In Game Anda" type="text" required
+                name="idPlayer" id="idPemain" placeholder="1234567890" minlength="8" maxlength="10" pattern="[0-9]+" />
+            </div>
+            <div class="player1">
+              <label for="namaPemain">Nama Pemain </label>
+              <br>
+              <input data-toggle="tooltip" data-placement="top" title="Masukan Nama In Game Anda" type="text" required
+                name="playerName" maxlength="14" id="namaPemain" placeholder="BTR_Nama" />
+            </div>
+          </li>
+          <li>
+            <div class="id2">
+              <label for="idPemain">ID In Game </label>
+              <br>
+              <input data-toggle="tooltip" data-placement="top" title="Masukan ID In Game Anda" type="text" required
+                name="idPlayer2" id="idPemain" placeholder="1234567890" minlength="8" maxlength="10" pattern="[0-9]+" />
+            </div>
+            <div class="player2">
+              <label for="namaPemain">Nama Pemain </label>
+              <br>
+              <input data-toggle="tooltip" data-placement="top" title="Masukan Nama In Game Anda" type="text" required
+                name="playerName2" maxlength="14" id="namaPemain" placeholder="BTR_Nama" />
+            </div>
+          </li>
+          <li>
+            <div class="id3">
+              <label for="idPemain">ID In Game </label>
+              <br>
+              <input data-toggle="tooltip" data-placement="top" title="Masukan ID In Game Anda" type="text" required
+                name="idPlayer3" id="idPemain" placeholder="1234567890" minlength="8" maxlength="10" pattern="[0-9]+" />
+            </div>
+            <div class="player3">
+              <label for="namaPemain">Nama Pemain </label>
+              <br>
+              <input data-toggle="tooltip" data-placement="top" title="Masukan Nama In Game Anda" type="text" required
+                name="playerName3" maxlength="14" id="namaPemain" placeholder="BTR_Nama" />
+            </div>
+          </li>
+          <li>
+            <div class="id4">
+              <label for="idPemain">ID In Game </label>
+              <br>
+              <input data-toggle="tooltip" data-placement="top" title="Masukan ID In Game Anda" type="text" required
+                name="idPlayer4" id="idPemain" placeholder="1234567890" minlength="8" maxlength="10" pattern="[0-9]+" />
+            </div>
+            <div class="player4">
+              <label for="namaPemain">Nama Pemain </label>
+              <br>
+              <input data-toggle="tooltip" data-placement="top" title="Masukan Nama In Game Anda" type="text" required
+                name="playerName4" maxlength="14" id="namaPemain" placeholder="BTR_Nama" />
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!--contact-->
+      <div class="contact">
+        <div class="noHP">
+          <label for="noHP">Nomor HP (Aktif WA) </label>
+          <br>
+          <input data-toggle="tooltip" data-placement="top" title="Masukan Nomor Handphone Yang Terhubung Dengan WA"
+            type="text" id="noHP" name="handphoneNumber" placeholder="081234567890" required minlength="11"
+            maxlength="12" pattern="[0-9]+" />
+        </div>
+        <div class="email">
+          <label for="email">Email </label>
+          <br>
+          <input data-toggle="tooltip" data-placement="top" title="Masukan Email Anda" type="email" required id="email"
+            name="email" placeholder="btr@gmail.com" />
+        </div>
+      </div>
+      <div class="submit">
+        <input data-toggle="tooltip" dtoplacement="right" title="Pastikan Data Yang Anda Isi Adalah Benar" type="submit"
+          value="SUBMIT" id="submit" />
+      </div>
+    </form>
+    <div class="kanan">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ratione, fuga sapi
+        ente nemo neque illo veritatis iusto expedita provident excepturi nesciunt voluptatum fu
+        git nihil. Minima fugit voluptates ducimus provident quae!</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nihil facere odit ad unde
+        ullam temporibus magni eveniet eligendi voluptatibus! Corrupti, voluptate eius.</p>
+      <br><br>
+      <img src="./img/851f8f453fa0070f2a3496b4a2651ebc.jpg" alt="">
+      <br>
+      <br>
+      <br>
+      <br>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni vitae minima, quaerat possimus consequatur
+        ducimus optio aliquid id, perferendis vel officiis quia facere iste iusto! Temporibus sint ex voluptatem minima?
+      </p>
+    </div>
+  </div>
+  <script defer src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script defer type="text/javascript" src="./js/bootstrap.min.js"></script>
+  <script defer>
+    $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+</body>
+
+</html>
