@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
@@ -52,7 +53,7 @@
         <div class="btn-wraper">
             <h4>Registration Open :</h4>
             <span>12/2 - 19/2</span>
-            <h4>Participants : <%= jumlahParticipant %>/120</h4>
+            <h4>Registered : <%= jumlahParticipant %>/64</h4>
             <a href="./registration" class="btn">Join Tournament</a>
         </div>
     </header>
@@ -62,7 +63,7 @@
         Welcome
     ======================
     -->
-    <div class="welcome">
+    <div data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" data-aos-once="true" class="welcome">
         <h4 class="specialFont">Welcome</h4>
         <p>Selamat datang para PECUNDANG, yang kalau kill 20-an di classic match dan menyebut diri mereka PRO padahal
             10-nya BOT, SAMPAH!!!. Buktikan kalau kamu memang layak disebut PRO, kalahkan pemain lainnya, buktikan
@@ -74,17 +75,34 @@
         Tournament Format and Prize Pool
         ==================
     -->
-    <div class="tourneyInfoPrize">
-        <div class="tournamentFormat">
+    <div class=" tourneyInfoPrize">
+        <div data-aos="fade-left" data-aos-delay="400" data-aos-duration="1000" data-aos-once="true"
+            class="tournamentFormat">
             <h4 class="specialFont">Format</h4>
             <div class="param-wraper">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum eligendi maxime laboriosam, facere
-                    qui
-                    dolore ducimus neque aspernatur cupiditate aut vero id obcaecati quas, dignissimos ullam sapiente
-                    quibusdam, consectetur ipsam!</p>
+                <div class="detail-left">
+                    <div class="param-wraper-detail">
+                        <h5>Entry Fee</h5>
+                        <span>Rp. 100,000</span>
+                    </div>
+                    <div class="param-wraper-detail">
+                        <h5>Prize Pool</h5>
+                        <span>Rp. 3,200,000</span>
+                    </div>
+                </div>
+                <div class="detail-right">
+                    <div class="param-wraper-detail">
+                        <h5>Team Size</h5>
+                        <span>4v4</span>
+                    </div>
+                    <div class="param-wraper-detail">
+                        <h5>Tournament Format</h5>
+                        <span>Group Elimination</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="prize">
+        <div data-aos="fade-right" data-aos-delay="400" data-aos-duration="1000" data-aos-once="true" class="prize">
             <h4 class="specialFont">Prize</h4>
             <div class="param-wraper">
                 <table id="prize-table">
@@ -108,75 +126,125 @@
     <!-- ==============
         Match Map
     ===================  -->
-    <div class="specialFont-wraper">
-        <h4 class="mb-2 text-center specialFont">schedule</h4>
-    </div>
-    <div class="button-wraper">
-        <button class="qualifier" data-tab-target="#qualifier">Group Stage</button>
-        <button class="qualifier qualifier-active" data-tab-target="#grandfinal">Grand Final</button>
-    </div>
-    <div id="map-container" class="container-sm-fluid text-sm-center p-3">
-        <div id="qualifier" data-tab-content class="qualifier-wraper">
-            <div class="wrap">
-                <div class="jadwal-kiri">
-                    <h3>19 February</h3>
-                    <h4 class="groups">Group A</h4>
-                    <ul>
-                        <li>Match 1 : <span class="groups">16.00</span></li>
-                        <li>Match 2 : <span class="groups">17.00</span></li>
-                        <li>Match 3 : <span class="groups">18.00</span></li>
-                    </ul>
-                    <h4 class="groups">Group B</h4>
-                    <ul>
-                        <li>Match 1 : <span class="groups">19.00</span></li>
-                        <li>Match 2 : <span class="groups">20.00</span></li>
-                        <li>Match 3 : <span class="groups">21.00</span></li>
-                    </ul>
-                </div>
-                <div class="jadwal-kanan">
-                    <h3>20 February</h3>
-                    <h4 class="groups">Group C</h4>
-                    <ul>
-                        <li>Match 1 : <span class="groups">16.00</span></li>
-                        <li>Match 2 : <span class="groups">17.00</span></li>
-                        <li>Match 3 : <span class="groups">18.00</span></li>
-                    </ul>
-                    <h4 class="groups">Group D</h4>
-                    <ul>
-                        <li>Match 1 : <span class="groups">19.00</span></li>
-                        <li>Match 2 : <span class="groups">20.00</span></li>
-                        <li>Match 3 : <span class="groups">21.00</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class='qualifier-map-wraper'>
-                <h6>Map : Sanhok - Erangel - Sanhok</h6>
-            </div>
+    <div data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000" data-aos-once="true">
+        <div class="specialFont-wraper">
+            <h4 class="mb-2 text-center specialFont">schedule</h4>
         </div>
-        <table id="grandfinal" data-tab-content class="table-responsive-xl active-tab">
-            <tr>
-                <td colspan="3">
-                    <h3>21 February</h3>
-                </td>
-                <td colspan="3">
-                    <h3>22 February</h3>
-                </td>
-            </tr>
-            <tr class="">
-                <div>
+        <div class="button-wraper">
+            <button class="qualifier" data-tab-target="#qualifier">Group Stage</button>
+            <button class="qualifier qualifier-active" data-tab-target="#grandfinal">Grand Final</button>
+        </div>
+        <div id="map-container" class="container-sm-fluid text-sm-center p-3">
+            <div id="qualifier" data-tab-content class="qualifier-wraper">
+                <div class="wrap">
+                    <div class="jadwal-kiri">
+                        <h3>19 February</h3>
+                        <h4 class="groups">Group A</h4>
+                        <ul>
+                            <li>Match 1 : <span class="groups">16.00</span></li>
+                            <li>Match 2 : <span class="groups">17.00</span></li>
+                            <li>Match 3 : <span class="groups">18.00</span></li>
+                        </ul>
+                        <h4 class="groups">Group B</h4>
+                        <ul>
+                            <li>Match 1 : <span class="groups">19.00</span></li>
+                            <li>Match 2 : <span class="groups">20.00</span></li>
+                            <li>Match 3 : <span class="groups">21.00</span></li>
+                        </ul>
+                    </div>
+                    <div class="jadwal-kanan">
+                        <h3>20 February</h3>
+                        <h4 class="groups">Group C</h4>
+                        <ul>
+                            <li>Match 1 : <span class="groups">16.00</span></li>
+                            <li>Match 2 : <span class="groups">17.00</span></li>
+                            <li>Match 3 : <span class="groups">18.00</span></li>
+                        </ul>
+                        <h4 class="groups">Group D</h4>
+                        <ul>
+                            <li>Match 1 : <span class="groups">19.00</span></li>
+                            <li>Match 2 : <span class="groups">20.00</span></li>
+                            <li>Match 3 : <span class="groups">21.00</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class='qualifier-map-wraper'>
+                    <h6>Map : Sanhok - Erangel - Sanhok</h6>
+                </div>
+            </div>
+            <table id="grandfinal" data-tab-content class="table-responsive-xl active-tab">
+                <tr>
+                    <td colspan="3">
+                        <h3>21 February</h3>
+                    </td>
+                    <td colspan="3">
+                        <h3>22 February</h3>
+                    </td>
+                </tr>
+                <tr class="">
                     <div>
+                        <div>
+                            <td>
+                                <div class="col-sm-md m-2">
+                                    <h4 class="groups">19.00</h4>
+                                    <div class="card" style="width: 12rem;">
+                                        <img src="./img/erangel.jpg" class="card-img p-0" alt="">
+                                        <div class="overlay">
+                                            <img src="./img/LOGOTIM.png" alt="">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title text-light font-weight-bolder">Erangel</h5>
+                                            <p class="card-text text-dark font-weight-bolder">TPP</p>
+                                            <p class="card-text text-dark font-weight-bolder mt-n4">Match 1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-md m-2">
+                                    <h4 class="groups">20.00</h4>
+                                    <div class="card" style="width: 12rem;">
+                                        <img src="./img/erangel.jpg" class="card-img-top p-0" alt="">
+                                        <div class="overlay">
+                                            <img src="./img/LOGOTIM.png" alt="">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title text-light font-weight-bolder">Erangel</h5>
+                                            <p class="card-text text-dark font-weight-bolder">TPP</p>
+                                            <p class="card-text text-dark font-weight-bolder mt-n4">Match 2</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-md m-2">
+                                    <h4 class="groups">21.00</h4>
+                                    <div class="card" style="width: 12rem;">
+                                        <img src="./img/erangel.jpg" class="card-img-top p-0" alt="">
+                                        <div class="overlay">
+                                            <img src="./img/LOGOTIM.png" alt="">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title text-light font-weight-bolder">Erangel</h5>
+                                            <p class="card-text text-dark font-weight-bolder">TPP</p>
+                                            <p class="card-text text-dark font-weight-bolder mt-n4">Match 3</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </div>
                         <td>
                             <div class="col-sm-md m-2">
                                 <h4 class="groups">19.00</h4>
                                 <div class="card" style="width: 12rem;">
-                                    <img src="./img/erangel.jpg" class="card-img p-0" alt="">
+                                    <img src="./img/miramar.jpg" class="card-img-top p-0" alt="">
                                     <div class="overlay">
                                         <img src="./img/LOGOTIM.png" alt="">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title text-light font-weight-bolder">Erangel</h5>
+                                        <h5 class="card-title text-light font-weight-bolder">Miramar</h5>
                                         <p class="card-text text-dark font-weight-bolder">TPP</p>
-                                        <p class="card-text text-dark font-weight-bolder mt-n4">Match 1</p>
+                                        <p class="card-text text-dark font-weight-bolder mt-n4">Match 4</p>
                                     </div>
                                 </div>
                             </div>
@@ -185,14 +253,14 @@
                             <div class="col-sm-md m-2">
                                 <h4 class="groups">20.00</h4>
                                 <div class="card" style="width: 12rem;">
-                                    <img src="./img/erangel.jpg" class="card-img-top p-0" alt="">
+                                    <img src="./img/miramar.jpg" class="card-img-top p-0" alt="">
                                     <div class="overlay">
                                         <img src="./img/LOGOTIM.png" alt="">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title text-light font-weight-bolder">Erangel</h5>
-                                        <p class="card-text text-dark font-weight-bolder">TPP</p>
-                                        <p class="card-text text-dark font-weight-bolder mt-n4">Match 2</p>
+                                        <h5 class="card-title text-light font-weight-bolder">Miramar</h5>
+                                        <p class="card-text text-dark font-weight-bold  er">TPP</p>
+                                        <p class="card-text text-dark font-weight-bolder mt-n4">Match 5</p>
                                     </div>
                                 </div>
                             </div>
@@ -201,77 +269,29 @@
                             <div class="col-sm-md m-2">
                                 <h4 class="groups">21.00</h4>
                                 <div class="card" style="width: 12rem;">
-                                    <img src="./img/erangel.jpg" class="card-img-top p-0" alt="">
+                                    <img src="./img/miramar.jpg" class="card-img-top p-0" alt="">
                                     <div class="overlay">
                                         <img src="./img/LOGOTIM.png" alt="">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title text-light font-weight-bolder">Erangel</h5>
+                                        <h5 class="card-title text-light font-weight-bolder">Miramar</h5>
                                         <p class="card-text text-dark font-weight-bolder">TPP</p>
-                                        <p class="card-text text-dark font-weight-bolder mt-n4">Match 3</p>
+                                        <p class="card-text text-dark font-weight-bolder mt-n4">Match 6</p>
                                     </div>
                                 </div>
                             </div>
                         </td>
                     </div>
-                    <td>
-                        <div class="col-sm-md m-2">
-                            <h4 class="groups">19.00</h4>
-                            <div class="card" style="width: 12rem;">
-                                <img src="./img/miramar.jpg" class="card-img-top p-0" alt="">
-                                <div class="overlay">
-                                    <img src="./img/LOGOTIM.png" alt="">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title text-light font-weight-bolder">Miramar</h5>
-                                    <p class="card-text text-dark font-weight-bolder">TPP</p>
-                                    <p class="card-text text-dark font-weight-bolder mt-n4">Match 4</p>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="col-sm-md m-2">
-                            <h4 class="groups">20.00</h4>
-                            <div class="card" style="width: 12rem;">
-                                <img src="./img/miramar.jpg" class="card-img-top p-0" alt="">
-                                <div class="overlay">
-                                    <img src="./img/LOGOTIM.png" alt="">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title text-light font-weight-bolder">Miramar</h5>
-                                    <p class="card-text text-dark font-weight-bold  er">TPP</p>
-                                    <p class="card-text text-dark font-weight-bolder mt-n4">Match 5</p>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="col-sm-md m-2">
-                            <h4 class="groups">21.00</h4>
-                            <div class="card" style="width: 12rem;">
-                                <img src="./img/miramar.jpg" class="card-img-top p-0" alt="">
-                                <div class="overlay">
-                                    <img src="./img/LOGOTIM.png" alt="">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title text-light font-weight-bolder">Miramar</h5>
-                                    <p class="card-text text-dark font-weight-bolder">TPP</p>
-                                    <p class="card-text text-dark font-weight-bolder mt-n4">Match 6</p>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </div>
-            </tr>
-        </table>
+                </tr>
+            </table>
+        </div>
     </div>
     <br>
 
     <!-- ===================== 
         Tournament Information
         ====================== -->
-    <div class="info">
+    <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000" data-aos-once="true" class="info">
         <div class="specialFont-wraper">
             <h4 class="text-center specialFont">Tournament Information</h4>
         </div>
@@ -515,7 +535,7 @@
                                     <td>0</td>
                                     <td>0</td>
                                 </tr>
-                                </table>
+                        </table>
                     </div>
                     <button class="collapsible">GROUP B</button>
                     <div class="content">
@@ -713,7 +733,7 @@
                                     <td>0</td>
                                     <td>0</td>
                                 </tr>
-                                </table>
+                        </table>
                     </div>
                     <button class="collapsible">GROUP C</button>
                     <div class="content">
@@ -1672,14 +1692,14 @@
                 <h4>Organized by:</h4>
                 <div class="content-2-wraper">
                     <img src="./img/profile.jpg" alt="" class="profile">
-                    <h5>r3tr0</h5>
+                    <!-- <h5>r3tr0</h5> -->
                 </div>
             </div>
             <div class="icon-social-wraper">
                 <a href="https://www.facebook.com/profile.php?id=100007913565099" target="_blank"><img
-                        class="icon-social" src="./img/facebook.svg" alt=""></a>
+                        class="icon-social" src="./img/iconmonstr-facebook-4-72.png" alt=""></a>
                 <a href="https://www.instagram.com/reyartem/?hl=id" target="_blank"><img class="icon-social"
-                        src="./img/instagram.svg" alt=""></a>
+                        src="./img/iconmonstr-instagram-14-72.png" alt=""></a>
             </div>
         </div>
     </footer>
@@ -1690,9 +1710,10 @@
     <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
-    <script type="text/javascript" src="./js/bootstrap.min.js" defer></script>
-    <script type="text/javascript" src="./js/script.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+    <script defer type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script defer type="text/javascript" src="./js/script.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 </body>
 
 

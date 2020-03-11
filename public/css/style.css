@@ -29,7 +29,7 @@ p {
 nav {
   margin: 0px;
   padding: 10px;
-  /* background: black; */
+  background: black;
   z-index: 2;
 }
 
@@ -69,6 +69,18 @@ nav a:hover {
 
 a:hover {
   color: rgba(255, 251, 251, 0.39);
+}
+
+.tombolkembali {
+  margin: 0 auto 0 0;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tombolkembali a img {
+  width: 32px;
 }
 
 /* =================================Banner====================================== */
@@ -191,17 +203,47 @@ img {
 
 .tournamentFormat {
   width: 90%;
+  margin-bottom: 2em;
 }
 
 .prize {
   width: 90%;
-  justify-content: baseline;
 }
 
 .param-wraper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  text-align: center;
+  /* text-align: left; */
   margin: 0 auto;
+}
+
+.param-wraper-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  width: 150px;
+  height: 50px;
+  border: 1px solid orange;
+  border-radius: 5px;
+}
+
+.param-wraper-detail h5 {
+  font-size: 12px;
+  color: #959aa2;
+}
+
+.param-wraper-detail span {
+  display: block;
+  margin-top: -10px;
+  color: white;
+  font-size: 14px;
+  font-weight: bolder;
 }
 
 #prize-table {
@@ -507,7 +549,7 @@ img {
 }
 
 a .active :hover {
-  color: orange;
+  color: #ffa600;
 }
 
 .home-wraper {
@@ -537,8 +579,8 @@ a .active :hover {
   float: left;
   padding: 8px 16px;
   text-decoration: none;
-  transition: background-color .3s;
-  transition: border-radius .3s;
+  transition: background-color 0.3s;
+  transition: border-radius 0.3s;
 }
 
 .pagination a.active {
@@ -551,7 +593,6 @@ a .active :hover {
   background-color: rgba(104, 104, 102, 0.397);
   color: white;
   border-radius: 5px;
-
 }
 
 /* =====================================Table Standings=================================== */
@@ -618,10 +659,21 @@ table td {
 }
 
 /* ==============================================Registrasi============================================ */
+
 .pendaftaran-title {
   text-align: center;
   font-weight: bold;
   margin-bottom: 1.25em;
+}
+
+input#namaPemain:focus,
+input#idPemain:focus,
+input#namaTeam:focus,
+input#singkatanTeam:focus,
+input#noHP:focus,
+input#email:focus,
+select {
+  border: 2px solid rgba(5, 160, 5, 0.76);
 }
 
 input#namaPemain,
@@ -772,11 +824,13 @@ footer p {
 .content-1 {
   width: 90%;
   padding: 1.5em;
+  margin-bottom: -2em;
 }
 
 .content-2-wraper {
   display: flex;
   flex-direction: row;
+  justify-content: left;
   align-items: flex-start;
 }
 
@@ -785,19 +839,19 @@ footer p {
   padding: 1.5em;
 }
 
-.content-2 h5 {
-  margin-left: -100px;
+.profile {
+  width: 46px;
+  border-radius: 100px;
+  padding: 0;
 }
 
-.profile {
-  width: 32px;
-  height: 32px;
-  border-radius: 100px;
+.profile::after {
+  content: "r3tr0";
 }
 
 .icon-social {
-  width: 32px;
-  height: 32px;
+  width: 46px;
+  padding: 0;
 }
 
 .icon-social-wraper {
@@ -806,10 +860,11 @@ footer p {
   width: 90%;
   justify-content: center;
   padding: 1.5em;
+  margin-top: 1em;
 }
 
 .icon-social-wraper a {
-  margin: 0 10px;
+  margin: 1em 10px;
 }
 
 .background-overlay {
@@ -861,6 +916,7 @@ footer p {
   }
 
   /* ===============================================Registration===================================================== */
+
   .team {
     width: 250px;
     display: flex;
@@ -915,6 +971,10 @@ footer p {
   .navbar-logo {
     width: 85px;
     height: 62.5px;
+  }
+
+  .tombolkembali a img {
+    width: 72px;
   }
 
   /* ===============================================Format & Prize===================================================== */
@@ -1055,7 +1115,16 @@ footer p {
     height: 300px;
     border-radius: 280px;
   }
+}
 
+@media screen and (min-width: 976px) {
+  .participant-details {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 350px;
+    height: 50px;
+  }
 }
 
 @media screen and (min-width: 1140px) {
