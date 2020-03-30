@@ -88,14 +88,14 @@ router.post("/registration", urlencoded, async (req, res) => {
 
 router.get("/", (req, res) => {
   Participant.find().then(participants => {
-    const page = req.query.page;
-    const limit = req.query.limit;
+    // const page = req.query.page;
+    // const limit = req.query.limit;
 
-    const startIndex = (page - 1) * limit;
-    const endIndex = page * limit;
+    // const startIndex = (page - 1) * limit;
+    // const endIndex = page * limit;
 
-    const resultParty = participants.slice(startIndex, endIndex);
-    console.log(resultParty);
+    // const resultParty = participants.slice(startIndex, endIndex);
+    // console.log(resultParty);
 
     res.render("index", {
       jumlahParticipant: participants.length,
