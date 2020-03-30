@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const Participant = require("../model/participant");
-const { registerValidation } = require("../validation");
+const {
+  registerValidation
+} = require("../validation");
 const express = require("express");
 const app = express();
 const urlencoded = app.use(
@@ -9,47 +11,53 @@ const urlencoded = app.use(
   })
 );
 
-router.post("/register", urlencoded, async (req, res) => {
+router.get("/registration", (req, res) => {
+  res.render("registration");
+});
+
+router.post("/registration", urlencoded, async (req, res) => {
   //validation
-  const { error } = registerValidation(req.body);
+  const {
+    error
+  } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   //check if the prticipant already exist
   const teamNameExist = await Participant.findOne({
     teamName: req.body.teamName
   });
-  if (teamNameExist) return res.status(400).send("Team already registered");
+  if (teamNameExist) return res.status(400).send("Nama Tim sudah terdaftar");
 
   const idPlayerExist = await Participant.findOne({
     idPlayer: req.body.idPlayer
   });
-  if (idPlayerExist) return res.status(400).send("ID already registered");
+  if (idPlayerExist) return res.status(400).send("ID sudah terdaftar");
 
   const idPlayerExist2 = await Participant.findOne({
     idPlayer2: req.body.idPlayer2
   });
-  if (idPlayerExist2) return res.status(400).send("ID already registered");
+  if (idPlayerExist2) return res.status(400).send("ID sudah terdaftar");
 
   const idPlayerExist3 = await Participant.findOne({
     idPlayer3: req.body.idPlayer3
   });
-  if (idPlayerExist3) return res.status(400).send("ID already registered");
+  if (idPlayerExist3) return res.status(400).send("ID sudah terdaftar");
 
   const idPlayerExist4 = await Participant.findOne({
     idPlayer4: req.body.idPlayer4
   });
-  if (idPlayerExist4) return res.status(400).send("ID already registered");
+  if (idPlayerExist4) return res.status(400).send("ID sudah terdaftar");
 
   const handphoneNumberExist = await Participant.findOne({
     handphoneNumber: req.body.handphoneNumber
   });
   if (handphoneNumberExist)
-    return res.status(400).send("Handphone Number already registered");
+    return res.status(400).send("Nomor HP sudah terdaftar");
 
   const emailExist = await Participant.findOne({
     email: req.body.email
   });
-  if (emailExist) return res.status(400).send("Email already registered");
+  if (emailExist) return res.status(400).send("Email sudah terdaftar");
 
   //create a new user
   const participant = new Participant({
@@ -96,9 +104,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/registration", (req, res) => {
-  res.render("registration");
-});
+
 
 router.get("/participant/:id", (req, res) => {
   res.send(`${req.params.id}`);
@@ -108,7 +114,7 @@ router.get("/register", (req, res) => {
   Participant.find().then(participants => {
     const a = participants;
 
-    res.json(a.teamName);
+    res.json(a);
   });
 });
 

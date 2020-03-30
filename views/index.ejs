@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>PUBG Mobile Terminator Weekly Challenge</title>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -19,29 +20,24 @@
     <!-- ===========
         Navbar
     ================ -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
-        <a href="./"><img src="./img/logo.png" class="navbar-logo" alt="">
-        </a>
-        <button class="btn-warning navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#collapsibleNavbar">
-            <span class="btn-warning navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="navbar-item">
-                    <a class="active" href="./">Home</a>
-                </li>
-                <li class="navbar-item">
-                    <a href="./registration">Registration</a>
-                </li>
+    <nav class="full-nav" id="nav">
+        <div class="nav">
+            <ul>
+                <li><a href="/" data-text="Home">Home</a></li>
+                <li><a href="/registration" data-text="Registration">Registration</a></li>
+                <li><a href="#" data-text="About">About</a></li>
+                <li><a href="#" data-text="Report">Report</a></li>
             </ul>
         </div>
     </nav>
+    <span class="menuicon" id="toggle"></span>
 
     <!-- ================
         Banner
     ==================== -->
     <header id="atas">
+        <a href="./"><img src="./img/logo.png" class="navbar-logo" alt="">
+        </a>
         <div class="title-wraper">
             <h1 class="form-control-md align-content-center" id="top">PUBG Mobile :<br> <span>Terminator Weekly
                     Challenge</span></h1>
@@ -92,8 +88,8 @@
                 </div>
                 <div class="detail-right">
                     <div class="param-wraper-detail">
-                        <h5>Team Size</h5>
-                        <span>4v4</span>
+                        <h5>Mode</h5>
+                        <span>Squad</span>
                     </div>
                     <div class="param-wraper-detail">
                         <h5>Tournament Format</h5>
@@ -308,6 +304,11 @@
             <div>
                 <div id="home" data-tab-content2 class="active-tab"><br>
                     <div class="home-wraper">
+                        <% if(participant.length === 0){%>
+                        <div class="no-participant">
+                            <h3>To be determined</h3>
+                        </div>
+                        <%}else{%>
                         <% for(let i = 0; i < participant.length; i++ ) { %>
                         <div>
                             <div class="team-card">
@@ -325,6 +326,7 @@
                                 </div>
                             </div>
                         </div>
+                        <% } %>
                         <% } %>
                     </div>
                     <div class="pagination">
@@ -1593,6 +1595,8 @@
                             <ul>
                                 <li class="ml-5">Seluruh peserta yang melakukan tindakan ilegal (bug, cheat, hack,
                                     dll) dengan didukung bukti kuat maka akan didiskualifikasi.</li>
+                                <li class="ml-5">Teaming atau kerjasama antar squad sangat dilarang, apabila ada squad yang kedapatan melakukan teaming, maka kedua tim
+                                tersebut akan didiskualifikasi.</li>
                                 <li class="ml-5">Apabila pihak yang merasakan dicurangi tidak dapat memberikan bukti
                                     kuat maka pemenang match tidak dapat diubah.</li>
                                 <li class="ml-5">Seluruh peserta yang menyebarluaskan link Whatsapp tanpa instruksi
@@ -1710,7 +1714,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
-    <script defer type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
     <script defer type="text/javascript" src="./js/script.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

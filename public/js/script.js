@@ -1,3 +1,14 @@
+//Menu
+function menuToggle() {
+  const nav = document.getElementById('nav');
+  const toggle = document.getElementById('toggle');
+  nav.classList.toggle('active');
+  toggle.classList.toggle('active');
+
+}
+const menu = document.getElementById('toggle');
+menu.addEventListener('click', menuToggle)
+
 //Animate on scroll
 AOS.init();
 
@@ -46,20 +57,6 @@ tabs2.forEach(tab2 => {
     target2.classList.add("active-tab");
   });
 });
-
-async function getParticipants() {
-  await fetch("http://localhost:3000/register")
-    .then(a => {
-      const part = a.json();
-      return part;
-    })
-    .then(b => {
-      console.log(b);
-    });
-}
-
-getParticipants();
-
 // const BRI_API = 'https://sandbox.partner.api.bri.co.id';
 
 // async function getBRI() {
