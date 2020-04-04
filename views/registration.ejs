@@ -8,6 +8,8 @@
   <title>PUBG Mobile Terminator Weekly Challenge - Pendaftaran</title>
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/style.css" />
+  <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
 </head>
@@ -42,8 +44,7 @@
         <div class="logotim">
           <label for="logo">Logo Tim (Optional) </label>
           <br>
-          <input data-toggle="tooltip" data-placement="top" title="Masukan Logo Tim Anda (150x150px)" type="file"
-            id="logo" name="logo" />
+          <input type="file" id="logo" title="Masukan Logo Anda (150 x 150px)" name="logo" class="filepond" />
         </div>
       </div>
 
@@ -154,6 +155,10 @@
   <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
   </script>
+  <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+  <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+  <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+  <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
   <script defer type="text/javascript" src="./js/bootstrap.min.js"></script>
   <script defer type="text/javascript" src="./js/registration.js"></script>
   <script defer>

@@ -10,6 +10,7 @@ const urlencoded = app.use(
     extended: false
   })
 );
+const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
 router.get("/registration", (req, res) => {
   res.render("registration");
@@ -63,7 +64,6 @@ router.post("/registration", urlencoded, async (req, res) => {
   const participant = new Participant({
     teamName: req.body.teamName,
     singkatanTeam: req.body.singkatanTeam,
-    logo: req.body.logo,
     idPlayer: req.body.idPlayer,
     idPlayer2: req.body.idPlayer2,
     idPlayer3: req.body.idPlayer3,
@@ -76,11 +76,12 @@ router.post("/registration", urlencoded, async (req, res) => {
     email: req.body.email
   });
 
-  res.redirect("/");
+  saveLogo(participant, req.body.logo);
+
 
   try {
     const savedParticipant = await participant.save();
-    res.send(savedParticipant);
+    res.redirect("/");
   } catch (err) {
     res.status(400).send(err);
   }
@@ -117,5 +118,14 @@ router.get("/register", (req, res) => {
     res.json(a);
   });
 });
+
+function saveLogo(image, logoEncoded) {
+  if (logoEncoded == null) return;
+  const logo = JSON.parse(logoEncoded);
+  if (logo != null && imageMimeTypes.includes(logo.type)) {
+    image.logo = new Buffer.from(logo.data, 'base64');
+    image.logoType = logo.type
+  }
+}
 
 module.exports = router;

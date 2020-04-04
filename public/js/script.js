@@ -1,13 +1,12 @@
 //Menu
 function menuToggle() {
-  const nav = document.getElementById('nav');
-  const toggle = document.getElementById('toggle');
-  nav.classList.toggle('active');
-  toggle.classList.toggle('active');
-
+  const nav = document.getElementById("nav");
+  const toggle = document.getElementById("toggle");
+  nav.classList.toggle("active");
+  toggle.classList.toggle("active");
 }
-const menu = document.getElementById('toggle');
-menu.addEventListener('click', menuToggle)
+const menu = document.getElementById("toggle");
+menu.addEventListener("click", menuToggle);
 
 //Animate on scroll
 AOS.init();
@@ -15,7 +14,7 @@ AOS.init();
 // Standings collapsible
 let coll = document.getElementsByClassName("collapsible");
 for (let i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function () {
+  coll[i].addEventListener("click", function() {
     this.classList.toggle("collapsible-active");
     let content = this.nextElementSibling;
     if (content.style.display === "block") {
@@ -57,13 +56,3 @@ tabs2.forEach(tab2 => {
     target2.classList.add("active-tab");
   });
 });
-// const BRI_API = 'https://sandbox.partner.api.bri.co.id';
-
-// async function getBRI() {
-//   const response = await fetch(BRI_API);
-//   const json = response.json();
-
-//   console.log(json);
-// }
-
-// getBRI();

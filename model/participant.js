@@ -11,9 +11,13 @@ const userSchema = new mongoose.Schema({
     maxlength: 5
   },
   logo: {
-    required: false
+    type: Buffer,
+    required: true
   },
-
+  logoType: {
+    type: String,
+    required: true
+  },
   idPlayer: {
     type: Number,
     required: true
@@ -64,5 +68,11 @@ const userSchema = new mongoose.Schema({
     required: true
   }
 });
+
+userSchema.virtual('logoImagePath').get(function () {
+  if (this.logo != null && this.logoType != null) {
+    return `data:${this.logoType};charset=utf-8;base64,${this.logo.toString('base64')}`
+  }
+})
 
 module.exports = mongoose.model("Participant", userSchema);
