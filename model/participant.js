@@ -12,11 +12,11 @@ const userSchema = new mongoose.Schema({
   },
   logo: {
     type: Buffer,
-    required: true
+    required: false
   },
   logoType: {
     type: String,
-    required: true
+    required: false
   },
   idPlayer: {
     type: Number,

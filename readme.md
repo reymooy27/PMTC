@@ -4,5 +4,4 @@
 - [ ] fix pagination
 - [ ] proses pembayaran
 - [ ] finish registration page
-- [ ] upload gambar
 - [ ] dynamic standing table

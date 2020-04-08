@@ -21,6 +21,11 @@
     </a>
   </div>
   <!-- Pendaftaran -->
+  <%if(jumlahParticipant === 64){%>
+  <div class="registration-closed">
+    <h1 class="registration-closed-title">Registration Closed</h1>
+  </div>
+  <%}else{%>
   <div class="form">
     <form class="kiri" id="registrationForm" action="/registration" method="POST">
       <!--Info Team-->
@@ -44,7 +49,7 @@
         <div class="logotim">
           <label for="logo">Logo Tim (Optional) </label>
           <br>
-          <input type="file" id="logo" title="Masukan Logo Anda (150 x 150px)" name="logo" class="filepond" />
+          <input type="file" id="logo" data-toggle="tooltip" data-placement="top" title="Masukan Logo Anda (150 x 150px)" name="logo" class="filepond" required />
         </div>
       </div>
 
@@ -149,6 +154,7 @@
       </p>
     </div>
   </div>
+  <%}%>
   <script defer src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
   </script>
@@ -158,6 +164,8 @@
   <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
   <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
   <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+  <script defer src="https://unpkg.com/filepond-plugin-image-validate-size/dist/filepond-plugin-image-validate-size.js">
+  </script>
   <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
   <script defer type="text/javascript" src="./js/bootstrap.min.js"></script>
   <script defer type="text/javascript" src="./js/registration.js"></script>

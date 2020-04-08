@@ -50,7 +50,11 @@
             <h4>Registration Open :</h4>
             <span>12/2 - 19/2</span>
             <h4>Registered : <%= jumlahParticipant %>/64</h4>
+            <%if(jumlahParticipant === 64){%>
+            <a class="btn-disabled" type="button" disabled>Registration Closed</a>
+            <%}else{%>
             <a href="./registration" class="btn">Join Tournament</a>
+            <%}%>
         </div>
     </header>
     <br>
@@ -305,1422 +309,1421 @@
                 <div id="home" data-tab-content2 class="active-tab"><br>
                     <div class="home-wraper">
                         <% if(participant.length === 0){%>
-                        <div class="no-participant">
-                            <h3>To be determined</h3>
-                        </div>
-                        <%}else{%>
-                        <% for(let i = 0; i < participant.length; i++ ) { %>
-                        <div>
-                            <div class="team-card">
-                                <div class="team-img">
-                                    <img src="<%= participant[i].logoImagePath %>" alt="">
-                                </div>
-                                <div class="team-container">
-                                    <span><%= participant[i].teamName %></span>
-                                    <ul>
-                                        <li> <%= participant[i].playerName %> </li>
-                                        <li> <%= participant[i].playerName2 %> </li>
-                                        <li> <%= participant[i].playerName3 %> </li>
-                                        <li> <%= participant[i].playerName4 %> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <% } %>
-                        <% } %>
+            <div class="no-participant">
+                <h3>To be determined</h3>
+            </div>
+            <%}else{%>
+            <% for(let i = 0; i < participant.length; i++ ) { %>
+            <div>
+                <div class="team-card">
+                    <div class="team-img">
+                        <img class="team-logo" src="<%= participant[i].logoImagePath %>" alt="">
                     </div>
-                    <div class="pagination">
-                        <a href="#">&laquo;</a>
-                        <a href="/?page=1&limit=5">1</a>
-                        <a class="active" href="/?page=2&limit=5">2</a>
-                        <a href="/?page=3&limit=5">3</a>
-                        <a href="/?page=4&limit=5">4</a>
-                        <a href="/?page=5&limit=5">5</a>
-                        <a href="/?page=61&limit=5">6</a>
-                        <a href="#">&raquo;</a>
+                    <div class="team-container">
+                        <span><%= participant[i].teamName %></span>
+                        <ul>
+                            <li> <%= participant[i].playerName %> </li>
+                            <li> <%= participant[i].playerName2 %> </li>
+                            <li> <%= participant[i].playerName3 %> </li>
+                            <li> <%= participant[i].playerName4 %> </li>
+                        </ul>
                     </div>
-                </div>
-                <div id="menu1" data-tab-content2><br>
-                    <button class="collapsible">GROUP A</button>
-                    <div class="content">
-                        <table class="content table table-striped table-bordered table-hover table-dark">
-                            <tbody class="p-sm-0 m-sm-0">
-                                <tr>
-                                    <td rowspan="2">#</td>
-                                    <td rowspan="2" class="align-self-center">Nama Tim</td>
-                                    <td rowspan="2">Total</td>
-                                    <td colspan="2">Match 1</td>
-                                    <td colspan="2">Match 2</td>
-                                    <td colspan="2">Match 3</td>
-                                </tr>
-                                <tr>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">1</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">2</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">3</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">4</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">5</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">6</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">7</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">8</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">9</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">10</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">11</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">12</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">13</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">14</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">15</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">16</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                        </table>
-                    </div>
-                    <button class="collapsible">GROUP B</button>
-                    <div class="content">
-                        <table class="content table table-striped table-bordered table-hover table-dark">
-                            <tbody class="p-sm-0 m-sm-0">
-                                <tr>
-                                    <td rowspan="2">#</td>
-                                    <td rowspan="2" class="align-self-center">Nama Tim</td>
-                                    <td rowspan="2">Total</td>
-                                    <td colspan="2">Match 1</td>
-                                    <td colspan="2">Match 2</td>
-                                    <td colspan="2">Match 3</td>
-                                </tr>
-                                <tr>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">1</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">2</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">3</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">4</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">5</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">6</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">7</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">8</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">9</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">10</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">11</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">12</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">13</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">14</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">15</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">16</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                        </table>
-                    </div>
-                    <button class="collapsible">GROUP C</button>
-                    <div class="content">
-                        <table class="content table table-striped table-bordered table-hover table-dark">
-                            <tbody class="p-sm-0 m-sm-0">
-                                <tr>
-                                    <td rowspan="2">#</td>
-                                    <td rowspan="2" class="align-self-center">Nama Tim</td>
-                                    <td rowspan="2">Total</td>
-                                    <td colspan="2">Match 1</td>
-                                    <td colspan="2">Match 2</td>
-                                    <td colspan="2">Match 3</td>
-                                </tr>
-                                <tr>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">1</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">2</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">3</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">4</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">5</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">6</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">7</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">8</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">9</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">10</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">11</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">12</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">13</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">14</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">15</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">16</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                        </table>
-                    </div>
-                    <button class="collapsible">GROUP D</button>
-                    <div class="content">
-                        <table class="content table table-striped table-bordered table-hover table-dark">
-                            <tbody class="p-sm-0 m-sm-0">
-                                <tr>
-                                    <td rowspan="2">#</td>
-                                    <td rowspan="2" class="align-self-center">Nama Tim</td>
-                                    <td rowspan="2">Total</td>
-                                    <td colspan="2">Match 1</td>
-                                    <td colspan="2">Match 2</td>
-                                    <td colspan="2">Match 3</td>
-                                </tr>
-                                <tr>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">1</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">2</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">3</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">4</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">5</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">6</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">7</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">8</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">9</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">10</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">11</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">12</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">13</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">14</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">15</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">16</td>
-                                    <td class="pass"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                        </table>
-                    </div>
-                    <button class="collapsible">GRAND FINAL</button>
-                    <div class="content">
-                        <table
-                            class="content table table-striped table-bordered table-hover table-dark table-responsive-sm">
-                            <tbody class="p-sm-0 m-sm-0">
-                                <tr>
-                                    <td rowspan="2">#</td>
-                                    <td rowspan="2" class="align-self-center">Nama Tim</td>
-                                    <td rowspan="2">Total</td>
-                                    <td colspan="2">Match 1</td>
-                                    <td colspan="2">Match 2</td>
-                                    <td colspan="2">Match 3</td>
-                                    <td colspan="2">Match 4</td>
-                                    <td colspan="2">Match 5</td>
-                                    <td colspan="2">Match 6</td>
-                                </tr>
-                                <tr>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                    <td class="point">P</td>
-                                    <td class="kill">K</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">1</td>
-                                    <td class="pass">A1</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">2</td>
-                                    <td class="pass">A2</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">3</td>
-                                    <td class="pass">A3</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">4</td>
-                                    <td class="pass">A4</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">5</td>
-                                    <td class="pass">B1</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">6</td>
-                                    <td class="pass">B2</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">7</td>
-                                    <td class="pass">B3</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="pass">8</td>
-                                    <td class="pass">B4</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="eliminate">9</td>
-                                    <td class="eliminate">C1</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="eliminate">10</td>
-                                    <td class="eliminate">C2</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="eliminate">11</td>
-                                    <td class="eliminate">C3</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="eliminate">12</td>
-                                    <td class="eliminate">C4</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="eliminate">13</td>
-                                    <td class="eliminate">D1</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="eliminate">14</td>
-                                    <td class="eliminate">D2</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="eliminate">15</td>
-                                    <td class="eliminate">D3</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td class="eliminate">16</td>
-                                    <td class="eliminate">D4</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div id="menu2" data-tab-content2><br>
-                    <table class="table table-striped table-bordered table-hover table-dark">
-                        <thead class="text-center">
-                            <tr>
-                                <th colspan="2">TERMINATOR</th>
-                            </tr>
-                            <tr>
-                                <td>Nama Pemain</td>
-                                <td>Total Kill</td>
-                            </tr>
-                            <tr>
-                                <td>To be determined</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>To be determined</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>To be determined</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>To be determined</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>To be determined</td>
-                                <td>0</td>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div id="menu3" data-tab-content2><br>
-                    <p>
-                        Berikut merupakan peraturan game yang digunakan dalam PUBG Mobile Terminator Weekly Challenge
-                        dengan sistem turnamen
-                        online. Dengan diinformasikannya peraturan ini maka seluruh peserta yang terlibat dalam turnamen
-                        ini wajib untuk
-                        mematuhi dan menjalankan segala peraturan yang ada.
-                    </p>
-                    <ol>
-                        <li>
-                            <h5>Peraturan Peserta</h5>
-                        </li>
-                        <ul>
-                            <li class="mb-2 ml-3">Ketentuan Peserta</li>
-                            <ul>
-                                <li class="ml-5">Peserta wajib memiliki akun atau id PUBG Mobile sendiri.</li>
-                                <li class="ml-5">ID-Nickname yang terdaftar tidak dapat diwakilkan oleh peserta
-                                    lain.</li>
-                                <li class="ml-5">Masing-masing peserta hanya dapat terdaftar dalam satu tim dan
-                                    tidak dapat
-                                    bermain dalam 2 tim yang
-                                    berbeda</li>
-                                <li class="ml-5">Peserta yang dapat bermain pada hari H hanyalah peserta yang
-                                    telah
-                                    terdaftar
-                                    dalam registrasi tim
-                                </li>
-                            </ul>
-                            <li class="mb-2 ml-3">Peraturan Umum</li>
-                            <ul>
-                                <li class="ml-5">Media komunikasi yang digunakan yakni Whatsapp.</li>
-                                <li class="ml-5">Perhitungan poin diatur melalui Scoring Sheet yang digunakan
-                                    oleh panitia.</li>
-                                <li class="ml-5">Seluruh informasi yang diberikan oleh panitia merupakan
-                                    tanggung jawab masing-masing perwakilan tim.</li>
-                                <li class="ml-5">Seluruh tim wajib bermain dengan lengkap (minimal 3 anggota),
-                                    jika tidak maka akan dianggap gagal atau WO
-                                </li>
-                                <li class="ml-5">Semua peserta wajib menjunjung nilai Sportif dan Fairplay.</li>
-                            </ul>
-                        </ul>
-                        <li>
-                            <h5>Sistem Turnamen</h5>
-                        </li>
-                        <ul>
-                            <li class="mb-2 ml-3">Sistem yang digunakan yakni sistem online</li>
-                            <li class="mb-2 ml-3">Turnamen PUBG Mobile menggunakan sistem scoring sheet dengan
-                                dihitung total poin.</li>
-                        </ul>
-                        <li>
-                            <h5>Pengaturan Match</h5>
-                        </li>
-                        <ul>
-                            <li class="mb-2 ml-3">Custom lobby atau room akan dibuat oleh panitia penyelenggara
-                            </li>
-                            <li class="mb-2 ml-3">Peserta akan bermain 6 ronde</li>
-                            <li class="mb-2 ml-3">Map yang digunakan : Erangel dan Miramar</li>
-                            <li class="mb-2 ml-3">Mode yang digunakan : Third Person Perspective (TPP)</li>
-                            <li class="mb-2 ml-3">Pemenang match ditentukan dari total poin tertinggi. Total poin
-                                terdiri dari Place Point dan Kill Point</li>
-                            <li class="mb-2 ml-3">Perhitungan poin merujuk pada peraturan internasional PUBG
-                                Mobile, berikut merupakan distribusi poin :</li>
-                        </ul>
-
-                        <table class="table-sm table-striped table-bordered table-hover table-dark">
-
-                            <tr>
-                                <th colspan="2" class="text-center">PERHITUNGAN POIN</th>
-                            </tr>
-                            <tr>
-                                <td>Placement</td>
-                                <td>Point</td>
-                            </tr>
-                            <tr>
-                                <td>Kill Point</td>
-                                <td>1 per kill</td>
-                            </tr>
-                            <tr>
-                                <td>#1</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <td>#2</td>
-                                <td>6</td>
-                            </tr>
-                            <tr>
-                                <td>#3</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>#4</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <td>#5</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>#6</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>#7</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>#8</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>#9-16</td>
-                                <td>0</td>
-                            </tr>
-                        </table>
-
-                        <li>
-                            <h5>Peraturan Turnamen</h5>
-                        </li>
-                        <ul>
-                            <li class="mb-2 ml-3">Peraturan Teknis</li>
-                            <ul>
-                                <li class="ml-5">Seluruh peserta yang melakukan tindakan ilegal (bug, cheat, hack,
-                                    dll) dengan didukung bukti kuat maka akan didiskualifikasi.</li>
-                                <li class="ml-5">Teaming atau kerjasama antar squad sangat dilarang, apabila ada squad
-                                    yang kedapatan melakukan teaming, maka kedua tim
-                                    tersebut akan didiskualifikasi.</li>
-                                <li class="ml-5">Apabila pihak yang merasakan dicurangi tidak dapat memberikan bukti
-                                    kuat maka pemenang match tidak dapat diubah.</li>
-                                <li class="ml-5">Seluruh peserta yang menyebarluaskan link Whatsapp tanpa instruksi
-                                    panitia maka akan didiskualifikasi pada turnamen tersebut.</li>
-                                <li class="ml-5">Panitia tidak bertanggung jawab atas seluruh gangguan koneksi
-                                    internet, crash device, device error, dan sebagainya, yang dialami oleh peserta.
-                                </li>
-                            </ul>
-                            <li class="mb-2 ml-3">Peraturan Saat Pertandingan</li>
-                            <ul>
-                                <li class="ml-5">Seluruh peserta wajib standby online dalam game 20 menit sebelum
-                                    waktu match pertama dimulai.</li>
-                                <li class="ml-5">Segala bentuk kelalaian yang disebabkan oleh peserta adalah diluar
-                                    tanggung jawab panitia.</li>
-                            </ul>
-                            <li class="mb-2 ml-3">Peraturan Tied Point</li>
-                            <ul>
-                                <p class="ml-3">Apabila terjadi jumlah poin yang sama pada keseluruhan match, metode
-                                    keputusan yaitu :</p class="ml-3">
-                                <ul>
-                                    <li class="ml-5">Tim dengan total kill terbanyak</li>
-                                    <li class="ml-5">Tim dengan total poin tertinggi pada ronde final</li>
-                                    <li class="ml-5">Tim dengan total rank tertinggi pada ronde final</li>
-                                </ul>
-                            </ul>
-                            <li class="mb-2 ml-3">Peraturan Rematch</li>
-                            <ul>
-                                <li class="ml-5">Rematch hanya akan dilakukan apabila seluruh peserta mengalami
-                                    gangguan koneksi sehingga pertandingan tidak dapat dilanjutkan; atau</li>
-                                <li class="ml-5">Rematch akan dilakukan apabila terjadi Force Majeure</li>
-                            </ul>
-                        </ul>
-                        <li>
-                            <h5>Prosedur Pertandingan</h5>
-                        </li>
-                        <ul>
-                            <li class="mb-2 ml-3">Sebelum Match</li>
-                            <ul>
-                                <li class="ml-5">Custom Lobby akan dibuat oleh panitia</li>
-                                <li class="ml-5">Peserta wajib standby di lobby 20 menit sebelum mulai</li>
-                            </ul>
-                            <li class="mb-2 ml-3">Saat Match</li>
-                            <ul>
-                                <li class="ml-5">Apabila masih terdapat peserta yang melakukan condition checking saat
-                                    lobby akan dimulai maka panitia akan tetap memulai match</li>
-                                <li class="ml-5">Jika terdapat peserta yang disconnect karena kesalahan pribadi maka
-                                    peserta tersebut dizinkan untuk reconnect namun match tetap berjalan.</li>
-                            </ul>
-                        </ul>
-                        <li>
-                            <h5>Penalti dan Walk Out</h5>
-                        </li>
-                        <ul>
-                            <li class="mb-2 ml-3">Peserta yang tidak dapat dihubungi melalui Whatsapp hingga H-2 maka
-                                akan digantikan dengan tim lainnya.</li>
-                            <li class="mb-2 ml-3">Peserta yang tidak hadir saat match hingga batas waktu tertentu maka
-                                akan dinyatakan WO</li>
-                            <li class="mb-2 ml-3">Peserta yang melanggar poin-poin peraturan di atas akan
-                                diskualifikasi.</li>
-                        </ul>
-                        <li>
-                            <h5>Hak Penyelenggara</h5>
-                        </li>
-                        <ul>
-                            <li class="mb-2 ml-3">Panitia berhak mengganti dan mengubah peraturan yang ada dengan
-                                dasar yang kuat untuk kelancaran turnamen.</li>
-                            <li class="mb-2 ml-3">Panita berhak memberikan instruksi kepada para peserta dengan dasar
-                                untuk kelancaran turnamen</li>
-                            <li class="mb-2 ml-3">Seluruh keputusan panitia merupakan hal yang mutlak dan tidak dapat
-                                diganggu gugat</li>
-                            <li class="mb-2 ml-3">Seluruh peserta wajib mematuhi peraturan yang ada demi kelancaran
-                                turnamen.</li>
-                        </ul>
-                    </ol>
                 </div>
             </div>
+            <% } %>
+            <% } %>
         </div>
-    </div>
-    <br>
+        <div class="pagination">
+            <a href="#">&laquo;</a>
+            <a href="/?page=1&limit=5">1</a>
+            <a class="active" href="/?page=2&limit=5">2</a>
+            <a href="/?page=3&limit=5">3</a>
+            <a href="/?page=4&limit=5">4</a>
+            <a href="/?page=5&limit=5">5</a>
+            <a href="/?page=61&limit=5">6</a>
+            <a href="#">&raquo;</a>
+        </div>
+        </div>
+        <div id="menu1" data-tab-content2><br>
+            <button class="collapsible">GROUP A</button>
+            <div class="content">
+                <table class="content table table-striped table-bordered table-hover table-dark">
+                    <tbody class="p-sm-0 m-sm-0">
+                        <tr>
+                            <td rowspan="2">#</td>
+                            <td rowspan="2" class="align-self-center">Nama Tim</td>
+                            <td rowspan="2">Total</td>
+                            <td colspan="2">Match 1</td>
+                            <td colspan="2">Match 2</td>
+                            <td colspan="2">Match 3</td>
+                        </tr>
+                        <tr>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">1</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">2</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">3</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">4</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">5</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">6</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">7</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">8</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">9</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">10</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">11</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">12</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">13</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">14</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">15</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">16</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                </table>
+            </div>
+            <button class="collapsible">GROUP B</button>
+            <div class="content">
+                <table class="content table table-striped table-bordered table-hover table-dark">
+                    <tbody class="p-sm-0 m-sm-0">
+                        <tr>
+                            <td rowspan="2">#</td>
+                            <td rowspan="2" class="align-self-center">Nama Tim</td>
+                            <td rowspan="2">Total</td>
+                            <td colspan="2">Match 1</td>
+                            <td colspan="2">Match 2</td>
+                            <td colspan="2">Match 3</td>
+                        </tr>
+                        <tr>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">1</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">2</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">3</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">4</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">5</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">6</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">7</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">8</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">9</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">10</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">11</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">12</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">13</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">14</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">15</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">16</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                </table>
+            </div>
+            <button class="collapsible">GROUP C</button>
+            <div class="content">
+                <table class="content table table-striped table-bordered table-hover table-dark">
+                    <tbody class="p-sm-0 m-sm-0">
+                        <tr>
+                            <td rowspan="2">#</td>
+                            <td rowspan="2" class="align-self-center">Nama Tim</td>
+                            <td rowspan="2">Total</td>
+                            <td colspan="2">Match 1</td>
+                            <td colspan="2">Match 2</td>
+                            <td colspan="2">Match 3</td>
+                        </tr>
+                        <tr>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">1</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">2</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">3</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">4</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">5</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">6</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">7</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">8</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">9</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">10</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">11</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">12</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">13</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">14</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">15</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">16</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                </table>
+            </div>
+            <button class="collapsible">GROUP D</button>
+            <div class="content">
+                <table class="content table table-striped table-bordered table-hover table-dark">
+                    <tbody class="p-sm-0 m-sm-0">
+                        <tr>
+                            <td rowspan="2">#</td>
+                            <td rowspan="2" class="align-self-center">Nama Tim</td>
+                            <td rowspan="2">Total</td>
+                            <td colspan="2">Match 1</td>
+                            <td colspan="2">Match 2</td>
+                            <td colspan="2">Match 3</td>
+                        </tr>
+                        <tr>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">1</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">2</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">3</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">4</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">5</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">6</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">7</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">8</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">9</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">10</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">11</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">12</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">13</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">14</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">15</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">16</td>
+                            <td class="pass"></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                </table>
+            </div>
+            <button class="collapsible">GRAND FINAL</button>
+            <div class="content">
+                <table class="content table table-striped table-bordered table-hover table-dark table-responsive-sm">
+                    <tbody class="p-sm-0 m-sm-0">
+                        <tr>
+                            <td rowspan="2">#</td>
+                            <td rowspan="2" class="align-self-center">Nama Tim</td>
+                            <td rowspan="2">Total</td>
+                            <td colspan="2">Match 1</td>
+                            <td colspan="2">Match 2</td>
+                            <td colspan="2">Match 3</td>
+                            <td colspan="2">Match 4</td>
+                            <td colspan="2">Match 5</td>
+                            <td colspan="2">Match 6</td>
+                        </tr>
+                        <tr>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                            <td class="point">P</td>
+                            <td class="kill">K</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">1</td>
+                            <td class="pass">A1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">2</td>
+                            <td class="pass">A2</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">3</td>
+                            <td class="pass">A3</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">4</td>
+                            <td class="pass">A4</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">5</td>
+                            <td class="pass">B1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">6</td>
+                            <td class="pass">B2</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">7</td>
+                            <td class="pass">B3</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pass">8</td>
+                            <td class="pass">B4</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="eliminate">9</td>
+                            <td class="eliminate">C1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="eliminate">10</td>
+                            <td class="eliminate">C2</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="eliminate">11</td>
+                            <td class="eliminate">C3</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="eliminate">12</td>
+                            <td class="eliminate">C4</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="eliminate">13</td>
+                            <td class="eliminate">D1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="eliminate">14</td>
+                            <td class="eliminate">D2</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="eliminate">15</td>
+                            <td class="eliminate">D3</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="eliminate">16</td>
+                            <td class="eliminate">D4</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="menu2" data-tab-content2><br>
+            <table class="table table-striped table-bordered table-hover table-dark">
+                <thead class="text-center">
+                    <tr>
+                        <th colspan="2">TERMINATOR</th>
+                    </tr>
+                    <tr>
+                        <td>Nama Pemain</td>
+                        <td>Total Kill</td>
+                    </tr>
+                    <tr>
+                        <td>To be determined</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>To be determined</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>To be determined</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>To be determined</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>To be determined</td>
+                        <td>0</td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div id="menu3" data-tab-content2><br>
+            <p>
+                Berikut merupakan peraturan game yang digunakan dalam PUBG Mobile Terminator Weekly Challenge
+                dengan sistem turnamen
+                online. Dengan diinformasikannya peraturan ini maka seluruh peserta yang terlibat dalam turnamen
+                ini wajib untuk
+                mematuhi dan menjalankan segala peraturan yang ada.
+            </p>
+            <ol>
+                <li>
+                    <h5>Peraturan Peserta</h5>
+                </li>
+                <ul>
+                    <li class="mb-2 ml-3">Ketentuan Peserta</li>
+                    <ul>
+                        <li class="ml-5">Peserta wajib memiliki akun atau id PUBG Mobile sendiri.</li>
+                        <li class="ml-5">ID-Nickname yang terdaftar tidak dapat diwakilkan oleh peserta
+                            lain.</li>
+                        <li class="ml-5">Masing-masing peserta hanya dapat terdaftar dalam satu tim dan
+                            tidak dapat
+                            bermain dalam 2 tim yang
+                            berbeda</li>
+                        <li class="ml-5">Peserta yang dapat bermain pada hari H hanyalah peserta yang
+                            telah
+                            terdaftar
+                            dalam registrasi tim
+                        </li>
+                    </ul>
+                    <li class="mb-2 ml-3">Peraturan Umum</li>
+                    <ul>
+                        <li class="ml-5">Media komunikasi yang digunakan yakni Whatsapp.</li>
+                        <li class="ml-5">Perhitungan poin diatur melalui Scoring Sheet yang digunakan
+                            oleh panitia.</li>
+                        <li class="ml-5">Seluruh informasi yang diberikan oleh panitia merupakan
+                            tanggung jawab masing-masing perwakilan tim.</li>
+                        <li class="ml-5">Seluruh tim wajib bermain dengan lengkap (minimal 3 anggota),
+                            jika tidak maka akan dianggap gagal atau WO
+                        </li>
+                        <li class="ml-5">Semua peserta wajib menjunjung nilai Sportif dan Fairplay.</li>
+                    </ul>
+                </ul>
+                <li>
+                    <h5>Sistem Turnamen</h5>
+                </li>
+                <ul>
+                    <li class="mb-2 ml-3">Sistem yang digunakan yakni sistem online</li>
+                    <li class="mb-2 ml-3">Turnamen PUBG Mobile menggunakan sistem scoring sheet dengan
+                        dihitung total poin.</li>
+                </ul>
+                <li>
+                    <h5>Pengaturan Match</h5>
+                </li>
+                <ul>
+                    <li class="mb-2 ml-3">Custom lobby atau room akan dibuat oleh panitia penyelenggara
+                    </li>
+                    <li class="mb-2 ml-3">Peserta akan bermain 6 ronde</li>
+                    <li class="mb-2 ml-3">Map yang digunakan : Erangel dan Miramar</li>
+                    <li class="mb-2 ml-3">Mode yang digunakan : Third Person Perspective (TPP)</li>
+                    <li class="mb-2 ml-3">Pemenang match ditentukan dari total poin tertinggi. Total poin
+                        terdiri dari Place Point dan Kill Point</li>
+                    <li class="mb-2 ml-3">Perhitungan poin merujuk pada peraturan internasional PUBG
+                        Mobile, berikut merupakan distribusi poin :</li>
+                </ul>
 
-    <div>
-        <a class="backtotop" style="float: right;" href="#atas"><button>TOP</button></a>
-    </div>
+                <table class="table-sm table-striped table-bordered table-hover table-dark">
 
-    <!-- ==============
+                    <tr>
+                        <th colspan="2" class="text-center">PERHITUNGAN POIN</th>
+                    </tr>
+                    <tr>
+                        <td>Placement</td>
+                        <td>Point</td>
+                    </tr>
+                    <tr>
+                        <td>Kill Point</td>
+                        <td>1 per kill</td>
+                    </tr>
+                    <tr>
+                        <td>#1</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>#2</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>#3</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>#4</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>#5</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>#6</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>#7</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>#8</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>#9-16</td>
+                        <td>0</td>
+                    </tr>
+                </table>
+
+                <li>
+                    <h5>Peraturan Turnamen</h5>
+                </li>
+                <ul>
+                    <li class="mb-2 ml-3">Peraturan Teknis</li>
+                    <ul>
+                        <li class="ml-5">Seluruh peserta yang melakukan tindakan ilegal (bug, cheat, hack,
+                            dll) dengan didukung bukti kuat maka akan didiskualifikasi.</li>
+                        <li class="ml-5">Teaming atau kerjasama antar squad sangat dilarang, apabila ada squad
+                            yang kedapatan melakukan teaming, maka kedua tim
+                            tersebut akan didiskualifikasi.</li>
+                        <li class="ml-5">Apabila pihak yang merasakan dicurangi tidak dapat memberikan bukti
+                            kuat maka pemenang match tidak dapat diubah.</li>
+                        <li class="ml-5">Seluruh peserta yang menyebarluaskan link Whatsapp tanpa instruksi
+                            panitia maka akan didiskualifikasi pada turnamen tersebut.</li>
+                        <li class="ml-5">Panitia tidak bertanggung jawab atas seluruh gangguan koneksi
+                            internet, crash device, device error, dan sebagainya, yang dialami oleh peserta.
+                        </li>
+                    </ul>
+                    <li class="mb-2 ml-3">Peraturan Saat Pertandingan</li>
+                    <ul>
+                        <li class="ml-5">Seluruh peserta wajib standby online dalam game 20 menit sebelum
+                            waktu match pertama dimulai.</li>
+                        <li class="ml-5">Segala bentuk kelalaian yang disebabkan oleh peserta adalah diluar
+                            tanggung jawab panitia.</li>
+                    </ul>
+                    <li class="mb-2 ml-3">Peraturan Tied Point</li>
+                    <ul>
+                        <p class="ml-3">Apabila terjadi jumlah poin yang sama pada keseluruhan match, metode
+                            keputusan yaitu :</p class="ml-3">
+                        <ul>
+                            <li class="ml-5">Tim dengan total kill terbanyak</li>
+                            <li class="ml-5">Tim dengan total poin tertinggi pada ronde final</li>
+                            <li class="ml-5">Tim dengan total rank tertinggi pada ronde final</li>
+                        </ul>
+                    </ul>
+                    <li class="mb-2 ml-3">Peraturan Rematch</li>
+                    <ul>
+                        <li class="ml-5">Rematch hanya akan dilakukan apabila seluruh peserta mengalami
+                            gangguan koneksi sehingga pertandingan tidak dapat dilanjutkan; atau</li>
+                        <li class="ml-5">Rematch akan dilakukan apabila terjadi Force Majeure</li>
+                    </ul>
+                </ul>
+                <li>
+                    <h5>Prosedur Pertandingan</h5>
+                </li>
+                <ul>
+                    <li class="mb-2 ml-3">Sebelum Match</li>
+                    <ul>
+                        <li class="ml-5">Custom Lobby akan dibuat oleh panitia</li>
+                        <li class="ml-5">Peserta wajib standby di lobby 20 menit sebelum mulai</li>
+                    </ul>
+                    <li class="mb-2 ml-3">Saat Match</li>
+                    <ul>
+                        <li class="ml-5">Apabila masih terdapat peserta yang melakukan condition checking saat
+                            lobby akan dimulai maka panitia akan tetap memulai match</li>
+                        <li class="ml-5">Jika terdapat peserta yang disconnect karena kesalahan pribadi maka
+                            peserta tersebut dizinkan untuk reconnect namun match tetap berjalan.</li>
+                    </ul>
+                </ul>
+                <li>
+                    <h5>Penalti dan Walk Out</h5>
+                </li>
+                <ul>
+                    <li class="mb-2 ml-3">Peserta yang tidak dapat dihubungi melalui Whatsapp hingga H-2 maka
+                        akan digantikan dengan tim lainnya.</li>
+                    <li class="mb-2 ml-3">Peserta yang tidak hadir saat match hingga batas waktu tertentu maka
+                        akan dinyatakan WO</li>
+                    <li class="mb-2 ml-3">Peserta yang melanggar poin-poin peraturan di atas akan
+                        diskualifikasi.</li>
+                </ul>
+                <li>
+                    <h5>Hak Penyelenggara</h5>
+                </li>
+                <ul>
+                    <li class="mb-2 ml-3">Panitia berhak mengganti dan mengubah peraturan yang ada dengan
+                        dasar yang kuat untuk kelancaran turnamen.</li>
+                    <li class="mb-2 ml-3">Panita berhak memberikan instruksi kepada para peserta dengan dasar
+                        untuk kelancaran turnamen</li>
+                    <li class="mb-2 ml-3">Seluruh keputusan panitia merupakan hal yang mutlak dan tidak dapat
+                        diganggu gugat</li>
+                    <li class="mb-2 ml-3">Seluruh peserta wajib mematuhi peraturan yang ada demi kelancaran
+                        turnamen.</li>
+                </ul>
+            </ol>
+        </div>
+        </div>
+        </div>
+        </div>
+        <br>
+
+        <div>
+            <a class="backtotop" style="float: right;" href="#atas"><button>TOP</button></a>
+        </div>
+
+        <!-- ==============
         Footer
     ================== -->
-    <footer>
-        <div class="background-overlay"></div>
-        <div class="footer-content">
-            <div class="content-1">
-                <h4 id="contact">Contact Us:</h4>
-                <h5>gdrrey@gmail.com </h5>
-                <h5>+6282237813869</h5>
-            </div>
-            <div class="content-2">
-                <h4>Organized by:</h4>
-                <div class="content-2-wraper">
-                    <img src="./img/profile.jpg" alt="" class="profile">
-                    <!-- <h5>r3tr0</h5> -->
+        <footer>
+            <div class="background-overlay"></div>
+            <div class="footer-content">
+                <div class="content-1">
+                    <h4 id="contact">Contact Us:</h4>
+                    <h5>gdrrey@gmail.com </h5>
+                    <h5>+6282237813869</h5>
+                </div>
+                <div class="content-2">
+                    <h4>Organized by:</h4>
+                    <div class="content-2-wraper">
+                        <img src="./img/profile.jpg" alt="" class="profile">
+                        <!-- <h5>r3tr0</h5> -->
+                    </div>
+                </div>
+                <div class="icon-social-wraper">
+                    <a href="https://www.facebook.com/profile.php?id=100007913565099" target="_blank"><img
+                            class="icon-social" src="./img/iconmonstr-facebook-4-72.png" alt=""></a>
+                    <a href="https://www.instagram.com/reyartem/?hl=id" target="_blank"><img class="icon-social"
+                            src="./img/iconmonstr-instagram-14-72.png" alt=""></a>
                 </div>
             </div>
-            <div class="icon-social-wraper">
-                <a href="https://www.facebook.com/profile.php?id=100007913565099" target="_blank"><img
-                        class="icon-social" src="./img/iconmonstr-facebook-4-72.png" alt=""></a>
-                <a href="https://www.instagram.com/reyartem/?hl=id" target="_blank"><img class="icon-social"
-                        src="./img/iconmonstr-instagram-14-72.png" alt=""></a>
-            </div>
-        </div>
-    </footer>
+        </footer>
 
-    <script defer src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
-    <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
-    <script defer type="text/javascript" src="./js/script.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script defer src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+        </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+        <script defer type="text/javascript" src="./js/script.js"></script>
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 </body>
 
 

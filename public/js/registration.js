@@ -2,13 +2,17 @@
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
   FilePondPluginImageResize,
-  FilePondPluginFileEncode
+  FilePondPluginFileEncode,
+  FilePondPluginImageValidateSize
 )
 
 FilePond.setOptions({
-  stylePanelAspectRatio: 150 / 150,
-  imageResizeTargetWidth: 150,
-  imageResizeTargetHeight: 150
+  stylePanelAspectRatio: 120 / 120,
+  imageResizeTargetWidth: 120,
+  allowImageValidateSize: true,
+  imageValidateSizeLabelImageSizeTooBig: 'Gambar Terlalu Besar',
+  imageValidateSizeMaxWidth: 640,
+  imageValidateSizeMaxHeight: 640
 })
 
 FilePond.parse(document.body);

@@ -12,8 +12,19 @@ const urlencoded = app.use(
 );
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
-router.get("/registration", (req, res) => {
-  res.render("registration");
+router.get("/registration", async (req, res) => {
+  const teamNameExist = await Participant.findOne({
+    teamName: req.body.teamName
+  });
+  if (teamNameExist) return res.status(400).send("Nama Tim sudah terdaftar");
+
+  Participant.find().then(participants => {
+
+    res.render("registration", {
+      jumlahParticipant: participants.length,
+      participant: participants
+    });
+  });
 });
 
 router.post("/registration", urlencoded, async (req, res) => {
@@ -32,22 +43,22 @@ router.post("/registration", urlencoded, async (req, res) => {
   const idPlayerExist = await Participant.findOne({
     idPlayer: req.body.idPlayer
   });
-  if (idPlayerExist) return res.status(400).send("ID sudah terdaftar");
+  if (idPlayerExist) return res.status(400).send("ID Player 1 sudah terdaftar");
 
   const idPlayerExist2 = await Participant.findOne({
     idPlayer2: req.body.idPlayer2
   });
-  if (idPlayerExist2) return res.status(400).send("ID sudah terdaftar");
+  if (idPlayerExist2) return res.status(400).send("ID Player 2 sudah terdaftar");
 
   const idPlayerExist3 = await Participant.findOne({
     idPlayer3: req.body.idPlayer3
   });
-  if (idPlayerExist3) return res.status(400).send("ID sudah terdaftar");
+  if (idPlayerExist3) return res.status(400).send("ID Player 3 sudah terdaftar");
 
   const idPlayerExist4 = await Participant.findOne({
     idPlayer4: req.body.idPlayer4
   });
-  if (idPlayerExist4) return res.status(400).send("ID sudah terdaftar");
+  if (idPlayerExist4) return res.status(400).send("ID Player 4 sudah terdaftar");
 
   const handphoneNumberExist = await Participant.findOne({
     handphoneNumber: req.body.handphoneNumber
@@ -78,7 +89,6 @@ router.post("/registration", urlencoded, async (req, res) => {
 
   saveLogo(participant, req.body.logo);
 
-
   try {
     const savedParticipant = await participant.save();
     res.redirect("/");
@@ -89,26 +99,11 @@ router.post("/registration", urlencoded, async (req, res) => {
 
 router.get("/", (req, res) => {
   Participant.find().then(participants => {
-    // const page = req.query.page;
-    // const limit = req.query.limit;
-
-    // const startIndex = (page - 1) * limit;
-    // const endIndex = page * limit;
-
-    // const resultParty = participants.slice(startIndex, endIndex);
-    // console.log(resultParty);
-
     res.render("index", {
       jumlahParticipant: participants.length,
       participant: participants
     });
   });
-});
-
-
-
-router.get("/participant/:id", (req, res) => {
-  res.send(`${req.params.id}`);
 });
 
 router.get("/register", (req, res) => {

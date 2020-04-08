@@ -24,9 +24,12 @@ mongoose.connect(
 );
 
 // middleware
-app.use(express.json());
+app.use(express.json({
+  limit: '2mb'
+}));
 app.use(express.urlencoded({
-  extended: false
+  extended: false,
+  limit: '2mb'
 }));
 app.use(express.static("public"));
 
