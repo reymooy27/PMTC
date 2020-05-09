@@ -4,27 +4,31 @@ const {
   registerValidation
 } = require("../validation");
 const express = require("express");
+const dotenv = require("dotenv");
+const midtransClient = require('midtrans-client');
+
 const app = express();
 const urlencoded = app.use(
   express.urlencoded({
-    extended: false
+    extended: true
   })
 );
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
 
 router.get("/registration", async (req, res) => {
   const teamNameExist = await Participant.findOne({
     teamName: req.body.teamName
   });
-  if (teamNameExist) return res.status(400).send("Nama Tim sudah terdaftar");
 
   Participant.find().then(participants => {
 
     res.render("registration", {
       jumlahParticipant: participants.length,
-      participant: participants
+      participant: participants,
+      teamNamesama: teamNameExist
     });
-  });
+  })
 });
 
 router.post("/registration", urlencoded, async (req, res) => {
@@ -89,9 +93,10 @@ router.post("/registration", urlencoded, async (req, res) => {
 
   saveLogo(participant, req.body.logo);
 
+
   try {
+    res.redirect("/simple_checkout");
     const savedParticipant = await participant.save();
-    res.redirect("/");
   } catch (err) {
     res.status(400).send(err);
   }
@@ -113,6 +118,47 @@ router.get("/register", (req, res) => {
     res.json(a);
   });
 });
+
+router.get("/simple_checkout", urlencoded,
+  function (req, res) {
+    // initialize snap client object
+    let snap = new midtransClient.Snap({
+      isProduction: false,
+      serverKey: process.env.MIDTRANS_SERVER_KEY,
+      clientKey: process.env.MIDTRANS_CLIENT_KEY
+    });
+    let parameter = {
+      "transaction_details": {
+        "order_id": "order-id-node-" + Math.round((new Date()).getTime() / 1000),
+        "gross_amount": 100000
+      },
+      "customer_details": {
+        "first_name": req.body.teamName,
+        "email": req.body.email,
+        "phone": req.body.handphoneNumber
+      },
+      "credit_card": {
+        "secure": true
+      },
+      "callbacks": {
+        "finish": "http://localhost:3000/"
+      },
+      "expiry": {
+        "unit": "hour",
+        "duration": 12
+      },
+
+    };
+
+    snap.createTransactionToken(parameter)
+      .then((transactionToken) => {
+
+        res.render('simple_checkout', {
+          token: transactionToken,
+          clientKey: snap.apiConfig.clientKey
+        })
+      })
+  })
 
 function saveLogo(image, logoEncoded) {
   if (logoEncoded == null) return;

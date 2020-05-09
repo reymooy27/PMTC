@@ -18,29 +18,84 @@ FilePond.setOptions({
 FilePond.parse(document.body);
 
 
-const kiri = document.getElementById('registrationForm');
-const tName = document.getElementById('namaTeam')
 
-async function getParticipants() {
-  await fetch("http://localhost:3000/register")
-    .then(a => {
-      const part = a.json();
-      return part
-    })
-    .then(participants => {
-      participants.forEach(data => {
-        kiri.addEventListener('submit', check)
-        const y = tName.getAttribute('value')
 
-        function check() {
-          if (y === data.teamName) {
-            console.log('sama');
-          }
-        }
 
-      })
-    });
+
+const form = document.getElementById('registrationForm');
+const teamNameInput = document.getElementById('namaTeam');
+const singkatanTeamInput = document.getElementById('singkatanTeam');
+const idPemain1Input = document.getElementById('idPemain');
+const idPemain2Input = document.getElementById('idPemain2');
+const idPemain3Input = document.getElementById('idPemain3');
+const idPemain4Input = document.getElementById('idPemain4');
+const namaPemain1Input = document.getElementById('namaPemain');
+const namaPemain2Input = document.getElementById('namaPemain2');
+const namaPemain3Input = document.getElementById('namaPemain3');
+const namaPemain4Input = document.getElementById('namaPemain4');
+const noHPInput = document.getElementById('noHP');
+const emailInput = document.getElementById('email');
+
+const showError = document.querySelector('.error');
+
+const error = {
+  teamName: 'Nama Tim sudah terdaftar',
+  singkatan: 'Singkatan sama dengan tim lain',
+  id1: 'ID 1 Pemain sudah terdaftar',
+  id2: 'ID 2 Pemain sudah terdaftar',
+  id3: 'ID 3 Pemain sudah terdaftar',
+  id4: 'ID 4 Pemain sudah terdaftar',
+  hp: 'Nomor Handphone sudah terdaftar',
+  email: 'Email sudah terdaftar'
+};
+
+
+function checkPhoneKey(key) {
+  return (key >= '0' && key <= '9') || key == '+' || key == '(' || key == ')' || key == '-' ||
+    key == 'ArrowLeft' || key == 'ArrowRight' || key == 'Delete' || key == 'Backspace';
 }
 
 
-getParticipants();
+// const url = 'http://localhost:3000/register';
+
+// function cek() {
+//   form.addEventListener('submit', (a) => {
+//     a.preventDefault();
+//   })
+// }
+
+// async function getParticipants() {
+//   await fetch(url).then((a) => {
+//     return a.json();
+//   }).then((b) => {
+//     b.forEach(data => {
+//       if (teamNameInput.value === data.teamName) {
+//         console.log('nama sama');
+//         cek();
+//       }
+//       if (singkatanTeamInput.value === data.singkatanTeam) {
+//         console.log('singkatan sama');
+//         cek()
+//       }
+//       if (idPemain1Input.value === data.idPlayer) {
+//         console.log('id1 sama');
+//         cek()
+//       }
+//       if (idPemain2Input.value === data.idPlayer2) {
+//         console.log('id2 sama');
+//         cek()
+//       }
+//       if (idPemain3Input.value === data.idPlayer3) {
+//         console.log('id3 sama');
+//         cek()
+//       }
+//       if (idPemain4Input.value === data.idPlayer4) {
+//         console.log('id4 sama');
+//         cek()
+//       }
+
+//     })
+//   })
+// }
+
+// getParticipants();

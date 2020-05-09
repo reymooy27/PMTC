@@ -27,6 +27,16 @@ p {
 }
 
 /* ===================================Navigation Bar==================================== */
+
+.navbar-responsive {
+  background: #16191e;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.658);
+  z-index: 4;
+  width: 100%;
+  height: 50px;
+  position: fixed;
+}
+
 .full-nav {
   position: fixed;
   left: 0;
@@ -114,10 +124,10 @@ p {
 
 .menuicon {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 60px;
-  height: 60px;
+  top: 0px;
+  right: 2px;
+  width: 50px;
+  height: 50px;
   background: url(../img/iconmonstr-menu-1-72.png);
   background-size: 32px;
   cursor: pointer;
@@ -150,10 +160,10 @@ p {
 
 /* =================================Banner====================================== */
 .navbar-logo {
-  width: 60px;
+  width: 50px;
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 7px;
+  left: 7px;
 }
 
 header {
@@ -207,18 +217,18 @@ header h4 {
 }
 
 .btn {
-  width: 180px;
+  width: 280px;
   height: 45px;
-  padding: 10px;
-  font-size: 14px;
+  padding: 15px 20px;
+  font-size: 12px;
   font-weight: bold;
-  border-radius: 10px;
-  border: 1px orange solid;
+  border-radius: 50px;
   background-color: orange;
   text-transform: uppercase;
   color: black;
   text-shadow: none;
   outline: none;
+  border: none;
 }
 
 .btn-disabled {
@@ -270,7 +280,7 @@ img {
 /* ======================================Welcome================================================= */
 .welcome {
   text-align: center;
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -379,6 +389,9 @@ img {
 }
 
 #map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0px auto 0;
   height: 450px;
   width: 100%;
@@ -410,7 +423,7 @@ img {
 
 .button2-wraper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   border-bottom: 1px solid orange;
   width: 96%;
@@ -424,7 +437,7 @@ img {
   outline: none;
   padding: 8px 16px;
   width: 100%;
-  font-size: 16px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   text-align: center;
@@ -437,7 +450,7 @@ img {
   outline: none;
   padding: 8px 16px;
   width: 100%;
-  font-size: 16px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   text-align: center;
@@ -454,9 +467,13 @@ img {
 .button2-wraper button:hover {
   color: black;
   background: orange;
-  border-radius: 0.25rem;
   text-decoration: none;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
+
 
 .qualifier-wraper {
   color: white;
@@ -472,7 +489,10 @@ img {
 .button2-wraper .qualifier-active {
   background: orange;
   color: black;
-  border-radius: 0.25rem;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .wrap {
@@ -585,75 +605,133 @@ img {
 }
 
 /* =====================================Participant=================================== */
+
+.info {
+  margin: 0 10px;
+}
+
+.home-wraper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-list {
+  color: white;
+  font-size: 14px;
+  position: relative;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  background: #0e1013;
+  padding: 10px 30px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 0.8px rgba(255, 255, 255, 0.288) solid;
+  cursor: pointer;
+}
+
+.team-list:hover {
+  box-shadow: 0px 4px 5px 2px black;
+}
+
+.team-list:after {
+  content: url("../img/iconmonstr-arrow-66-16.png");
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.team-list-active:after {
+  content: url("../img/iconmonstr-arrow-65-16.png");
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.team-name {
+  display: flex;
+  justify-content: baseline;
+  text-align: left;
+}
+
+.team-name span {
+  padding: 0 10px;
+  color: orange;
+}
+
+.logo-team {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-team img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  max-width: 40px;
+  max-height: 40px;
+  padding: 0;
+}
+
+.list {
+  background: #0e1013;
+  display: none;
+  width: 100%;
+  padding: 5px 8px;
+  margin-bottom: 10px;
+  border: 1px rgba(255, 255, 255, 0.479) solid;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.list ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  color: white;
+}
+
+.list ul li {
+  list-style: none;
+  padding: 10px 10px;
+}
+
+.list ul li span {
+  color: orange;
+  padding: 0 5px;
+}
+
 .kop-participant {
   font-size: 18px;
   text-align: center;
   margin-bottom: -10px;
 }
 
-.info {
-  margin: 0 10px;
-}
-
-.team-card {
-  border-radius: 20px;
-  width: 280px;
-  height: 210px;
-  max-width: 96%;
-  background-color: #0e1013;
-  color: white;
-  text-align: center;
-  margin-bottom: 1em;
-}
-
-.team-card img {
-  border-radius: 5px 5px 0 0;
-}
-
-.team-img {
-  height: 40%;
-}
-
-.team-logo {
-  width: 120px;
-  padding: 10px;
-}
-
-.team-container {
-  padding: 10px 0px;
-}
-
-.team-card ul {
+.team-registered {
   display: flex;
-  /* flex-direction: column; */
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-  /* padding: 5px; */
+  width: 100%;
+  justify-content: first baseline;
+  align-items: baseline;
 }
 
-.team-card span {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 18px;
-}
-
-.team-card li {
-  position: relative;
-  width: 50%;
+.team-registered h4 {
+  color: white;
   font-size: 14px;
+  font-weight: bold;
+  padding: 0px 10px 10px;
 }
 
 a .active :hover {
   color: #ffa600;
-}
-
-.home-wraper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
 #home,
@@ -700,7 +778,13 @@ a .active :hover {
   color: orange;
   border: none;
   border-radius: 5px;
-  margin: 5px auto 0;
+  margin: 10px auto 0;
+  border: 0.8px rgba(255, 255, 255, 0.288) solid;
+
+}
+
+.collapsible:hover {
+  box-shadow: 0px 4px 5px 2px black;
 }
 
 .collapsible:after {
@@ -723,10 +807,6 @@ a .active :hover {
 
 .content table {
   display: table;
-}
-
-.collapsible:hover {
-  background-color: #0e101377;
 }
 
 #menu1 th,
@@ -778,16 +858,29 @@ table td {
 
 input#namaPemain:focus,
 input#idPemain:focus,
+input#idPemain2:focus,
+input#idPemain3:focus,
+input#idPemain4:focus,
 input#namaTeam:focus,
+input#namaPemain2:focus,
+input#namaPemain3:focus,
+input#namaPemain4:focus,
 input#singkatanTeam:focus,
 input#noHP:focus,
 input#email:focus,
 select {
-  border: 2px solid rgba(5, 160, 5, 0.76);
+  border: 2px solid rgba(6, 118, 170, 0.76);
+  transition: ease 0.3s;
 }
 
 input#namaPemain,
+input#namaPemain2,
+input#namaPemain3,
+input#namaPemain4,
 input#idPemain,
+input#idPemain2,
+input#idPemain3,
+input#idPemain4,
 input#namaTeam,
 input#singkatanTeam,
 input#noHP,
@@ -799,12 +892,21 @@ select {
   text-align: left;
   text-indent: 10px;
   margin: 5px auto;
-  border: 1px solid rgb(122, 118, 118);
+  border: 2px solid rgb(168, 167, 167);
   outline: none;
 }
 
 input#singkatanTeam {
   text-transform: uppercase;
+}
+
+.error {
+  font-size: 11px;
+  color: red;
+}
+
+.setError {
+  border: 2px red solid;
 }
 
 label {
@@ -983,27 +1085,67 @@ footer p {
 }
 
 /* =======================================Tombol back to top================================= */
-.backtotop button {
+.backtotop {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 8px;
   color: orange;
   background-color: black;
   border-style: none;
   font-weight: bolder;
-  font-size: 16px;
-  float: right;
-  margin: 20px;
-  background-color: black;
-  padding: 14px;
+  font-size: 14px;
+  padding: 12px;
   border-radius: 10px;
   cursor: pointer;
   outline: none;
+  transition: .2s ease-in-out;
+  z-index: 3;
+  text-decoration: none;
 }
 
-.backtotop button:hover {
+.backtotop:hover {
   color: black;
   background-color: orange;
-  border-color: aqua;
   border-style: solid 16px;
+  text-decoration: none;
 }
+
+.btnEntrance {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: btnEntrance;
+}
+
+@keyframes btnEntrance {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0)
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.btnExit {
+  animation-duration: 0.25s;
+  animation-fill-mode: both;
+  animation-name: btnExit;
+}
+
+@keyframes btnExit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0)
+  }
+}
+
 
 @media screen and (max-width: 576px) {
   /* Home */
@@ -1055,6 +1197,7 @@ footer p {
 }
 
 @media screen and (min-width: 350px) {
+
   .jadwal-kiri li,
   .jadwal-kanan li {
     font-size: 1em;
@@ -1100,13 +1243,40 @@ footer p {
     right: 20px;
   }
 
+  .welcome {
+    width: 60%;
+  }
+
   /* ===============================================Tournament Information===================================================== */
+
+  .team-list {
+    font-size: 16px;
+  }
+
+  .list ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    color: white;
+  }
 
   #home,
   #menu1,
   #menu2,
   #menu3 {
     margin: 0 20px;
+  }
+
+  .button2-wraper button {
+    font-size: 16px;
+  }
+
+  .button-wraper button {
+    font-size: 16px;
+  }
+
+  .team-registered h4 {
+    font-size: 18px;
   }
 
   /* ===============================================Banner===================================================== */
@@ -1120,16 +1290,12 @@ footer p {
   }
 
   .btn {
-    background-color: transparent;
-    color: orange;
     width: 220px;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .btn:hover {
-    background: rgb(255, 154, 0);
-    color: black;
-    box-shadow: 10px 10px 15px rgba(56, 56, 56, 0.582);
+    background: rgb(219, 132, 0);
   }
 
   .specialFont {
@@ -1140,19 +1306,6 @@ footer p {
     flex-direction: row;
   }
 
-  .button2-wraper button:hover {
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  .button2-wraper .qualifier-active {
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
 
   /* ===============================================Footer===================================================== */
   footer {
@@ -1191,6 +1344,7 @@ footer p {
     height: 300px;
     border-radius: 280px;
   }
+
 }
 
 @media screen and (min-width: 976px) {
@@ -1237,6 +1391,7 @@ footer p {
 
   .tournamentFormat {
     width: 50%;
+    margin-bottom: 0;
   }
 
   .prize {
@@ -1250,6 +1405,25 @@ footer p {
 
   .info {
     margin: 0 20px;
+  }
+
+  .menuicon {
+    top: 0px;
+    right: 0px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .navbar-responsive {
+    height: 60px;
+  }
+
+  .navbar-logo {
+    height: 80px;
+    width: 100px;
+    position: absolute;
+    top: -10px;
+    left: 7px;
   }
 }
 

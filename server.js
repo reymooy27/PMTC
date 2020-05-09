@@ -28,7 +28,7 @@ app.use(express.json({
   limit: '2mb'
 }));
 app.use(express.urlencoded({
-  extended: false,
+  extended: true,
   limit: '2mb'
 }));
 app.use(express.static("public"));

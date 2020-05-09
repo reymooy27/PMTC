@@ -20,24 +20,26 @@
     <!-- ===========
         Navbar
     ================ -->
-    <nav class="full-nav" id="nav">
-        <div class="nav">
-            <ul>
-                <li><a href="/" data-text="Home">Home</a></li>
-                <li><a href="/registration" data-text="Registration">Registration</a></li>
-                <li><a href="#" data-text="About">About</a></li>
-                <li><a href="#" data-text="Report">Report</a></li>
-            </ul>
-        </div>
-    </nav>
-    <span class="menuicon" id="toggle"></span>
+    <div class="navbar-responsive">
+        <a href="./"><img src="./img/logo.png" class="navbar-logo" alt="">
+        </a>
+        <span class="menuicon" id="toggle"></span>
+        <nav class="full-nav" id="nav">
+            <div class="nav">
+                <ul>
+                    <li><a href="/" data-text="Home">Home</a></li>
+                    <li><a href="/registration" data-text="Pendaftaran">Pendaftaran</a></li>
+                    <li><a href="#" data-text="Tentang">Tentang</a></li>
+                    <li><a href="#" data-text="Lapor">Lapor</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
     <!-- ================
         Banner
     ==================== -->
     <header id="atas">
-        <a href="./"><img src="./img/logo.png" class="navbar-logo" alt="">
-        </a>
         <div class="title-wraper">
             <h1 class="form-control-md align-content-center" id="top">PUBG Mobile :<br> <span>Terminator Weekly
                     Challenge</span></h1>
@@ -47,13 +49,13 @@
                 minggunya</p>
         </div>
         <div class="btn-wraper">
-            <h4>Registration Open :</h4>
+            <h4>Pendaftaran Buka :</h4>
             <span>12/2 - 19/2</span>
-            <h4>Registered : <%= jumlahParticipant %>/64</h4>
+            <h4>Pendaftar : <span id="registered-team"><%= jumlahParticipant %></span>/64</h4>
             <%if(jumlahParticipant === 64){%>
-            <a class="btn-disabled" type="button" disabled>Registration Closed</a>
+            <a class="btn-disabled" type="button" disabled>Pendaftaran Tutup</a>
             <%}else{%>
-            <a href="./registration" class="btn">Join Tournament</a>
+            <a href="./registration" class="btn">Daftar</a>
             <%}%>
         </div>
     </header>
@@ -63,8 +65,8 @@
         Welcome
     ======================
     -->
-    <div data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" data-aos-once="true" class="welcome">
-        <h4 class="specialFont">Welcome</h4>
+    <div data-aos="fade-up" data-aos-duration="500" data-aos-once="true" class="welcome">
+        <h4 class="specialFont">Selamat Datang</h4>
         <p>Selamat datang para PECUNDANG, yang kalau kill 20-an di classic match dan menyebut diri mereka PRO padahal
             10-nya BOT, SAMPAH!!!. Buktikan kalau kamu memang layak disebut PRO, kalahkan pemain lainnya, buktikan
             dirimu dan bawa pulang hadianhnya hadiahnya.</p>
@@ -76,34 +78,34 @@
         ==================
     -->
     <div class=" tourneyInfoPrize">
-        <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000" data-aos-once="true"
+        <div data-aos="fade-up" data-aos-duration="500" data-aos-once="true"
             class="tournamentFormat">
             <h4 class="specialFont">Format</h4>
             <div class="param-wraper">
                 <div class="detail-left">
                     <div class="param-wraper-detail">
-                        <h5>Entry Fee</h5>
+                        <h5>Biaya Pendaftaran</h5>
                         <span>Rp. 100,000</span>
                     </div>
                     <div class="param-wraper-detail">
-                        <h5>Prize Pool</h5>
+                        <h5>Total Hadiah</h5>
                         <span>Rp. 3,200,000</span>
                     </div>
                 </div>
                 <div class="detail-right">
                     <div class="param-wraper-detail">
                         <h5>Mode</h5>
-                        <span>Squad</span>
+                        <span>Squad TPP</span>
                     </div>
                     <div class="param-wraper-detail">
-                        <h5>Tournament Format</h5>
-                        <span>Group Elimination</span>
+                        <h5>Format Turnamen</h5>
+                        <span>4 Tim Terbaik</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000" data-aos-once="true" class="prize">
-            <h4 class="specialFont">Prize</h4>
+        <div data-aos="fade-up" data-aos-duration="500" data-aos-once="true" class="prize">
+            <h4 class="specialFont">Hadiah</h4>
             <div class="param-wraper">
                 <table id="prize-table">
                     <tr id="gold">
@@ -126,12 +128,12 @@
     <!-- ==============
         Match Map
     ===================  -->
-    <div data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000" data-aos-once="true">
+    <div data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
         <div class="specialFont-wraper">
-            <h4 class="mb-2 text-center specialFont">schedule</h4>
+            <h4 class="mb-2 text-center specialFont">Jadwal</h4>
         </div>
         <div class="button-wraper">
-            <button class="qualifier" data-tab-target="#qualifier">Group Stage</button>
+            <button class="qualifier" data-tab-target="#qualifier">Babak Grup</button>
             <button class="qualifier qualifier-active" data-tab-target="#grandfinal">Grand Final</button>
         </div>
         <div id="map-container" class="container-sm-fluid text-sm-center p-3">
@@ -139,13 +141,13 @@
                 <div class="wrap">
                     <div class="jadwal-kiri">
                         <h3>19 February</h3>
-                        <h4 class="groups">Group A</h4>
+                        <h4 class="groups">Grup A</h4>
                         <ul>
                             <li>Match 1 : <span class="groups">16.00</span></li>
                             <li>Match 2 : <span class="groups">17.00</span></li>
                             <li>Match 3 : <span class="groups">18.00</span></li>
                         </ul>
-                        <h4 class="groups">Group B</h4>
+                        <h4 class="groups">Grup B</h4>
                         <ul>
                             <li>Match 1 : <span class="groups">19.00</span></li>
                             <li>Match 2 : <span class="groups">20.00</span></li>
@@ -154,13 +156,13 @@
                     </div>
                     <div class="jadwal-kanan">
                         <h3>20 February</h3>
-                        <h4 class="groups">Group C</h4>
+                        <h4 class="groups">Grup C</h4>
                         <ul>
                             <li>Match 1 : <span class="groups">16.00</span></li>
                             <li>Match 2 : <span class="groups">17.00</span></li>
                             <li>Match 3 : <span class="groups">18.00</span></li>
                         </ul>
-                        <h4 class="groups">Group D</h4>
+                        <h4 class="groups">Grup D</h4>
                         <ul>
                             <li>Match 1 : <span class="groups">19.00</span></li>
                             <li>Match 2 : <span class="groups">20.00</span></li>
@@ -291,44 +293,46 @@
     <!-- ===================== 
         Tournament Information
         ====================== -->
-    <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000" data-aos-once="true" class="info">
+    <div data-aos="fade-up" data-aos-duration="500" data-aos-once="true" class="info">
         <div class="specialFont-wraper">
-            <h4 class="text-center specialFont">Tournament Information</h4>
+            <h4 class="text-center specialFont">Informasi Turnamen</h4>
         </div>
         <!-- Nav tabs -->
         <div class="button2-wraper">
-            <button class="qualifier qualifier-active" data-tab-target2="#home">Participants</button>
-            <button class="qualifier" data-tab-target2="#menu1">Standings</button>
-            <button class="qualifier" data-tab-target2="#menu2">Kill Rangking</button>
-            <button class="qualifier" data-tab-target2="#menu3">Rules</button>
+            <button class="qualifier qualifier-active" data-tab-target2="#home">Tim</button>
+            <button class="qualifier" data-tab-target2="#menu1">Rangking</button>
+            <button class="qualifier" data-tab-target2="#menu2">Kill</button>
+            <button class="qualifier" data-tab-target2="#menu3">Peraturan</button>
         </div>
 
         <!-- Tab panes -->
         <div class="info">
             <div>
                 <div id="home" data-tab-content2 class="active-tab"><br>
-                    <div class="home-wraper">
-                        <% if(participant.length === 0){%>
+                    <div class="team-registered">
+                        <h4>Tim : <%= participant.length%> </h4>
+            <h4>Slot Tersedia : 64</h4>
+        </div>
+        <div class="home-wraper">
+            <% if(participant.length === 0){%>
             <div class="no-participant">
                 <h3>To be determined</h3>
             </div>
             <%}else{%>
             <% for(let i = 0; i < participant.length; i++ ) { %>
-            <div>
-                <div class="team-card">
-                    <div class="team-img">
-                        <img class="team-logo" src="<%= participant[i].logoImagePath %>" alt="">
-                    </div>
-                    <div class="team-container">
-                        <span><%= participant[i].teamName %></span>
-                        <ul>
-                            <li> <%= participant[i].playerName %> </li>
-                            <li> <%= participant[i].playerName2 %> </li>
-                            <li> <%= participant[i].playerName3 %> </li>
-                            <li> <%= participant[i].playerName4 %> </li>
-                        </ul>
-                    </div>
+            <div class="team-list">
+                <div class="logo-team"><img src="<%= participant[i].logoImagePath %>" alt=""></div>
+                <div class="team-name"><%= participant[i].teamName %>
+                    <span class="team-abbr">(<%= participant[i].singkatanTeam %>)</span>
                 </div>
+            </div>
+            <div class="list">
+                <ul>
+                    <li> <%= participant[i].playerName %> <span>(<%= participant[i].idPlayer %>)</span></li>
+                    <li> <%= participant[i].playerName2 %> <span>(<%= participant[i].idPlayer2 %>)</span></li>
+                    <li> <%= participant[i].playerName3 %> <span>(<%= participant[i].idPlayer3 %>)</span></li>
+                    <li> <%= participant[i].playerName4 %> <span>(<%= participant[i].idPlayer4 %>)</span></li>
+                </ul>
             </div>
             <% } %>
             <% } %>
@@ -345,7 +349,7 @@
         </div>
         </div>
         <div id="menu1" data-tab-content2><br>
-            <button class="collapsible">GROUP A</button>
+            <button class="collapsible">GRUP A</button>
             <div class="content">
                 <table class="content table table-striped table-bordered table-hover table-dark">
                     <tbody class="p-sm-0 m-sm-0">
@@ -543,7 +547,7 @@
                         </tr>
                 </table>
             </div>
-            <button class="collapsible">GROUP B</button>
+            <button class="collapsible">GRUP B</button>
             <div class="content">
                 <table class="content table table-striped table-bordered table-hover table-dark">
                     <tbody class="p-sm-0 m-sm-0">
@@ -741,7 +745,7 @@
                         </tr>
                 </table>
             </div>
-            <button class="collapsible">GROUP C</button>
+            <button class="collapsible">GRUP C</button>
             <div class="content">
                 <table class="content table table-striped table-bordered table-hover table-dark">
                     <tbody class="p-sm-0 m-sm-0">
@@ -939,7 +943,7 @@
                         </tr>
                 </table>
             </div>
-            <button class="collapsible">GROUP D</button>
+            <button class="collapsible">GRUP D</button>
             <div class="content">
                 <table class="content table table-striped table-bordered table-hover table-dark">
                     <tbody class="p-sm-0 m-sm-0">
@@ -1682,7 +1686,7 @@
         <br>
 
         <div>
-            <a class="backtotop" style="float: right;" href="#atas"><button>TOP</button></a>
+            <a class="backtotop" id="back-to-top" href="#atas">TOP</a>
         </div>
 
         <!-- ==============
@@ -1692,12 +1696,12 @@
             <div class="background-overlay"></div>
             <div class="footer-content">
                 <div class="content-1">
-                    <h4 id="contact">Contact Us:</h4>
+                    <h4 id="contact">Hubungi Kami</h4>
                     <h5>pmtc.official@gmail.com</h5>
                     <h5>+6282237813869</h5>
                 </div>
                 <div class="content-2">
-                    <h4>Organized by:</h4>
+                    <h4>Diselenggarakan Oleh</h4>
                     <div class="content-2-wraper">
                         <img src="./img/profile.jpg" alt="" class="profile">
                         <!-- <h5>r3tr0</h5> -->
