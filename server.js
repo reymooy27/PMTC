@@ -13,7 +13,7 @@ dotenv.config();
 
 // connect DB
 mongoose.connect(
-  "mongodb://127.0.0.1:27017",
+  process.env.DB_CONNECT,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
