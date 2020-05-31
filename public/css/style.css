@@ -15,9 +15,14 @@ body {
   line-height: 2;
   margin: 0px;
   font-family: "Roboto", sans-serif;
-  background: #16191e;
-  overflow-y: none;
+  background: #151a2c;
   position: relative;
+}
+
+.main-content-wraper {
+  width: (100% - 200px);
+  margin-left: 0px;
+  transition: all 0.3s ease;
 }
 
 p {
@@ -29,103 +34,65 @@ p {
 /* ===================================Navigation Bar==================================== */
 
 .navbar-responsive {
-  background: #16191e;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.658);
+  background: #151a2c;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.849);
   z-index: 4;
   width: 100%;
   height: 50px;
   position: fixed;
+  top: 0;
+  left: 0;
+  margin-left: 0px;
+  transition: all 0.3s ease;
 }
 
 .full-nav {
   position: fixed;
-  left: 0;
-  top: -100%;
-  width: 100%;
+  left: -100%;
+  top: 50.2px;
+  width: 200px;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background: black;
-  transition: 0.5s;
-  z-index: 9;
+  background: #2d303e;
+  transition: all 0.3s ease;
+  z-index: 4;
+  overflow: auto;
 }
 
 .full-nav.active {
-  top: 0;
+  left: 0;
 }
 
 .full-nav .nav {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  flex-direction: column;
+  width: 200px;
   height: 100%;
-  overflow-y: auto;
+  padding: 5px;
 }
 
-.full-nav .nav ul {
-  position: relative;
-}
-
-.full-nav .nav ul li {
-  position: relative;
-  list-style: none;
-  padding: 0 20px;
-  margin: 5px 0;
-  overflow: hidden;
-  display: table;
-}
-
-.full-nav .nav ul li:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: orange;
-  transition: transform 0.5s ease-in-out;
-  transform: scaleY(0);
-  transform-origin: bottom;
-}
-
-.full-nav .nav ul li:hover:before {
-  transition: transform 0.5s ease-in-out;
-  transform: scaleY(1);
-  transform-origin: top;
-}
-
-.full-nav .nav ul li a {
-  font-family: "Oswald", sans-serif;
-  color: white;
-  position: relative;
-  text-decoration: none;
-  font-size: 2em;
-  font-weight: 700;
-  line-height: 1em;
-  padding-top: 12px;
+.full-nav .nav a {
   display: inline-block;
-  text-transform: uppercase;
-  transition: ease-in-out 0.5s;
+  width: 100%;
+  padding: 10px;
+  margin: 10px auto 0;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: left;
 }
 
-.full-nav .nav ul li a:before {
-  content: attr(data-text);
-  position: absolute;
-  bottom: -100%;
-  left: 0;
-  color: black;
-}
-
-.full-nav .nav ul li:hover a {
-  transform: translateY(-100%);
+.full-nav .nav a:hover {
+  background: #151a2c;
+  border-radius: 10px;
 }
 
 .menuicon {
   position: absolute;
   top: 0px;
-  right: 2px;
+  left: 2px;
   width: 50px;
   height: 50px;
   background: url(../img/iconmonstr-menu-1-72.png);
@@ -134,10 +101,10 @@ p {
   background-repeat: no-repeat;
   background-position: 10px;
   z-index: 10;
+  transition: all 0.3s ease;
 }
 
 .menuicon.active {
-  position: fixed;
   background: url(../img/iconmonstr-x-mark-1-72.png);
   background-size: 32px;
   cursor: pointer;
@@ -148,10 +115,10 @@ p {
 
 .tombolkembali {
   margin: 0 auto 0 0;
-  padding: 20px;
+  padding: 0px;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 10px;
 }
 
 .tombolkembali a img {
@@ -159,16 +126,14 @@ p {
 }
 
 /* =================================Banner====================================== */
-.navbar-logo {
-  width: 50px;
-  position: absolute;
-  top: 7px;
-  left: 7px;
-}
 
 header {
-  min-height: 640px;
-  color: orange;
+  margin: 6em auto 0;
+  height: 640px;
+  width: 95%;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.712);
+  color: white;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -178,57 +143,147 @@ header {
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: scroll;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #2bddb4cb;
   background-blend-mode: multiply;
-  text-shadow: rgba(88, 81, 81, 0.699) 2px 2px;
+  position: relative;
 }
 
-.title-wraper {
-  margin: 2em 1em 0 1em;
-}
-
-header h1,
-h1 {
-  font-size: 2em;
-  color: rgb(255, 154, 0);
+header h1 {
+  font-size: 1.5em;
+  color: white;
   font-family: "Oswald", sans-serif;
   text-align: left;
   text-transform: uppercase;
 }
-
-header p {
-  text-align: left;
-  color: rgb(255, 154, 0);
+.header-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+}
+.header-1-1 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.logo-wraper {
+  width: 96px;
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  padding: 0;
+  margin: 0;
 }
 
-header h4 {
-  color: orange;
-  font-size: 1em;
+.logo-wraper img {
+  padding: 0;
+  margin: 0;
+}
+.title-wraper {
+  position: absolute;
+  bottom: 3em;
+  left: 1em;
+}
+.header-1-2 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 1em;
+}
+
+.header-1-2 p {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+
+.header-1-2-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  width: 160px;
+  height: 80px;
+}
+
+.header-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30%;
+  background: #151a2c;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.param-wraper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  width: 100%;
+  padding-bottom: 1em;
+}
+
+.param-wraper-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  margin: 5px;
+}
+
+.param-wraper-detail h5 {
+  font-size: 12px;
+  color: #959aa2;
+}
+
+.param-wraper-detail span {
+  display: block;
+  margin-top: -10px;
+  color: white;
+  font-size: 14px;
+  font-weight: bolder;
 }
 
 .btn-wraper {
-  margin-top: -90px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.btn-wraper span {
-  color: orange;
-  font-weight: bold;
-  font-size: 1.5em;
-}
-
-.btn {
-  width: 280px;
-  height: 45px;
-  padding: 15px 20px;
-  font-size: 12px;
+.btn-registered {
+  display: inline-block;
+  width: 60%;
+  height: 40px;
+  padding: 11px 20px;
+  font-size: 0.75em;
   font-weight: bold;
   border-radius: 50px;
-  background-color: orange;
+  background: #00deab;
   text-transform: uppercase;
   color: black;
-  text-shadow: none;
   outline: none;
-  border: none;
+  transition: ease-in-out 0.3s;
+  text-decoration: none;
+}
+
+.btn-registered:hover {
+  background: rgb(4, 172, 132);
+  text-decoration: none;
+  color: black;
 }
 
 .btn-disabled {
@@ -248,26 +303,27 @@ header h4 {
 }
 
 .specialFont-wraper {
+  top: 0;
+  left: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: left;
+  justify-content: left;
+  background: #070613;
+  width: 100%;
+  padding: 10px;
+  padding-left: 20px;
+  border-top: #00deab 3px solid;
+  border-left: #00deab 3px solid;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .specialFont {
   font-family: "Oswald", sans-serif;
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: normal;
-  text-transform: uppercase;
-  margin-bottom: 40px;
-  color: rgb(255, 154, 0);
-}
-
-/* Logo PUBG di tengah */
-div img {
-  margin: 50px auto;
-  width: 150px;
-  margin-top: 0px;
-  margin-bottom: -60px;
+  text-transform: capitalize;
+  color: white;
 }
 
 img {
@@ -277,22 +333,16 @@ img {
   display: block;
 }
 
-/* ======================================Welcome================================================= */
-.welcome {
-  text-align: center;
-  width: 80%;
-  margin: 0 auto;
-}
-
-.welcome span {
-  display: block;
-  margin-top: -10px;
-  font-size: 11px;
-  color: white;
-}
-
 /* ======================================Tourney Format and Prize================================================= */
 .tourneyInfoPrize {
+  padding-bottom: 20px;
+  margin: 0 auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  width: 95%;
+  background: #2d303e;
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.712);
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -300,101 +350,107 @@ img {
   text-align: center;
 }
 
-.tournamentFormat {
-  width: 90%;
-  margin-bottom: 2em;
+.tourneyInfoPrize p {
+  font-size: 12px;
+  margin-top: 20px;
+  margin-bottom: 0;
+  padding: 10px;
+}
+.tourneyInfoPrize p span {
+  color: #00deab;
 }
 
 .prize {
-  width: 90%;
-}
-
-.param-wraper {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  /* text-align: left; */
-  margin: 0 auto;
-}
-
-.param-wraper-detail {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   padding: 10px;
-  margin: 10px;
-  width: 150px;
-  height: 50px;
-  border: 1px solid orange;
+}
+
+.prize-details {
+  padding: 10px;
+  color: white;
+  background: url("../img/iconmonstr-trophy-13-240.png");
   border-radius: 5px;
-  box-shadow: 6px 6px 10px rgba(56, 56, 56, 0.582);
+  border: 1px solid #00deab;
+  width: 90%;
+  height: 170px;
+  background-size: 90px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 10px;
 }
 
-.param-wraper-detail h5 {
-  font-size: 12px;
-  color: #959aa2;
-}
-
-.param-wraper-detail span {
-  display: block;
-  margin-top: -10px;
-  color: white;
+.prize-details span {
   font-size: 14px;
-  font-weight: bolder;
+  display: inline-block;
+  margin-top: 100px;
 }
-
-#prize-table {
+.prize-details2 {
+  padding: 10px;
   color: white;
-  font-size: 1em;
-  width: 60%;
-  margin: 0 auto;
-  padding: 20px 20px;
-  text-align: center;
-  border-bottom: solid 1px orange;
+  background: url("../img/iconmonstr-trophy-13-240\ \(1\).png");
+  border-radius: 5px;
+  border: 1px solid #00deab;
+  width: 90%;
+  height: 170px;
+  background-size: 90px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 10px;
 }
 
-#prize-table tr {
-  text-align: center;
-  border-bottom: solid 1px orange;
+.prize-details2 span {
+  font-size: 14px;
+  display: inline-block;
+  margin-top: 100px;
+}
+.prize-details3 {
+  padding: 10px;
+  color: white;
+  background: url("../img/iconmonstr-trophy-13-240\ \(2\).png");
+  border-radius: 5px;
+  border: 1px solid #00deab;
+  width: 90%;
+  height: 170px;
+  background-size: 90px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 10px;
 }
 
-#gold:before {
-  content: url("../img/iconmonstr-trophy-13-16\ gold.png");
-}
-
-#silver:before {
-  content: url("../img/iconmonstr-trophy-13-16\ silver.png");
-}
-
-#bronze:before {
-  content: url("../img/iconmonstr-trophy-13-16\ bronze.png");
-}
-
-#prize-table tr:hover {
-  background: rgba(104, 104, 102, 0.397);
+.prize-details3 span {
+  font-size: 14px;
+  display: inline-block;
+  margin-top: 100px;
 }
 
 /* ======================================Schedule================================================= */
 
-.container-sm-fluid {
-  background: url("../img/erangel-background.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: rgba(0, 0, 0, 0.6);
-  background-blend-mode: multiply;
+.jadwal-wraper {
+  margin: 0 auto;
+  width: 95%;
+  background: #2d303e;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.712);
 }
 
 #map-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0px auto 0;
+  margin: 0px auto;
+  padding: 10px;
   height: 450px;
   width: 100%;
+  color: white;
+  overflow: auto;
+}
+#map-container::-webkit-scrollbar {
+  background-color: transparent;
 }
 
 [data-tab-content] {
@@ -415,90 +471,80 @@ img {
 
 .button-wraper {
   display: flex;
-  justify-content: center;
-  border-bottom: 1px solid orange;
-  width: 96%;
-  margin: 2em auto 0;
+  justify-content: left;
+  border-bottom: 1px solid rgb(87, 87, 87);
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 1.5em;
 }
 
 .button2-wraper {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  border-bottom: 1px solid orange;
-  width: 96%;
-  margin: 0 auto 10px;
+  justify-content: left;
+  border-bottom: 1px solid rgb(87, 87, 87);
+  width: 95%;
+  margin: 0 auto;
+  overflow: auto;
+  padding-top: 10px;
 }
 
 .button-wraper button {
   background: none;
-  color: rgba(255, 251, 251, 0.747);
+  color: rgba(255, 255, 255, 0.425);
   border: none;
+  padding: 10px;
   outline: none;
-  padding: 8px 16px;
-  width: 100%;
+  width: 150px;
   font-size: 14px;
-  text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 400;
+  text-transform: capitalize;
   text-align: center;
+  vertical-align: baseline;
 }
 
 .button2-wraper button {
   background: none;
-  color: rgba(255, 251, 251, 0.747);
+  color: rgba(255, 255, 255, 0.425);
   border: none;
+  padding: 10px;
   outline: none;
-  padding: 8px 16px;
-  width: 100%;
+  width: 150px;
   font-size: 14px;
-  text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 400;
+  text-transform: capitalize;
   text-align: center;
+  vertical-align: baseline;
 }
 
 .button-wraper button:hover {
-  color: black;
-  background: orange;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
+  color: white;
   text-decoration: none;
 }
 
 .button2-wraper button:hover {
-  color: black;
-  background: orange;
+  color: white;
   text-decoration: none;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
 }
-
 
 .qualifier-wraper {
   color: white;
 }
 
 .button-wraper .qualifier-active {
-  background: orange;
-  color: black;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
+  color: white;
+  border-bottom: #00deab 2px solid;
 }
 
 .button2-wraper .qualifier-active {
-  background: orange;
-  color: black;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  color: white;
+  border-bottom: #00deab 2px solid;
 }
 
 .wrap {
   display: flex;
   justify-content: center;
   align-self: center;
+  text-align: center;
 }
 
 .jadwal-kiri,
@@ -517,31 +563,22 @@ img {
 }
 
 .groups {
-  color: orange;
+  color: #00deab;
 }
 
 #grandfinal {
-  margin: 29px auto 0;
+  margin: 1em auto 0;
 }
 
 #grandfinal::-webkit-scrollbar {
   display: none;
 }
 
-#grandfinal h3 {
-  color: white;
-}
-
-#grandfinal h3 {
-  text-align: left;
-  margin-left: 35px;
-}
-
 .card {
   position: relative;
   width: 50%;
   border: none;
-  box-shadow: 10px 10px 20px rgba(3, 3, 3, 0.801);
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.253);
 }
 
 .card img {
@@ -549,6 +586,8 @@ img {
   width: 100%;
   height: auto;
   border: none;
+  margin-top: 0px;
+  margin-bottom: -60px;
 }
 
 .overlay {
@@ -573,14 +612,14 @@ img {
   margin-top: 30px;
   padding: 5px;
   border-radius: 5px;
-  color: orange;
+  color: #00deab;
   background-color: black;
   border: none;
   font-size: 12px;
 }
 
 .card a {
-  color: orange;
+  color: #00deab;
 }
 
 .card-text {
@@ -590,10 +629,12 @@ img {
 /* ======================================Tournament info=============================== */
 
 .info {
-  padding: 0px;
+  padding-bottom: 20px;
   margin: 0 auto;
-  min-width: 90%;
-  background-color: #16191e;
+  width: 95%;
+  background: #2d303e;
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.712);
+  border-radius: 10px;
 }
 
 #menu3 li {
@@ -606,18 +647,18 @@ img {
 
 /* =====================================Participant=================================== */
 
-.info {
-  margin: 0 10px;
-}
-
 .home-wraper {
-  width: 100%;
+  margin: 0 auto;
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.no-participant {
+  height: 300px;
+}
 .team-list {
   color: white;
   font-size: 14px;
@@ -625,7 +666,7 @@ img {
   width: 100%;
   height: 60px;
   display: flex;
-  background: #0e1013;
+  background: #070613;
   padding: 10px 30px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -634,7 +675,7 @@ img {
 }
 
 .team-list:hover {
-  box-shadow: 0px 4px 5px 2px black;
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.253);
 }
 
 .team-list:after {
@@ -642,13 +683,11 @@ img {
   position: absolute;
   right: 15px;
   top: 15px;
+  transition: ease-in-out 0.3s;
 }
 
 .team-list-active:after {
-  content: url("../img/iconmonstr-arrow-65-16.png");
-  position: absolute;
-  right: 15px;
-  top: 15px;
+  transform: rotate(180deg);
 }
 
 .team-name {
@@ -659,7 +698,8 @@ img {
 
 .team-name span {
   padding: 0 10px;
-  color: orange;
+  color: #00deab;
+  text-transform: uppercase;
 }
 
 .logo-team {
@@ -683,7 +723,7 @@ img {
 }
 
 .list {
-  background: #0e1013;
+  background: #070613;
   display: none;
   width: 100%;
   padding: 5px 8px;
@@ -706,7 +746,7 @@ img {
 }
 
 .list ul li span {
-  color: orange;
+  color: #00deab;
   padding: 0 5px;
 }
 
@@ -717,6 +757,7 @@ img {
 }
 
 .team-registered {
+  padding-left: 20px;
   display: flex;
   width: 100%;
   justify-content: first baseline;
@@ -731,94 +772,105 @@ img {
 }
 
 a .active :hover {
-  color: #ffa600;
+  color: #00deab;
 }
 
 #home,
 #menu1,
 #menu2,
 #menu3 {
-  margin: 0;
+  margin: 0 auto;
 }
 
-/* =====================================Pagination=================================== */
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
+#home {
+  margin: 0 auto;
+  width: 100%;
 }
 
-.pagination a {
-  color: orange;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color 0.3s;
-  transition: border-radius 0.3s;
-}
-
-.pagination a.active {
-  background-color: orange;
-  color: black;
-  border-radius: 5px;
-}
-
-.pagination a:hover:not(.active) {
-  background-color: rgba(104, 104, 102, 0.397);
-  color: white;
-  border-radius: 5px;
+#menu1,
+#menu2,
+#menu3 {
+  width: 90%;
 }
 
 /* =====================================Table Standings=================================== */
 .collapsible {
   width: 100%;
   height: 40px;
-  background-color: #0e1013;
-  color: orange;
+  background-color: #070613;
+  color: #00deab;
   border: none;
   border-radius: 5px;
   margin: 10px auto 0;
   border: 0.8px rgba(255, 255, 255, 0.288) solid;
-
 }
 
 .collapsible:hover {
-  box-shadow: 0px 4px 5px 2px black;
+  box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.26);
 }
 
 .collapsible:after {
   content: url("../img/iconmonstr-arrow-66-16.png");
   float: right;
   margin: 0 10px;
+  transition: ease-in-out 0.3s;
 }
 
 .collapsible-active:after {
-  content: url("../img/iconmonstr-arrow-65-16.png");
-  float: right;
-  margin: 0 10px;
+  transform: rotate(180deg);
 }
 
 .content {
   width: 100%;
   display: none;
   overflow: auto;
+  color: white;
 }
 
 .content table {
   display: table;
+  color: white;
+  border-collapse: collapse;
 }
 
 #menu1 th,
 #menu2 th,
 #menu3 th {
-  color: orange;
+  color: #00deab;
   background-color: rgba(0, 0, 0, 0.8);
+}
+#menu1 td,
+#menu2 td,
+#menu3 td {
+  color: white;
+}
+
+#menu1 .content table tr {
+  border-bottom: #636b86 1px solid;
+}
+#menu1 .content table tr:hover {
+  background: #292e3575;
+}
+#menu1 .content table tr td {
+  padding: 15px;
+}
+
+#menu2 table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#menu2 table tr {
+  border-bottom: #636b86 1px solid;
+}
+#menu2 table tr:hover {
+  background: #292e3575;
+}
+#menu2 table tr td {
+  padding: 15px;
 }
 
 #menu2 {
-  background-color: #16191e;
-  color: #16191e;
+  color: white;
 }
 
 #menu3 p,
@@ -835,18 +887,31 @@ table td {
   text-align: center;
 }
 
+.team-rank {
+  display: flex;
+}
+
 /* ==============================================Registrasi============================================ */
+.filepond--panel-root {
+  background-color: #16191e;
+}
+.filepond--item-panel {
+  background: red;
+}
+.filepond--drop-label {
+  color: red;
+}
 .registration-closed {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #faa31f;
+  background: #16191e;
   width: 100%;
   height: 100vh;
 }
 
 .registration-closed-title {
-  color: black;
+  color: #00deab;
   font-size: 4em;
 }
 
@@ -869,8 +934,24 @@ input#singkatanTeam:focus,
 input#noHP:focus,
 input#email:focus,
 select {
-  border: 2px solid rgba(6, 118, 170, 0.76);
-  transition: ease 0.3s;
+  border: 2px solid #00deab;
+  transition: ease-in-out 0.3s;
+}
+input#namaPemain:hover,
+input#idPemain:hover,
+input#idPemain2:hover,
+input#idPemain3:hover,
+input#idPemain4:hover,
+input#namaTeam:hover,
+input#namaPemain2:hover,
+input#namaPemain3:hover,
+input#namaPemain4:hover,
+input#singkatanTeam:hover,
+input#noHP:hover,
+input#email:hover,
+select {
+  border: 2px solid #00deab;
+  transition: ease-in-out 0.3s;
 }
 
 input#namaPemain,
@@ -886,16 +967,23 @@ input#singkatanTeam,
 input#noHP,
 input#email,
 select {
-  border-radius: 6px;
+  border-radius: 10px;
+  background-color: #0e1013;
+  color: white;
   width: 250px;
   height: 40px;
   text-align: left;
   text-indent: 10px;
   margin: 5px auto;
-  border: 2px solid rgb(168, 167, 167);
+  border: 2px solid rgb(85, 85, 85);
   outline: none;
+  transition: ease-in-out 0.3s;
 }
 
+input#logo {
+  background: #0e1013;
+  color: white;
+}
 input#singkatanTeam {
   text-transform: uppercase;
 }
@@ -914,7 +1002,8 @@ label {
 }
 
 .form {
-  background-color: #faa31f;
+  background: #16191e;
+  color: white;
   padding: 70px 0;
   margin: 0px auto;
   transition: background-color 0.7s;
@@ -925,24 +1014,15 @@ label {
 }
 
 .kiri {
+  background-color: #16191e;
+  border-radius: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 90%;
   margin: 0px 30px;
-}
-
-.kanan {
-  width: 90%;
-  margin: 2em 30px 0;
-  text-align: center;
-}
-
-.kanan img {
-  width: 240px;
-  height: 240px;
-  border-radius: 280px;
+  padding: 30px 0px;
 }
 
 .form p {
@@ -963,12 +1043,18 @@ label {
   width: 250px;
   height: 40px;
   margin: 2em auto;
-  background-color: black;
+  background-color: #00deab;
   border: none;
-  font-size: 20px;
-  font-weight: bolder;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
-  color: orange;
+  color: black;
+  transition: ease-in-out 0.3s;
+}
+
+#submit:hover {
+  background: rgb(4, 172, 132);
 }
 
 .submit,
@@ -991,16 +1077,15 @@ label {
 
 /* =======================================Footer================================ */
 footer {
-  background: url("../img/3.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top;
-  background-blend-mode: multiply;
-  height: 400px;
-  margin: 0px;
+  background: #2d303e;
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.712);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 100%;
+  margin: 0 auto;
   padding: 20px;
-  width: 100%;
-  color: #ffa500;
+  width: 95%;
+  color: #00deab;
   line-height: 45px;
   clear: both;
   font-size: 16px;
@@ -1021,30 +1106,25 @@ footer p {
 }
 
 .footer-content {
-  position: absolute;
-  width: 90%;
-  margin: 30px 20px;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
 }
 
 .content-1 {
   width: 90%;
-  padding: 1.5em;
-  margin-bottom: -2em;
+  padding: 1em;
 }
 
 .content-2-wraper {
   display: flex;
   flex-direction: row;
-  justify-content: left;
-  align-items: flex-start;
 }
 
 .content-2 {
   width: 90%;
-  padding: 1.5em;
+  padding: 1em;
 }
 
 .profile {
@@ -1067,21 +1147,12 @@ footer p {
   flex-direction: row;
   width: 90%;
   justify-content: center;
-  padding: 1.5em;
+  padding: 1em;
   margin-top: 1em;
 }
 
 .icon-social-wraper a {
   margin: 1em 10px;
-}
-
-.background-overlay {
-  position: absolute;
-  background: rgba(0, 0, 0, 0.6);
-  width: 100%;
-  height: 400px;
-  bottom: 0;
-  left: 0;
 }
 
 /* =======================================Tombol back to top================================= */
@@ -1090,7 +1161,7 @@ footer p {
   position: fixed;
   bottom: 20px;
   right: 8px;
-  color: orange;
+  color: #00deab;
   background-color: black;
   border-style: none;
   font-weight: bolder;
@@ -1099,14 +1170,14 @@ footer p {
   border-radius: 10px;
   cursor: pointer;
   outline: none;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
   z-index: 3;
   text-decoration: none;
 }
 
 .backtotop:hover {
   color: black;
-  background-color: orange;
+  background-color: #00deab;
   border-style: solid 16px;
   text-decoration: none;
 }
@@ -1120,7 +1191,7 @@ footer p {
 @keyframes btnEntrance {
   from {
     opacity: 0;
-    transform: translate3d(0, 100%, 0)
+    transform: translate3d(0, 100%, 0);
   }
 
   to {
@@ -1142,10 +1213,9 @@ footer p {
 
   to {
     opacity: 0;
-    transform: translate3d(0, 100%, 0)
+    transform: translate3d(0, 100%, 0);
   }
 }
-
 
 @media screen and (max-width: 576px) {
   /* Home */
@@ -1156,12 +1226,6 @@ footer p {
 
   .container-sm-fluid .card .card-body {
     padding: -30px;
-  }
-
-  .home-wraper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   /* ===============================================Registration===================================================== */
@@ -1197,7 +1261,6 @@ footer p {
 }
 
 @media screen and (min-width: 350px) {
-
   .jadwal-kiri li,
   .jadwal-kanan li {
     font-size: 1em;
@@ -1210,6 +1273,17 @@ footer p {
   }
 }
 
+@media screen and (min-width: 600px) {
+  .prize-details {
+    width: 170px;
+  }
+  .prize-details2 {
+    width: 170px;
+  }
+  .prize-details3 {
+    width: 170px;
+  }
+}
 @media screen and (min-width: 700px) {
   p {
     font-size: 1em;
@@ -1223,28 +1297,25 @@ footer p {
     font-size: 1em;
   }
 
+  .jadwal-kiri h3,
+  .jadwal-kanan h3 {
+    font-size: 1.8em;
+  }
+
   /* ===============================================Navbar===================================================== */
 
-  .navbar-logo {
-    width: 85px;
-    height: 62.5px;
+  .tombolkembali {
+    top: -2px;
+    left: 0px;
   }
 
   .tombolkembali a img {
     width: 72px;
+    color: #ffa500;
   }
 
-  .full-nav .nav ul li a {
-    font-size: 4em;
-  }
-
-  .menuicon {
-    top: 20px;
-    right: 20px;
-  }
-
-  .welcome {
-    width: 60%;
+  .prize {
+    flex-direction: row;
   }
 
   /* ===============================================Tournament Information===================================================== */
@@ -1264,7 +1335,7 @@ footer p {
   #menu1,
   #menu2,
   #menu3 {
-    margin: 0 20px;
+    margin: auto;
   }
 
   .button2-wraper button {
@@ -1280,37 +1351,18 @@ footer p {
   }
 
   /* ===============================================Banner===================================================== */
-  header {
-    min-height: 500px;
-    background-attachment: scroll;
-  }
 
-  .btn-wraper span {
-    font-size: 2em;
-  }
-
-  .btn {
-    width: 220px;
-    font-size: 16px;
-  }
-
-  .btn:hover {
-    background: rgb(219, 132, 0);
-  }
-
-  .specialFont {
-    font-size: 2.5em;
+  .btn-registered {
+    font-size: 0.75em;
   }
 
   .button2-wraper {
     flex-direction: row;
   }
 
-
   /* ===============================================Footer===================================================== */
   footer {
-    height: 250px;
-    background-attachment: fixed;
+    height: 180px;
   }
 
   .background-overlay {
@@ -1335,45 +1387,54 @@ footer p {
 
   /* ===============================================Registration===================================================== */
 
-  div img {
-    padding: 20px;
+  .form {
+    background: url("../img/pubg-trenchcoat-girl-4k-7x-1680x1050.jpg");
+    color: white;
+    padding: 70px 0;
+    margin: 0px auto;
+    transition: background-color 0.7s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: scroll;
+    background-color: rgba(0, 0, 0, 0.4);
+    background-blend-mode: multiply;
   }
-
-  .kanan img {
-    width: 300px;
-    height: 300px;
-    border-radius: 280px;
-  }
-
 }
 
 @media screen and (min-width: 976px) {
+  .full-nav {
+    left: 0;
+    top: 62.5px;
+  }
+
+  .main-content-wraper {
+    margin-left: 200px;
+  }
+
   header {
-    display: flex;
+    height: 350px;
+  }
+
+  .header-1 {
     flex-direction: row;
   }
-
-  .title-wraper {
-    margin: 20em 2em 5em 2em;
-    display: block;
+  .header-1-1 {
     width: 50%;
   }
-
-  header h1 {
-    font-size: 3em;
+  .header-1-2 {
+    width: 50%;
+    justify-content: flex-end;
+    align-items: flex-end;
   }
-
-  header p {
-    font-size: 1em;
+  .header-2 {
+    flex-direction: row;
   }
-
-  .btn-wraper {
-    margin-top: 16em;
-    justify-content: center;
-    align-self: center;
-    width: 40%;
-  }
-
   .participant-details {
     display: flex;
     justify-content: space-evenly;
@@ -1385,45 +1446,34 @@ footer p {
   /* ===============================================Format & Prize===================================================== */
 
   .tourneyInfoPrize {
-    flex-direction: row;
     justify-content: space-around;
   }
 
-  .tournamentFormat {
-    width: 50%;
-    margin-bottom: 0;
-  }
-
-  .prize {
-    border-left: 1px solid orange;
-    width: 50%;
-  }
-
   .param-wraper {
-    width: 80%;
+    justify-content: left;
+    width: 60%;
+    flex-wrap: nowrap;
+    padding-bottom: 0;
   }
 
+  .param-wraper-detail {
+    width: 150px;
+    height: 70px;
+  }
+
+  .btn-wraper {
+    width: 40%;
+  }
   .info {
-    margin: 0 20px;
+    margin: 0 auto;
   }
 
   .menuicon {
-    top: 0px;
-    right: 0px;
-    width: 60px;
-    height: 60px;
+    display: none;
   }
 
   .navbar-responsive {
     height: 60px;
-  }
-
-  .navbar-logo {
-    height: 80px;
-    width: 100px;
-    position: absolute;
-    top: -10px;
-    left: 7px;
   }
 }
 
@@ -1432,17 +1482,7 @@ footer p {
     flex-direction: row;
   }
 
-  .kanan {
-    width: 50%;
-    margin: 0 30px;
-  }
-
   .kiri {
     width: 50%;
-  }
-
-  header {
-    min-height: 100vh;
-    background-attachment: fixed;
   }
 }

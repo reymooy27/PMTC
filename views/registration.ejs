@@ -19,10 +19,15 @@
 
   <body>
     <!-- NavBar -->
-    <div class="tombolkembali">
-      <a href="/"
-        ><img src="./img/iconmonstr-arrow-left-thin-64.png" alt="" />
-      </a>
+    <div
+      class="navbar-responsive"
+      style="background: #16191e70; box-shadow: none; margin-left: 0;"
+    >
+      <div class="tombolkembali">
+        <a href="/"
+          ><img src="./img/iconmonstr-arrow-left-thin-64.png" alt="" />
+        </a>
+      </div>
     </div>
     <!-- Pendaftaran -->
     <%if(jumlahParticipant === 64){%>
@@ -51,12 +56,12 @@
               type="text"
               name="teamName"
               id="namaTeam"
-              placeholder="Bigetron"
+              placeholder="Nama Tim"
               required
             />
-            <%if(teamNamesama){%>
-            <p class="error">Nama Tim tidak oleh kosong</p>
-            <%}%>
+            <% participant.forEach(e => { if(e === body.teamName){ %>
+            <p>adadad</p>
+            <% } }); %>
           </div>
           <div class="abbrteam">
             <label for="singkatanTeam">Abbr </label>
@@ -70,7 +75,7 @@
               name="singkatanTeam"
               id="singkatanTeam"
               maxlength="5"
-              placeholder="BTR"
+              placeholder="ABBR"
             />
           </div>
           <br />
@@ -85,7 +90,6 @@
               title="Masukan Logo Anda (150 x 150px)"
               name="logo"
               class="filepond"
-              required
             />
           </div>
         </div>
@@ -125,7 +129,7 @@
                   name="playerName"
                   maxlength="14"
                   id="namaPemain"
-                  placeholder="BTR_Nama"
+                  placeholder="Nick In Game"
                 />
               </div>
             </li>
@@ -160,7 +164,7 @@
                   name="playerName2"
                   maxlength="14"
                   id="namaPemain2"
-                  placeholder="BTR_Nama"
+                  placeholder="Nick In Game"
                 />
               </div>
             </li>
@@ -195,7 +199,7 @@
                   name="playerName3"
                   maxlength="14"
                   id="namaPemain3"
-                  placeholder="BTR_Nama"
+                  placeholder="Nick In Game"
                 />
               </div>
             </li>
@@ -230,7 +234,7 @@
                   name="playerName4"
                   maxlength="14"
                   id="namaPemain4"
-                  placeholder="BTR_Nama"
+                  placeholder="Nick In Game"
                 />
               </div>
             </li>
@@ -278,36 +282,12 @@
             dtoplacement="right"
             title="Pastikan Data Yang Anda Isi Adalah Benar"
             type="submit"
-            value="SUBMIT"
+            value="DAFTAR"
             id="submit"
           />
         </div>
+        <h4><%= participant.teamName %></h4>
       </form>
-      <div class="kanan">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-          ratione, fuga sapi ente nemo neque illo veritatis iusto expedita
-          provident excepturi nesciunt voluptatum fu git nihil. Minima fugit
-          voluptates ducimus provident quae!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nihil
-          facere odit ad unde ullam temporibus magni eveniet eligendi
-          voluptatibus! Corrupti, voluptate eius.
-        </p>
-        <br /><br />
-        <img src="./img/851f8f453fa0070f2a3496b4a2651ebc.jpg" alt="" />
-        <br />
-        <br />
-        <br />
-        <br />
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni vitae
-          minima, quaerat possimus consequatur ducimus optio aliquid id,
-          perferendis vel officiis quia facere iste iusto! Temporibus sint ex
-          voluptatem minima?
-        </p>
-      </div>
     </div>
     <%}%>
     <script
@@ -325,6 +305,10 @@
     <script
       defer
       src="https://unpkg.com/filepond-plugin-image-validate-size/dist/filepond-plugin-image-validate-size.js"
+    ></script>
+    <script
+      defer
+      src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"
     ></script>
     <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script defer type="text/javascript" src="./js/registration.js"></script>

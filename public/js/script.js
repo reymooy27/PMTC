@@ -1,4 +1,4 @@
-//Menu 
+//Menu
 function menuToggle() {
   const nav = document.getElementById("nav");
   const toggle = document.getElementById("toggle");
@@ -7,9 +7,6 @@ function menuToggle() {
 }
 const menu = document.getElementById("toggle");
 menu.addEventListener("click", menuToggle);
-
-//Animate on scroll
-AOS.init();
 
 // Standings collapsible
 let coll = document.getElementsByClassName("collapsible");
@@ -26,28 +23,28 @@ for (let i = 0; i < coll.length; i++) {
 }
 smoothScrollBackToTop;
 
-const teamList = document.getElementsByClassName('team-list');
+const teamList = document.getElementsByClassName("team-list");
 for (let i = 0; i < teamList.length; i++) {
-  teamList[i].addEventListener('click', function () {
-    this.classList.toggle('team-list-active');
+  teamList[i].addEventListener("click", function () {
+    this.classList.toggle("team-list-active");
     let list = this.nextElementSibling;
     if (list.style.display === "block") {
       list.style.display = "none";
-      this.style.marginBottom = '10px'
-      this.style.borderBottom = ' 0.8px rgba(255, 255, 255, 0.288) solid                        '
-      this.style.borderBottomLeftRadius = '5px';
-      this.style.borderBottomRightRadius = '5px';
+      this.style.marginBottom = "10px";
+      this.style.borderBottom = " 0.8px rgba(255, 255, 255, 0.288) solid";
+      this.style.borderBottomLeftRadius = "5px";
+      this.style.borderBottomRightRadius = "5px";
     } else {
       list.style.display = "block";
-      this.style.marginBottom = '0px'
-      this.style.borderBottom = 'none'
-      this.style.borderBottomLeftRadius = '0px';
-      this.style.borderBottomRightRadius = '0px';
+      this.style.marginBottom = "0px";
+      this.style.borderBottom = "none";
+      this.style.borderBottomLeftRadius = "0px";
+      this.style.borderBottomRightRadius = "0px";
     }
-  })
+  });
 }
 
-// SChedule tab
+// Schedule tab
 let tabs = document.querySelectorAll("[data-tab-target]");
 let tabContent = document.querySelectorAll("[data-tab-content]");
 tabs.forEach((tab) => {
