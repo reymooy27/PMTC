@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
@@ -12,14 +11,22 @@ const app = express();
 dotenv.config();
 
 // connect DB
+// "mongodb://127.0.0.1:27017"
+// process.env.DB_CONNECT
+const db_uri = process.env.DB_CONNECT;
 mongoose.connect(
-  process.env.DB_CONNECT,
+  db_uri,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   },
-  () => {
-    console.log("Database ON");
+  (err) => {
+    if (err) {
+      console.log("DB Error");
+    } else {
+      console.log("Database ON");
+    }
   }
 );
 
@@ -44,5 +51,5 @@ app.use(route);
 
 //port
 const port = process.env.PORT || 3000;
-app.listen(port);
-console.log("Server ON");
+
+app.listen(port, () => console.log("Server ON"));

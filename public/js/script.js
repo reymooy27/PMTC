@@ -21,7 +21,6 @@ for (let i = 0; i < coll.length; i++) {
     }
   });
 }
-smoothScrollBackToTop;
 
 const teamList = document.getElementsByClassName("team-list");
 for (let i = 0; i < teamList.length; i++) {
@@ -131,3 +130,58 @@ function easeInOutCubic(t, b, c, d) {
   t -= 2;
   return (c / 2) * (t * t * t + 2) + b;
 }
+
+// sort standing table
+function sortTable(a) {
+  var table, i, x, y;
+  table = document.getElementById(`standing-table-${a}`);
+  var switching = true;
+
+  // Run loop until no switching is needed
+  while (switching) {
+    switching = false;
+    var rows = table.rows;
+
+    // Loop to go through all rows
+    for (i = 1; i < rows.length - 1; i++) {
+      var Switch = false;
+
+      // Fetch 2 elements that need to be compared
+      x = rows[i].getElementsByClassName("tot-pts")[0];
+      y = rows[i + 1].getElementsByClassName("tot-pts")[0];
+
+      // Check if 2 rows need to be switched
+      if (Number(x.innerHTML) < Number(y.innerHTML)) {
+        // If yes, mark Switch as needed and break loop
+        Switch = true;
+        break;
+      }
+    }
+    if (Switch) {
+      // Function to switch rows and mark switch as completed
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+sortTable(1);
+sortTable(2);
+sortTable(3);
+sortTable(4);
+sortTable(5);
+sortTable(6);
+
+function pos(a) {
+  let pos = document.getElementsByClassName(`pos-${a}`);
+  for (let i = 0; i < pos.length; i++) {
+    pos[i].innerHTML = i + 1;
+  }
+}
+
+pos(1);
+pos(2);
+pos(3);
+pos(4);
+pos(5);
+pos(6);

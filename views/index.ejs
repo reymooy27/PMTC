@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>PUBG Mobile Terminator Weekly Challenge</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css"/>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
@@ -76,7 +75,7 @@
                     </div>
                 </div>
                 <div class="btn-wraper">
-                    <%if(jumlahParticipant === 64){%>
+                    <%if(jumlahParticipant == batasPeserta){%>
                     <a class="btn-disabled" type="button" disabled>Pendaftaran Tutup</a>
                     <%}else{%>
                     <a href="./registration" class="btn-registered">Daftar</a>
@@ -299,13 +298,13 @@
         <div class="home-wraper">
             <% if(participant.length === 0){%>
             <div class="no-participant">
-                <h3>To be determined</h3>
+                <h3>Belum Tersedia Saat Ini</h3>
             </div>
             <%}else{%>
             <% for(let i = 0; i < participant.length; i++ ) { %>
             <div class="team-list">
                 <div class="logo-team"><img src="<%= participant[i].logoImagePath %>" alt=""></div>
-                <div class="team-name"><%= participant[i].teamName %>
+                <div class="team-name" style="margin-left: -15px;"><%= participant[i].teamName %>
                     <span class="team-abbr">(<%= participant[i].singkatanTeam %>)</span>
                 </div>
             </div>
@@ -323,663 +322,192 @@
 
         </div>
         <div id="menu1" data-tab-content2><br>
+            <% if(participant.length === 0){%>
+            <div class="no-participant">
+                <h3>Belum Tersedia Saat Ini</h3>
+            </div>
+            <%}else{%>
             <button class="collapsible">GRUP A</button>
             <div class="content">
-                <table class="content">
+                <table class="content" id="standing-table-1">
                     <tbody class="p-sm-0 m-sm-0">
                         <tr>
                             <td>#</td>
                             <td class="align-self-center">Nama Tim</td>
+                            <td >Total PTS</td>
                             <td>Placement PTS</td>
                             <td>Kill PTS</td>
-                            <td >Total PTS</td>
                         </tr>
+            <% for(let i = 0; i < participant.length; i++ ) { %>
+                <% if(participant[i].inGroup === 'A'){ %> 
                         <tr>
-                            <td class="pass">1</td>
+                            <td class="pos-1"></td>
                             <td class="team-rank">
-                                <div class="logo-team"><img src="<%= participant[0].logoImagePath %>" alt=""></div>
-                                <div class="team-name"><%= participant[0].teamName %>
+                                <div class="logo-team"><img src="<%= participant[i].logoImagePath %>" alt=""></div>
+                                <div class="team-name"><%= participant[i].teamName %></div>
                             </td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td class="tot-pts"><%= participant[i].teamPlcPoint + participant[i].teamKillPoint %></td>
+                            <td><%= participant[i].teamPlcPoint %></td>
+                            <td><%= participant[i].teamKillPoint %></td>
                         </tr>
-                        <tr>
-                            <td class="pass">2</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">3</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">4</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">5</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">6</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">7</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">8</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">9</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">10</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">11</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">12</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">13</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">14</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">15</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">16</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
+                <% } %>
+            <% } %>
                 </table>
             </div>
             <button class="collapsible">GRUP B</button>
             <div class="content">
-                <table class="content">
+                <table class="content" id="standing-table-2">
                     <tbody class="p-sm-0 m-sm-0">
                         <tr>
                             <td>#</td>
                             <td class="align-self-center">Nama Tim</td>
+                            <td>Total PTS</td>
                             <td>Placement PTS</td>
                             <td>Kill PTS</td>
-                            <td>Total PTS</td>
                         </tr>
+                        <% for(let i = 0; i < participant.length; i++ ) { %>
+                <% if(participant[i].inGroup === 'B'){ %> 
                         <tr>
-                            <td class="pass">1</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td class="pos-2"></td>
+                            <td class="team-rank">
+                                <div class="logo-team"><img src="<%= participant[i].logoImagePath %>" alt=""></div>
+                                <div class="team-name"><%= participant[i].teamName %></div>
+                            </td>
+                            <td class="tot-pts"><%= participant[i].teamPlcPoint + participant[i].teamKillPoint %></td>
+                            <td><%= participant[i].teamPlcPoint %></td>
+                            <td><%= participant[i].teamKillPoint %></td>
                         </tr>
-                        <tr>
-                            <td class="pass">2</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">3</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">4</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">5</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">6</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">7</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">8</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">9</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">10</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">11</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">12</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">13</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">14</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">15</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">16</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
+                        <% } %>
+                        <% } %>
                 </table>
             </div>
             <button class="collapsible">GRUP C</button>
             <div class="content">
-                <table class="content">
+                <table class="content" id="standing-table-3">
                     <tbody class="p-sm-0 m-sm-0">
                         <tr>
                             <td>#</td>
                             <td class="align-self-center">Nama Tim</td>
+                            <td>Total PTS</td>
                             <td>Placement PTS</td>
                             <td>Kill PTS</td>
-                            <td>Total PTS</td>
                         </tr>
+                        <% for(let i = 0; i < participant.length; i++ ) { %>
+                <% if(participant[i].inGroup === 'C'){ %> 
+
                         <tr>
-                            <td class="pass">1</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td class="pos-3"></td>
+                            <td class="team-rank">
+                                <div class="logo-team"><img src="<%= participant[i].logoImagePath %>" alt=""></div>
+                                <div class="team-name"><%= participant[i].teamName %></div>
+                            </td>
+                            <td class="tot-pts"><%= participant[i].teamPlcPoint + participant[i].teamKillPoint %></td>
+                            <td><%= participant[i].teamPlcPoint %></td>
+                            <td><%= participant[i].teamKillPoint %></td>
                         </tr>
-                        <tr>
-                            <td class="pass">2</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">3</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">4</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">5</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">6</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">7</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">8</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">9</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">10</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">11</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">12</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">13</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">14</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">15</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">16</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
+                        <% } %>
+                        <% } %>
                 </table>
             </div>
             <button class="collapsible">GRUP D</button>
             <div class="content">
-                <table class="content">
+                <table class="content" id="standing-table-4">
                     <tbody class="p-sm-0 m-sm-0">
                         <tr>
                             <td>#</td>
                             <td class="align-self-center">Nama Tim</td>
+                            <td>Total PTS</td>
                             <td>Placement PTS</td>
                             <td>Kill PTS</td>
-                            <td>Total PTS</td>
                         </tr>
+                        <% for(let i = 0; i < participant.length; i++ ) { %>
+                <% if(participant[i].inGroup === 'D'){ %> 
+
                         <tr>
-                            <td class="pass">1</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td class="pos-4"></td>
+                            <td class="team-rank">
+                                <div class="logo-team"><img src="<%= participant[i].logoImagePath %>" alt=""></div>
+                                <div class="team-name"><%= participant[i].teamName %></div>
+                            </td>
+                            <td class="tot-pts"><%= participant[i].teamPlcPoint + participant[i].teamKillPoint %></td>
+                            <td><%= participant[i].teamPlcPoint %></td>
+                            <td><%= participant[i].teamKillPoint %></td>
                         </tr>
-                        <tr>
-                            <td class="pass">2</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">3</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">4</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">5</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">6</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">7</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">8</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">9</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">10</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">11</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">12</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">13</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">14</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">15</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">16</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
+                        <% } %>
+                        <% } %>
                 </table>
             </div>
             <button class="collapsible">GRAND FINAL</button>
             <div class="content">
-                <table class="content">
+                <table class="content" id="standing-table-5">
                     <tbody class="p-sm-0 m-sm-0">
                         <tr>
                             <td>#</td>
                             <td class="align-self-center">Nama Tim</td>
+                            <td>Total PTS</td>
                             <td>Placement PTS</td>
                             <td>Kill PTS</td>
-                            <td>Total PTS</td>
                         </tr>
+                        <% for(let i = 0; i < participant.length; i++ ) { %>
+                <% if(participant[i].qualifyToGrandFinal){ %> 
+
                         <tr>
-                            <td class="pass">1</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td class="pos-5"></td>
+                            <td class="team-rank">
+                                <div class="logo-team"><img src="<%= participant[i].logoImagePath %>" alt=""></div>
+                                <div class="team-name"><%= participant[i].teamName %></div>
+                            </td>
+                            <td class="tot-pts"><%= participant[i].GFteamPlcPoint + participant[i].GFteamKillPoint %></td>
+                            <td><%= participant[i].GFteamPlcPoint %></td>
+                            <td><%= participant[i].GFteamKillPoint %></td>
                         </tr>
-                        <tr>
-                            <td class="pass">2</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">3</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">4</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">5</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">6</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">7</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">8</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">9</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">10</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">11</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">12</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">13</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">14</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">15</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td class="pass">16</td>
-                            <td class="pass"></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
+                        <% } %>
+                        <% } %>
                 </table>
             </div>
         </div>
+        <% } %>
         <div id="menu2" data-tab-content2><br>
-            <table>
-                <thead class="text-center">
+            <table id="standing-table-6">
                     <tr>
+                        <td>#</td>
                         <td>Nama Pemain</td>
                         <td>Total Kill</td>
                     </tr>
+                    <% for(let i = 0; i < participant.length; i++){ %> 
                     <tr>
-                        <td>To be determined</td>
-                        <td>0</td>
+                        <td class="pos-6"></td>
+                        <td class="team-rank">
+                            <div class="logo-team"><img src="<%= participant[i].logoImagePath %>" alt=""></div>
+                            <div class="team-name" style="margin-left: 10px;"><%= participant[i].playerName %>
+                        </td>
+                        <td class="tot-pts"><%=participant[i].playerKill%></td>
                     </tr>
                     <tr>
-                        <td>To be determined</td>
-                        <td>0</td>
+                        <td class="pos-6"></td>
+                        <td class="team-rank">
+                            <div class="logo-team"><img src="<%= participant[i].logoImagePath %>" alt=""></div>
+                            <div class="team-name" style="margin-left: 10px;"><%= participant[i].playerName2 %>
+                        </td>
+                        <td class="tot-pts"><%=participant[i].player2Kill%></td>
                     </tr>
                     <tr>
-                        <td>To be determined</td>
-                        <td>0</td>
+                        <td class="pos-6"></td>
+                        <td class="team-rank">
+                            <div class="logo-team"><img src="<%= participant[i].logoImagePath %>" alt=""></div>
+                            <div class="team-name" style="margin-left: 10px;"><%= participant[i].playerName3 %>
+                        </td>
+                        <td class="tot-pts"><%=participant[i].player3Kill%></td>
                     </tr>
                     <tr>
-                        <td>To be determined</td>
-                        <td>0</td>
+                        <td class="pos-6"></td>
+                        <td class="team-rank">
+                            <div class="logo-team"><img src="<%= participant[i].logoImagePath %>" alt=""></div>
+                            <div class="team-name" style="margin-left: 10px;"><%= participant[i].playerName4 %>
+                        </td>
+                        <td class="tot-pts"><%=participant[i].player4Kill%></td>
                     </tr>
-                    <tr>
-                        <td>To be determined</td>
-                        <td>0</td>
-                    </tr>
-                </thead>
+                <% } %> 
             </table>
         </div>
         <div id="menu3" data-tab-content2><br>
@@ -1218,14 +746,6 @@
         </footer>
         </div>
         </div>
-        <script defer src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-        </script>
-        <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
-        <script defer src="./js/bootstrap.min.js">
-        </script>
         <script defer type="text/javascript" src="./js/script.js"></script>
 </body>
 

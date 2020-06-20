@@ -104,15 +104,6 @@ p {
   transition: all 0.3s ease;
 }
 
-.menuicon.active {
-  background: url(../img/iconmonstr-x-mark-1-72.png);
-  background-size: 32px;
-  cursor: pointer;
-  background-repeat: no-repeat;
-  background-position: 10px;
-  z-index: 10;
-}
-
 .tombolkembali {
   margin: 0 auto 0 0;
   padding: 0px;
@@ -128,7 +119,7 @@ p {
 /* =================================Banner====================================== */
 
 header {
-  margin: 6em auto 0;
+  margin: 4em auto 0;
   height: 640px;
   width: 95%;
   border-radius: 10px;
@@ -191,7 +182,7 @@ header h1 {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-end;
   padding: 1em;
 }
@@ -228,7 +219,7 @@ header h1 {
 }
 .param-wraper {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   overflow: auto;
   width: 100%;
@@ -239,9 +230,12 @@ header h1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 120px;
+  padding: 5px 5px;
+  margin: 0 5px;
   align-items: center;
-  padding: 5px;
-  margin: 5px;
+  border: 1px solid #959aa2;
+  border-radius: 5px;
 }
 
 .param-wraper-detail h5 {
@@ -449,9 +443,6 @@ img {
   color: white;
   overflow: auto;
 }
-#map-container::-webkit-scrollbar {
-  background-color: transparent;
-}
 
 [data-tab-content] {
   display: none;
@@ -570,9 +561,9 @@ img {
   margin: 1em auto 0;
 }
 
-#grandfinal::-webkit-scrollbar {
+/* #grandfinal::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .card {
   position: relative;
@@ -694,6 +685,7 @@ img {
   display: flex;
   justify-content: baseline;
   text-align: left;
+  margin-left: 10px;
 }
 
 .team-name span {
@@ -871,6 +863,7 @@ a .active :hover {
 
 #menu2 {
   color: white;
+  overflow: auto;
 }
 
 #menu3 p,
@@ -888,18 +881,25 @@ table td {
 }
 
 .team-rank {
+  min-width: 200px;
   display: flex;
+  justify-content: left;
+  align-content: center;
+  position: relative;
 }
 
 /* ==============================================Registrasi============================================ */
 .filepond--panel-root {
-  background-color: #16191e;
+  background-color: #0e1013;
 }
 .filepond--item-panel {
   background: red;
 }
 .filepond--drop-label {
   color: red;
+}
+.filepond--root {
+  margin-top: 10px;
 }
 .registration-closed {
   display: flex;
@@ -965,8 +965,7 @@ input#idPemain4,
 input#namaTeam,
 input#singkatanTeam,
 input#noHP,
-input#email,
-select {
+input#email {
   border-radius: 10px;
   background-color: #0e1013;
   color: white;
@@ -974,7 +973,7 @@ select {
   height: 40px;
   text-align: left;
   text-indent: 10px;
-  margin: 5px auto;
+  margin: 10px auto;
   border: 2px solid rgb(85, 85, 85);
   outline: none;
   transition: ease-in-out 0.3s;
@@ -988,17 +987,54 @@ input#singkatanTeam {
   text-transform: uppercase;
 }
 
+input#namaPemain.setErorr,
+input#namaPemain2.setErorr,
+input#namaPemain3.setErorr,
+input#namaPemain4.setErorr,
+input#idPemain.setErorr,
+input#idPemain2.setErorr,
+input#idPemain3.setErorr,
+input#idPemain4.setErorr,
+input#namaTeam.setErorr,
+input#singkatanTeam.setErorr,
+input#noHP.setErorr,
+input#email.setErorr {
+  border: 2px solid red;
+}
+input#namaPemain.correct,
+input#namaPemain2.correct,
+input#namaPemain3.correct,
+input#namaPemain4.correct,
+input#idPemain.correct,
+input#idPemain2.correct,
+input#idPemain3.correct,
+input#idPemain4.correct,
+input#namaTeam.correct,
+input#singkatanTeam.correct,
+input#noHP.correct,
+input#email.correct {
+  border: 2px solid #00deab;
+}
+
 .error {
   font-size: 11px;
   color: red;
 }
-
-.setError {
-  border: 2px red solid;
+.error-msg {
+  color: red;
+  font-size: 11px;
+  display: block;
+  margin: -10px 0 0;
+  padding: 0;
+  padding-left: 5px;
+  opacity: 0;
 }
 
 label {
+  display: block;
+  font-size: 14px;
   margin-left: 7px;
+  margin-bottom: -40px;
 }
 
 .form {
@@ -1055,6 +1091,27 @@ label {
 
 #submit:hover {
   background: rgb(4, 172, 132);
+}
+
+.logo-input-wraper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.logo-req {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+.logo-req ul li {
+  list-style: circle;
 }
 
 .submit,
@@ -1305,12 +1362,12 @@ footer p {
   /* ===============================================Navbar===================================================== */
 
   .tombolkembali {
-    top: -2px;
-    left: 0px;
+    top: 1em;
+    left: 1em;
   }
 
   .tombolkembali a img {
-    width: 72px;
+    width: 32px;
     color: #ffa500;
   }
 
@@ -1405,9 +1462,28 @@ footer p {
     background-color: rgba(0, 0, 0, 0.4);
     background-blend-mode: multiply;
   }
+
+  .logo-input-wraper {
+    flex-direction: row;
+  }
 }
 
 @media screen and (min-width: 976px) {
+  ::-webkit-scrollbar {
+    background: #070613;
+    width: 5px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #00deab;
+    border-radius: 10px;
+    height: 30px;
+    width: 30px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 20px;
+  }
   .full-nav {
     left: 0;
     top: 62.5px;
@@ -1419,6 +1495,7 @@ footer p {
 
   header {
     height: 350px;
+    margin-top: 5em;
   }
 
   .header-1 {
@@ -1459,6 +1536,8 @@ footer p {
   .param-wraper-detail {
     width: 150px;
     height: 70px;
+    border: none;
+    border-radius: 0;
   }
 
   .btn-wraper {

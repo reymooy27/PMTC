@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/admin.css" />
+  </head>
+  <body>
+    <div>
+      <form id="form">
+        <select name="teamSelect" id="teamSelect">
+          <option value="">Pilih Tim...</option>
+          <% participant.forEach(tim =>{ %>
+          <option value="<%=tim._id %>"><%=tim.teamName%></option>
+          <% }) %>
+        </select>
+        <h2 id="namaTeam">Nama Tim</h2>
+        <label for="teamPlcPoint">Placement Pts</label>
+        <input type="number" name="teamKillPoint" id="plc_pts" value="" />
+        <label for="playerKill">Player 1</label>
+        <input type="number" name="playerKill" id="playerKill" value="" />
+        <label for="player2Kill">Player 2</label>
+        <input type="number" name="player2Kill" id="player2Kill" value="" />
+        <label for="player3Kill">Player 3</label>
+        <input type="number" name="player3Kill" id="player3Kill" value="" />
+        <label for="player4Kill">Player 4</label>
+        <input type="number" name="player4Kill" id="player4Kill" value="" />
+        <label for="inGroup">Grup</label>
+        <select name="inGroup" id="inGroup">
+          <option value="Pilih Grup">Pilih Grup</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+        </select>
+        <label for="qualifyToGrandFinal">Lolos Grand Final</label>
+        <input
+          type="checkbox"
+          name="qualifyToGrandFinal"
+          id="qualifyToGrandFinal"
+          value=""
+        />
+        <div id="gf">
+          <label for="GFteamPlcPoint">GF Placement Pts</label>
+          <input type="number" name="GFteamKillPoint" id="GFplc_pts" value="" />
+          <label for="GFplayerKill">GF Player 1</label>
+          <input type="number" name="GFplayerKill" id="GFplayerKill" value="" />
+          <label for="GFplayer2Kill">GF Player 2</label>
+          <input
+            type="number"
+            name="GFplayer2Kill"
+            id="GFplayer2Kill"
+            value=""
+          />
+          <label for="GFplayer3Kill">GF Player 3</label>
+          <input
+            type="number"
+            name="GFplayer3Kill"
+            id="GFplayer3Kill"
+            value=""
+          />
+          <label for="GFplayer4Kill">GF Player 4</label>
+          <input
+            type="number"
+            name="GFplayer4Kill"
+            id="GFplayer4Kill"
+            value=""
+          />
+        </div>
+        <button id="update">UPDATE</button>
+      </form>
+    </div>
+    <div class="teams"></div>
+
+    <script src="./js/admin.js"></script>
+  </body>
+</html>

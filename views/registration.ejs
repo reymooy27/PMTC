@@ -30,7 +30,7 @@
       </div>
     </div>
     <!-- Pendaftaran -->
-    <%if(jumlahParticipant === 64){%>
+    <%if(jumlahParticipant == batasPeserta){%>
     <div class="registration-closed">
       <h1 class="registration-closed-title">Registration Closed</h1>
     </div>
@@ -59,9 +59,7 @@
               placeholder="Nama Tim"
               required
             />
-            <% participant.forEach(e => { if(e === body.teamName){ %>
-            <p>adadad</p>
-            <% } }); %>
+            <span class="error-msg">error</span>
           </div>
           <div class="abbrteam">
             <label for="singkatanTeam">Abbr </label>
@@ -77,20 +75,30 @@
               maxlength="5"
               placeholder="ABBR"
             />
+            <span class="error-msg">error</span>
           </div>
           <br />
-          <div class="logotim" style="width: 150px;">
-            <label for="logo">Logo Tim</label>
-            <br />
-            <input
-              type="file"
-              id="logo"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Masukan Logo Anda (150 x 150px)"
-              name="logo"
-              class="filepond"
-            />
+          <div class="logo-input-wraper">
+            <div class="logotim" style="width: 150px;">
+              <label for="logo">Logo Tim</label>
+              <br />
+              <input
+                type="file"
+                id="logo"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Masukan Logo Anda (150 x 150px)"
+                name="logo"
+                class="filepond"
+              />
+            </div>
+            <div class="logo-req">
+              <ul>
+                <li>Logo Maks berukuran 500*500px</li>
+                <li>Format logo .jpg/.png</li>
+                <li>Ukuran file tidak boleh lebih dari 100kb</li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -116,6 +124,7 @@
                   maxlength="10"
                   pattern="[0-9]+"
                 />
+                <span class="error-msg">error</span>
               </div>
               <div class="player1">
                 <label for="namaPemain">Nama Pemain #1</label>
@@ -131,6 +140,7 @@
                   id="namaPemain"
                   placeholder="Nick In Game"
                 />
+                <span class="error-msg">error</span>
               </div>
             </li>
             <li>
@@ -151,6 +161,7 @@
                   maxlength="10"
                   pattern="[0-9]+"
                 />
+                <span class="error-msg">error</span>
               </div>
               <div class="player2">
                 <label for="namaPemain">Nama Pemain #2 </label>
@@ -166,6 +177,7 @@
                   id="namaPemain2"
                   placeholder="Nick In Game"
                 />
+                <span class="error-msg">error</span>
               </div>
             </li>
             <li>
@@ -186,6 +198,7 @@
                   maxlength="10"
                   pattern="[0-9]+"
                 />
+                <span class="error-msg">error</span>
               </div>
               <div class="player3">
                 <label for="namaPemain">Nama Pemain #3 </label>
@@ -201,6 +214,7 @@
                   id="namaPemain3"
                   placeholder="Nick In Game"
                 />
+                <span class="error-msg">error</span>
               </div>
             </li>
             <li>
@@ -221,6 +235,7 @@
                   maxlength="10"
                   pattern="[0-9]+"
                 />
+                <span class="error-msg">error</span>
               </div>
               <div class="player4">
                 <label for="namaPemain">Nama Pemain #4 </label>
@@ -236,6 +251,7 @@
                   id="namaPemain4"
                   placeholder="Nick In Game"
                 />
+                <span class="error-msg">error</span>
               </div>
             </li>
           </ul>
@@ -260,6 +276,7 @@
               maxlength="12"
               pattern="[0-9]+"
             />
+            <span class="error-msg">error</span>
           </div>
           <div class="email">
             <label for="email">Email </label>
@@ -274,6 +291,7 @@
               name="email"
               placeholder="@gmail.com"
             />
+            <span class="error-msg">error</span>
           </div>
         </div>
         <div class="submit">
@@ -285,8 +303,8 @@
             value="DAFTAR"
             id="submit"
           />
+          <span class="error-msg"></span>
         </div>
-        <h4><%= participant.teamName %></h4>
       </form>
     </div>
     <%}%>
