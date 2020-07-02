@@ -172,6 +172,7 @@ sortTable(4);
 sortTable(5);
 sortTable(6);
 
+// standing position
 function pos(a) {
   let pos = document.getElementsByClassName(`pos-${a}`);
   for (let i = 0; i < pos.length; i++) {
@@ -185,3 +186,21 @@ pos(3);
 pos(4);
 pos(5);
 pos(6);
+
+// register button
+const registrationButton = document.querySelector(".btn-registered.top");
+window.addEventListener("scroll", () => {
+  if (window.pageYOffset > 350) {
+    registrationButton.classList.add("show");
+  } else {
+    registrationButton.classList.remove("show");
+  }
+
+  if (window.screen.width < 700) {
+    if (window.pageYOffset > 600) {
+      registrationButton.classList.add("show");
+    } else {
+      registrationButton.classList.remove("show");
+    }
+  }
+});

@@ -7,7 +7,7 @@ const playerKill = document.getElementById("playerKill");
 const player2Kill = document.getElementById("player2Kill");
 const player3Kill = document.getElementById("player3Kill");
 const player4Kill = document.getElementById("player4Kill");
-const form = document.querySelector("form");
+const form = document.getElementById("form");
 const updtBttn = document.getElementById("update");
 const select = document.getElementById("teamSelect");
 const teamsDiv = document.querySelector(".teams");
@@ -24,15 +24,75 @@ const GFlabel2 = document.querySelector('label[for="GFplayer2Kill"]');
 const GFlabel3 = document.querySelector('label[for="GFplayer3Kill"]');
 const GFlabel4 = document.querySelector('label[for="GFplayer4Kill"]');
 const GFForm = document.getElementById("gf");
+const tournamentName = document.getElementById("tournamentName");
+const tournamentFirstPrize = document.getElementById("tournamentFirstPrize");
+const tournamentSecondPrize = document.getElementById("tournamentSecondPrize");
+const tournamentThirdPrize = document.getElementById("tournamentThirdPrize");
+const tournamentFee = document.getElementById("tournamentFee");
+const registrationStart = document.getElementById("registrationStart");
+const startDate = document.getElementById("startDate");
+const qualifierDay1 = document.getElementById("qualifierDay1");
+const qualifierDay2 = document.getElementById("qualifierDay2");
+const grandFinalDate = document.getElementById("grandFinalDate");
+const updateTournamentButton = document.getElementById("update-tournament");
+const tournamentForm = document.getElementById("tournament-form");
+const tournamentFirstWinner = document.getElementById("tournamentFirstWinner");
+const tournamentSecondWinner = document.getElementById(
+  "tournamentSecondWinner"
+);
+const tournamentThirdWinner = document.getElementById("tournamentThirdWinner");
+const accessToken = localStorage.getItem("token");
 
-GFlabel1.addEventListener("click", () => console.log("ss"));
+async function accessAdmin() {
+  await fetch("/admin", {
+    method: "GET",
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((info) => info)
+    .catch((err) => console.log(err));
+}
+
+window.addEventListener("load", async () => {
+  accessAdmin();
+  const res = await fetch("/v1/api/tourney");
+  const json = await res.json();
+  json.map((tourney) => {
+    tournamentName.value = tourney.tournamentName;
+    tournamentFirstPrize.value = tourney.tournamentFirstPrize;
+    tournamentSecondPrize.value = tourney.tournamentSecondPrize;
+    tournamentThirdPrize.value = tourney.tournamentThirdPrize;
+    tournamentFee.value = tourney.tournamentFee;
+    registrationStart.value = tourney.registrationStart;
+    startDate.value = tourney.startDate;
+    qualifierDay1.value = tourney.qualifierDay1;
+    qualifierDay2.value = tourney.qualifierDay2;
+    grandFinalDate.value = tourney.grandFinalDate;
+  });
+});
+
 qualifyToGrandFinal.addEventListener("click", () => {
   if (qualifyToGrandFinal.checked === true) return true;
   return false;
 });
+tournamentFirstWinner.addEventListener("click", () => {
+  console.log("click");
+  if (tournamentFirstWinner.checked === true) return true;
+  return false;
+});
+tournamentSecondWinner.addEventListener("click", () => {
+  if (tournamentSecondWinner.checked === true) return true;
+  return false;
+});
+tournamentThirdWinner.addEventListener("click", () => {
+  if (tournamentThirdWinner.checked === true) return true;
+  return false;
+});
 
 async function updateParticipant(tim) {
-  await fetch(`/${tim}`, {
+  await fetch(`/participant/${tim}`, {
     method: "put",
     body: JSON.stringify({
       teamKillPoint:
@@ -57,21 +117,23 @@ async function updateParticipant(tim) {
       GFplayer2Kill: GFplayer2Kill.value,
       GFplayer3Kill: GFplayer3Kill.value,
       GFplayer4Kill: GFplayer4Kill.value,
+      tournamentFirstWinner: tournamentFirstWinner.checked,
+      tournamentSecondWinner: tournamentSecondWinner.checked,
+      tournamentThirdWinner: tournamentThirdWinner.checked,
     }),
     headers: {
       "Content-Type": "application/json",
     },
   })
     .then((res) => res.json())
-    .then((data) => data);
+    .then((data) => data)
+    .catch((err) => console.log(err));
 }
-
-window.addEventListener("load", displayTeam());
 
 select.addEventListener(
   "change",
   async (e) => {
-    const res = await fetch("/register");
+    const res = await fetch("/v1/api/register");
     const json = await res.json();
     json.map((info) => {
       if (e.target.value === info._id) {
@@ -97,7 +159,17 @@ select.addEventListener(
         GFplayer4Kill.value = info.GFplayer4Kill;
         if (info.qualifyToGrandFinal === true) {
           GFForm.style.display = "block";
-          return (qualifyToGrandFinal.checked = true);
+          qualifyToGrandFinal.checked = true;
+
+          if (info.tournamentFirstWinner === true) {
+            tournamentFirstWinner.checked = true;
+          }
+          if (info.tournamentSecondWinner === true) {
+            tournamentSecondWinner.checked = true;
+          }
+          if (info.tournamentThirdWinner === true) {
+            tournamentThirdWinner.checked = true;
+          }
         }
       }
     });
@@ -110,31 +182,28 @@ select.addEventListener(
   { once: true }
 );
 
-async function displayTeam() {
-  const res = await fetch("/register");
-  const json = await res.json();
-  teamsDiv.innerHTML = json.map((tim) => {
-    return `
-      <div class="team">
-        <h3>${tim.teamName} (${tim.inGroup})</h3>
-        <h5>Kill Point : ${tim.teamKillPoint} - GF : ${tim.GFteamKillPoint}</h5>
-        <h5>Plc Point : ${tim.teamPlcPoint} - GF :${tim.GFteamPlcPoint}</h5>
-        <h5>${tim.playerName} : ${tim.playerKill} - GF : ${
-      tim.GFplayerKill
-    }</h5>
-        <h5>${tim.playerName2} : ${tim.player2Kill} - GF : ${
-      tim.GFplayer2Kill
-    }</h5>
-        <h5>${tim.playerName3} : ${tim.player3Kill} - GF : ${
-      tim.GFplayer3Kill
-    }</h5>
-        <h5>${tim.playerName4} : ${tim.player4Kill} - GF : ${
-      tim.GFplayer4Kill
-    }</h5>
-        <h5>Lolos Grandfinal : ${
-          tim.qualifyToGrandFinal ? "Lolos" : "Tidak Lolos"
-        }</h5>
-      </div>
-      `;
-  });
+async function updateTournament() {
+  await fetch("/tournament", {
+    method: "put",
+    body: JSON.stringify({
+      tournamentName: tournamentName.value,
+      tournamentFirstPrize: tournamentFirstPrize.value,
+      tournamentSecondPrize: tournamentSecondPrize.value,
+      tournamentThirdPrize: tournamentThirdPrize.value,
+      tournamentFee: tournamentFee.value,
+      registrationStart: registrationStart.value,
+      startDate: startDate.value,
+      qualifierDay1: qualifierDay1.value,
+      qualifierDay2: qualifierDay2.value,
+      grandFinalDate: grandFinalDate.value,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => data)
+    .catch((err) => console.log(err));
 }
+
+updateTournamentButton.addEventListener("click", updateTournament);

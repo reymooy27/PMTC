@@ -125,6 +125,18 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  tournamentFirstWinner: {
+    type: Boolean,
+    default: false,
+  },
+  tournamentSecondWinner: {
+    type: Boolean,
+    default: false,
+  },
+  tournamentThirdWinner: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 userSchema.virtual("logoImagePath").get(function () {

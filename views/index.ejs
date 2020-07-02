@@ -18,8 +18,10 @@
     ================ -->
     <div class="navbar-responsive">
         <span class="menuicon" id="toggle"></span>
+                    <a href="./registration" class="btn-registered top">Daftar</a>
 
         <nav class="full-nav" id="nav">
+            
             <div class="nav">
                 <a href="/">Home</a>
                 <a href="/registration">Pendaftaran</a>
@@ -41,17 +43,17 @@
                         <img src="./img/logo.png" class="navbar-logo" alt="">
                     </div>
                     <div class="title-wraper">
-                        <h1>PUBG Mobile : Terminator Weekly Challenge</h1>
+                        <h1><%= tourney.tournamentName %></h1>
                     </div>
                 </div>
                 <div class="header-1-2">
                     <div class="header-1-2-1">
                         <p>Pendaftaran Buka</p>
-                        <span>00 - 00 Jun 2020</span>
+                        <span><%= tourney.registrationStart %></span>
                     </div>
                     <div class="header-1-2-1">
                         <p>Turnamen Mulai</p>
-                        <span>00 Jun 2020</span>
+                        <span><%=tourney.startDate%></span>
                     </div>
                 </div>
             </div>            
@@ -63,7 +65,7 @@
                     </div>
                     <div class="param-wraper-detail">
                         <h5>Biaya Pendaftaran</h5>
-                        <span>Rp. 100,000</span>
+                        <span>Rp. <%= new Intl.NumberFormat().format(tourney.tournamentFee)%></span>
                     </div>
                     <div class="param-wraper-detail">
                         <h5>Mode</h5>
@@ -94,17 +96,42 @@
         </div>
         <p><span>PENTING</span> : Hadiah akhir akan disesuaikan berdasarkan jumlah total tim yang mendaftar</p>
         <div class="prize">
-            <div class="prize-details">
+            
+            <div class="prize-details" id='firstWinner'>
                 <h6>1st</h6>
-                <span>Rp. 1,800,000</span>
+                <%participant.filter(team=>{%>
+                    <%if(team.tournamentFirstWinner === true){%>
+                        <img class="winnerLogo" src="<%=team.logoImagePath%>" alt="">
+                        <h6><%=team.teamName%></h6>
+                        <%}%>
+                        <%})%>
+                <div class="prize-wraper">
+                    <span>Rp. <%= new Intl.NumberFormat().format(tourney.tournamentFirstPrize)%></span>
+                </div>
             </div>
             <div class="prize-details2">
                 <h6>2nd</h6>
-                <span>Rp. 900,000</span>
+                <%participant.filter(team=>{%>
+                <%if(team.tournamentSecondWinner === true){%>
+                    <img class="winnerLogo" src="<%=team.logoImagePath%>" alt="">
+                        <h6><%=team.teamName%></h6>
+                <%}%>
+                <%})%>
+                <div class="prize-wraper2">
+                    <span>Rp. <%=new Intl.NumberFormat().format(tourney.tournamentSecondPrize)%></span>
+                </div>
             </div>
             <div class="prize-details3">
                 <h6>3rd</h6>
-                <span>Rp. 500,000</span>
+                <%participant.filter(team=>{%>
+                <%if(team.tournamentThirdWinner === true){%>
+                <img class="winnerLogo" src="<%=team.logoImagePath%>" alt="">
+                        <h6><%=team.teamName%></h6>
+                <%}%>
+                <%})%>
+                <div class="prize-wraper3">
+                <span>Rp. <%=new Intl.NumberFormat().format(tourney.tournamentThirdPrize)%></span>
+                </div>
             </div>
         </div>
     </div>
@@ -123,7 +150,7 @@
             <div id="qualifier" data-tab-content class="qualifier-wraper">
                 <div class="wrap">
                     <div class="jadwal-kiri">
-                        <h3>00 Jun</h3>
+                        <h3><%=tourney.qualifierDay1%></h3>
                         <h4 class="groups">Grup A</h4>
                         <ul>
                             <li>Match 1 : <span class="groups">18.00</span></li>
@@ -138,7 +165,7 @@
                         </ul>
                     </div>
                     <div class="jadwal-kanan">
-                        <h3>00 Jun</h3>
+                        <h3><%=tourney.qualifierDay2%></h3>
                         <h4 class="groups">Grup C</h4>
                         <ul>
                             <li>Match 1 : <span class="groups">18.00</span></li>
@@ -161,7 +188,7 @@
             <table id="grandfinal" data-tab-content class="table-responsive-xl active-tab">
                 <tr>
                     <td colspan="12">
-                        <h3>00 Jun</h3>
+                        <h3><%=tourney.grandFinalDate%></h3>
                     </td>
                 </tr>
                 <tr>

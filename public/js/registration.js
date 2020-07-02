@@ -12,8 +12,8 @@ FilePond.setOptions({
   imageResizeTargetWidth: 120,
   allowImageValidateSize: true,
   imageValidateSizeLabelImageSizeTooBig: "Gambar Terlalu Besar",
-  imageValidateSizeMaxWidth: 640,
-  imageValidateSizeMaxHeight: 640,
+  imageValidateSizeMaxWidth: 500,
+  imageValidateSizeMaxHeight: 500,
   acceptedFileTypes: ["image/png", "image/jpeg"],
 });
 
@@ -48,17 +48,6 @@ const noHPInput = document.getElementById("noHP");
 const emailInput = document.getElementById("email");
 
 teamNameInput.focus();
-
-function invalid(field, msg) {
-  field.nextElementSibling.innerHTML = msg;
-  field.nextElementSibling.style.opacity = 1;
-  field.classList.add("setErorr");
-  field.focus();
-}
-function valid(field) {
-  field.nextElementSibling.style.opacity = 0;
-  field.classList.remove("setErorr");
-}
 
 function cekIdSudahTerdaftar(field, data) {
   if (
@@ -97,7 +86,18 @@ function cekInputSama(field, field1, field2, field3) {
   }
 }
 
-const uri = "/register";
+function invalid(field, msg) {
+  field.focus();
+  field.classList.add("setErorr");
+  field.nextElementSibling.innerHTML = msg;
+  field.nextElementSibling.style.opacity = 1;
+}
+function valid(field) {
+  field.nextElementSibling.style.opacity = 0;
+  field.classList.remove("setErorr");
+}
+
+const uri = "/v1/api/register";
 
 async function getParticipants() {
   const res = await fetch(uri);
@@ -118,8 +118,8 @@ async function getParticipants() {
       }
 
       if (cekIdSudahTerdaftar(idPemain1Input, data)) {
-        invalid(idPemain1Input, "Id sudah terdaftar");
         event.preventDefault();
+        invalid(idPemain1Input, "Id sudah terdaftar");
       } else if (
         cekInputSama(
           idPemain1Input,
@@ -135,8 +135,8 @@ async function getParticipants() {
       }
 
       if (cekIdSudahTerdaftar(idPemain2Input, data)) {
-        invalid(idPemain2Input, "Id sudah terdaftar");
         event.preventDefault();
+        invalid(idPemain2Input, "Id sudah terdaftar");
       } else if (
         cekInputSama(
           idPemain2Input,
@@ -152,8 +152,8 @@ async function getParticipants() {
       }
 
       if (cekIdSudahTerdaftar(idPemain3Input, data)) {
-        invalid(idPemain3Input, "Id sudah terdaftar");
         event.preventDefault();
+        invalid(idPemain3Input, "Id sudah terdaftar");
       } else if (
         cekInputSama(
           idPemain3Input,
@@ -169,8 +169,8 @@ async function getParticipants() {
       }
 
       if (cekIdSudahTerdaftar(idPemain4Input, data)) {
-        invalid(idPemain4Input, "Id sudah terdaftar");
         event.preventDefault();
+        invalid(idPemain4Input, "Id sudah terdaftar");
       } else if (
         cekInputSama(
           idPemain4Input,
@@ -186,8 +186,8 @@ async function getParticipants() {
       }
 
       if (cekNickSudahTerdaftar(namaPemain1Input, data)) {
-        invalid(namaPemain1Input, "Nick sudah terdaftar");
         event.preventDefault();
+        invalid(namaPemain1Input, "Nick sudah terdaftar");
       } else if (
         cekInputSama(
           namaPemain1Input,
@@ -203,8 +203,8 @@ async function getParticipants() {
       }
 
       if (cekNickSudahTerdaftar(namaPemain2Input, data)) {
-        invalid(namaPemain2Input, "Nick sudah terdaftar");
         event.preventDefault();
+        invalid(namaPemain2Input, "Nick sudah terdaftar");
       } else if (
         cekInputSama(
           namaPemain2Input,
@@ -213,15 +213,15 @@ async function getParticipants() {
           namaPemain4Input
         )
       ) {
-        invalid(namaPemain2Input, "Nick sama");
         event.preventDefault();
+        invalid(namaPemain2Input, "Nick sama");
       } else {
         valid(namaPemain2Input);
       }
 
       if (cekNickSudahTerdaftar(namaPemain3Input, data)) {
-        invalid(namaPemain3Input, "Nick sudah terdaftar");
         event.preventDefault();
+        invalid(namaPemain3Input, "Nick sudah terdaftar");
       } else if (
         cekInputSama(
           namaPemain3Input,
@@ -237,8 +237,8 @@ async function getParticipants() {
       }
 
       if (cekNickSudahTerdaftar(namaPemain4Input, data)) {
-        invalid(namaPemain4Input, "Nick sudah terdaftar");
         event.preventDefault();
+        invalid(namaPemain4Input, "Nick sudah terdaftar");
       } else if (
         cekInputSama(
           namaPemain4Input,
@@ -270,6 +270,5 @@ async function getParticipants() {
   });
 }
 window.addEventListener("load", () => {
-  console.log("load");
   getParticipants();
 });

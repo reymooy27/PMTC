@@ -1,14 +1,18 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-
-// import route
-const route = require("./routes/routes");
-
+const compression = require("compression");
+const helmet = require("helmet");
 const app = express();
 
 //config
 dotenv.config();
+
+app.use(compression());
+app.use(helmet());
+
+// import route
+const route = require("./routes/routes");
 
 // connect DB
 // "mongodb://127.0.0.1:27017"

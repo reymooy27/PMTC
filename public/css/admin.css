@@ -8,28 +8,29 @@
   background-color: #151a2c;
 }
 
-form {
-  margin: 1em auto 0;
+table {
+  margin: 5px;
+  padding: 10px;
+}
+table tr td {
+  padding: 5px;
+}
+
+#form-wraper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
 }
 
-label {
-  align-items: left;
-  text-align: left;
-  display: block;
-  font-size: 14px;
+#tournament-form {
+  margin-top: 3em;
+  transition: display 0.3s ease-in-out;
 }
-
-select {
-  width: 250px;
-  height: 40px;
-  margin-bottom: 20px;
-}
-
 input:focus,
 select {
   border: 2px solid #00deab;
@@ -41,28 +42,32 @@ select {
   transition: ease-in-out 0.3s;
 }
 
-input {
-  border-radius: 10px;
+input,
+select {
   background-color: #0e1013;
+  height: 30px;
   color: white;
-  width: 250px;
-  height: 40px;
-  text-align: left;
   text-indent: 10px;
+  text-align: left;
   border: 2px solid rgb(85, 85, 85);
   outline: none;
   transition: ease-in-out 0.3s;
-  margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+  width: 50px;
 }
 
 button {
-  display: inline-block;
-  width: 250px;
+  position: absolute;
+  left: 30px;
+  bottom: -30px;
+  margin: 0 auto;
+  width: 200px;
   height: 40px;
-  padding: 11px 20px;
-  font-size: 0.75em;
+  padding: 10px;
+  display: inline-block;
   border: none;
-  font-weight: bold;
   border-radius: 50px;
   background: #00deab;
   text-transform: uppercase;
@@ -72,17 +77,40 @@ button {
   text-decoration: none;
 }
 .teams {
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
-  margin: 20px;
+  margin: 40px auto 20px;
 }
 
 .team {
-  min-width: 150px;
-
+  width: 100%;
   margin: 10px;
 }
 
 #gf {
   display: none;
+}
+
+@media screen and (min-width: 700px) {
+  .container {
+    display: flex;
+  }
+  #form-wraper {
+    flex-direction: row;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+  }
+  #tournament-form {
+    margin-top: 0;
+  }
+  input[type="number"] {
+    width: 70px;
+  }
+  .team {
+    width: 150px;
+  }
 }
