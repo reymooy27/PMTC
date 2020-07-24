@@ -121,6 +121,25 @@
                   />
                 </td>
               </tr>
+              <tr>
+                <td>
+                  <label for="confirmed">Dikonfirmasi</label>
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
+                    name="confirmed"
+                    id="confirmed"
+                    value=""
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button id="update">UPDATE</button>
+                  <button id="delete">DELETE</button>
+                </td>
+              </tr>
             </tbody>
           </table>
 
@@ -241,7 +260,6 @@
             </table>
           </div>
         </div>
-        <button id="update">UPDATE</button>
       </form>
 
       <form id="tournament-form">
@@ -348,9 +366,65 @@
                 <input type="text" name="grandFinalDate" id="grandFinalDate" />
               </td>
             </tr>
+            <tr>
+              <td>
+                <label for="showGroupStandings">Grup Standing Standing</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="showGroupStandings"
+                  id="showGroupStandings"
+                  value=""
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="showGrandFinal">Grandfinal Standing</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="showGrandFinal"
+                  id="showGrandFinal"
+                  value=""
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="showKillStanding">Kill Standing</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="showKillStanding"
+                  id="showKillStanding"
+                  value=""
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="registrationClosed">Pendaftaran Tutup</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="registrationClosed"
+                  id="registrationClosed"
+                  value=""
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button id="update-tournament">UPDATE</button>
+              </td>
+            </tr>
           </tbody>
         </table>
-        <button id="update-tournament">UPDATE</button>
       </form>
     </div>
 

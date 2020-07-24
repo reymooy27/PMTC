@@ -3,6 +3,12 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const compression = require("compression");
 const helmet = require("helmet");
+const cors = require("cors");
+const route = require("./routes/routes");
+const tournamentRoutes = require("./routes/tournament");
+const userRoutes = require("./routes/user");
+const participantRoutes = require("./routes/participant");
+
 const app = express();
 
 //config
@@ -10,13 +16,8 @@ dotenv.config();
 
 app.use(compression());
 app.use(helmet());
+app.use(cors());
 
-// import route
-const route = require("./routes/routes");
-
-// connect DB
-// "mongodb://127.0.0.1:27017"
-// process.env.DB_CONNECT
 const db_uri = process.env.DB_CONNECT;
 mongoose.connect(
   db_uri,
@@ -52,6 +53,9 @@ app.set("view engine", "ejs");
 
 // route
 app.use(route);
+app.use(tournamentRoutes);
+app.use(userRoutes);
+app.use(participantRoutes);
 
 //port
 const port = process.env.PORT || 3000;

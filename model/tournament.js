@@ -32,6 +32,22 @@ const tournamentSchema = new mongoose.Schema({
   grandFinalDate: {
     type: String,
   },
+  showGroupStandings: {
+    type: Boolean,
+    default: false,
+  },
+  showGrandFinal: {
+    type: Boolean,
+    default: false,
+  },
+  showKillStanding: {
+    type: Boolean,
+    default: false,
+  },
+  registrationClosed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("Tournament", tournamentSchema);

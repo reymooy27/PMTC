@@ -1,18 +1,21 @@
 const jwt = require("jsonwebtoken");
 
-module.exports = (req, res, next) => {
-  let token = req.headers["x-access-token"] || req.headers["authorization"];
-  console.log(token);
+module.exports = async (req, res, next) => {
+  let bearerToken = req.headers["authorization"];
 
-  if (!token) return res.status(401).json({ msg: "Tidak Dapat Diakses" });
-  if (token.startsWith("Bearer ")) {
-    token = token.slice(7, token.length);
-  }
+  if (!bearerToken) return res.status(401).json({ msg: "Tidak Dapat Diakses" });
 
   try {
-    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-    req.user = verified;
-    next();
+    if (typeof bearerToken !== "undefined") {
+      const bearer = bearerToken.split(" ");
+      const token = bearer[1];
+
+      const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+      req.user = verified;
+      await next();
+    } else {
+      res.status(500).json({ msg: "Invalid Token" });
+    }
   } catch (err) {
     res.status(500).json({ msg: "Invalid Token" });
   }

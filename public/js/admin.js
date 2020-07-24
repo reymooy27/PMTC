@@ -9,6 +9,7 @@ const player3Kill = document.getElementById("player3Kill");
 const player4Kill = document.getElementById("player4Kill");
 const form = document.getElementById("form");
 const updtBttn = document.getElementById("update");
+const deltBttn = document.getElementById("delete");
 const select = document.getElementById("teamSelect");
 const teamsDiv = document.querySelector(".teams");
 const namaTeam = document.querySelector("#namaTeam");
@@ -41,6 +42,11 @@ const tournamentSecondWinner = document.getElementById(
   "tournamentSecondWinner"
 );
 const tournamentThirdWinner = document.getElementById("tournamentThirdWinner");
+const showGroupStandings = document.getElementById("showGroupStandings");
+const showGrandFinal = document.getElementById("showGrandFinal");
+const showKillStanding = document.getElementById("showKillStanding");
+const registrationClosed = document.getElementById("registrationClosed");
+const confirmed = document.getElementById("confirmed");
 const accessToken = localStorage.getItem("token");
 
 async function accessAdmin() {
@@ -55,9 +61,47 @@ async function accessAdmin() {
     .catch((err) => console.log(err));
 }
 
+qualifyToGrandFinal.addEventListener("click", () => {
+  if (qualifyToGrandFinal.checked === true) return true;
+  return false;
+});
+tournamentFirstWinner.addEventListener("click", () => {
+  if (tournamentFirstWinner.checked === true) return true;
+  return false;
+});
+tournamentSecondWinner.addEventListener("click", () => {
+  if (tournamentSecondWinner.checked === true) return true;
+  return false;
+});
+tournamentThirdWinner.addEventListener("click", () => {
+  if (tournamentThirdWinner.checked === true) return true;
+  return false;
+});
+
+showGroupStandings.addEventListener("click", () => {
+  if (showGroupStandings.checked === true) return true;
+  return false;
+});
+showGrandFinal.addEventListener("click", () => {
+  if (showGrandFinal.checked === true) return true;
+  return false;
+});
+showKillStanding.addEventListener("click", () => {
+  if (showKillStanding.checked === true) return true;
+  return false;
+});
+registrationClosed.addEventListener("click", () => {
+  if (registrationClosed.checked === true) return true;
+  return false;
+});
+confirmed.addEventListener("click", () => {
+  if (confirmed.checked === true) return true;
+  return false;
+});
+
 window.addEventListener("load", async () => {
   accessAdmin();
-  const res = await fetch("/v1/api/tourney");
+  const res = await fetch("/api/v1/tourney");
   const json = await res.json();
   json.map((tourney) => {
     tournamentName.value = tourney.tournamentName;
@@ -70,26 +114,52 @@ window.addEventListener("load", async () => {
     qualifierDay1.value = tourney.qualifierDay1;
     qualifierDay2.value = tourney.qualifierDay2;
     grandFinalDate.value = tourney.grandFinalDate;
+
+    if (tourney.showGroupStandings === true) {
+      showGroupStandings.checked = true;
+    }
+
+    if (tourney.showGrandFinal === true) {
+      showGrandFinal.checked = true;
+    }
+    if (tourney.showKillStanding === true) {
+      showKillStanding.checked = true;
+    }
+    if (tourney.registrationClosed === true) {
+      registrationClosed.checked = true;
+    }
   });
 });
 
-qualifyToGrandFinal.addEventListener("click", () => {
-  if (qualifyToGrandFinal.checked === true) return true;
-  return false;
-});
-tournamentFirstWinner.addEventListener("click", () => {
-  console.log("click");
-  if (tournamentFirstWinner.checked === true) return true;
-  return false;
-});
-tournamentSecondWinner.addEventListener("click", () => {
-  if (tournamentSecondWinner.checked === true) return true;
-  return false;
-});
-tournamentThirdWinner.addEventListener("click", () => {
-  if (tournamentThirdWinner.checked === true) return true;
-  return false;
-});
+async function updateTournament() {
+  await fetch("/tournament", {
+    method: "put",
+    body: JSON.stringify({
+      tournamentName: tournamentName.value,
+      tournamentFirstPrize: tournamentFirstPrize.value,
+      tournamentSecondPrize: tournamentSecondPrize.value,
+      tournamentThirdPrize: tournamentThirdPrize.value,
+      tournamentFee: tournamentFee.value,
+      registrationStart: registrationStart.value,
+      startDate: startDate.value,
+      qualifierDay1: qualifierDay1.value,
+      qualifierDay2: qualifierDay2.value,
+      grandFinalDate: grandFinalDate.value,
+      showGroupStandings: showGroupStandings.checked,
+      showGrandFinal: showGrandFinal.checked,
+      showKillStanding: showKillStanding.checked,
+      registrationClosed: registrationClosed.checked,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => data)
+    .catch((err) => console.log(err));
+}
+
+updateTournamentButton.addEventListener("click", updateTournament);
 
 async function updateParticipant(tim) {
   await fetch(`/participant/${tim}`, {
@@ -120,6 +190,7 @@ async function updateParticipant(tim) {
       tournamentFirstWinner: tournamentFirstWinner.checked,
       tournamentSecondWinner: tournamentSecondWinner.checked,
       tournamentThirdWinner: tournamentThirdWinner.checked,
+      confirmed: confirmed.checked,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -130,10 +201,18 @@ async function updateParticipant(tim) {
     .catch((err) => console.log(err));
 }
 
+async function deleteParticipant(tim) {
+  await fetch(`/participant/${tim}`, {
+    method: "delete",
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+}
+
 select.addEventListener(
   "change",
   async (e) => {
-    const res = await fetch("/v1/api/register");
+    const res = await fetch("/api/v1/register");
     const json = await res.json();
     json.map((info) => {
       if (e.target.value === info._id) {
@@ -145,7 +224,7 @@ select.addEventListener(
         label4.innerHTML = info.playerName4;
         playerKill.value = info.playerKill;
         player2Kill.value = info.player2Kill;
-        player3Kill.value = info.player4Kill;
+        player3Kill.value = info.player3Kill;
         player4Kill.value = info.player4Kill;
         inGroup.value = info.inGroup;
         GFteamPlcPoint.value = info.GFteamPlcPoint;
@@ -157,6 +236,9 @@ select.addEventListener(
         GFplayer2Kill.value = info.GFplayer2Kill;
         GFplayer3Kill.value = info.GFplayer3Kill;
         GFplayer4Kill.value = info.GFplayer4Kill;
+        if (info.confirmed === true) {
+          confirmed.checked = true;
+        }
         if (info.qualifyToGrandFinal === true) {
           GFForm.style.display = "block";
           qualifyToGrandFinal.checked = true;
@@ -174,36 +256,13 @@ select.addEventListener(
       }
     });
     let id = e.target.value;
-    console.log(id);
     updtBttn.addEventListener("click", () => {
       updateParticipant(id);
+    });
+    deltBttn.addEventListener("click", () => {
+      if (confirm("Apakah anda ingin menghapus tim ini ?"))
+        deleteParticipant(id);
     });
   },
   { once: true }
 );
-
-async function updateTournament() {
-  await fetch("/tournament", {
-    method: "put",
-    body: JSON.stringify({
-      tournamentName: tournamentName.value,
-      tournamentFirstPrize: tournamentFirstPrize.value,
-      tournamentSecondPrize: tournamentSecondPrize.value,
-      tournamentThirdPrize: tournamentThirdPrize.value,
-      tournamentFee: tournamentFee.value,
-      registrationStart: registrationStart.value,
-      startDate: startDate.value,
-      qualifierDay1: qualifierDay1.value,
-      qualifierDay2: qualifierDay2.value,
-      grandFinalDate: grandFinalDate.value,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => data)
-    .catch((err) => console.log(err));
-}
-
-updateTournamentButton.addEventListener("click", updateTournament);

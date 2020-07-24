@@ -1,3 +1,116 @@
+const registeredTeam = document.getElementById("registered-team");
+const regTeam = document.getElementById("registeredTeam");
+const homeWraper = document.getElementById("home-wraper");
+const tournamentName = document.getElementById("tournamentName");
+const registrationStart = document.getElementById("registrationStart");
+const startDate = document.getElementById("startDate");
+const tournamentFee = document.getElementById("tournamentFee");
+const qualifierDay1 = document.getElementById("qualifierDay1");
+const qualifierDay2 = document.getElementById("qualifierDay2");
+const grandFinalDate = document.getElementById("grandFinalDate");
+const tournamentFirstPrize = document.getElementById("tournamentFirstPrize");
+const tournamentSecondPrize = document.getElementById("tournamentSecondPrize");
+const tournamentThirdPrize = document.getElementById("tournamentThirdPrize");
+const gfStanding = document.getElementById("grandfinal-standing");
+const menu1 = document.getElementById("menu1");
+const menu2 = document.getElementById("menu2");
+const btnWraper = document.getElementById("btn-wraper");
+
+const prize1 = document.querySelector(".prize-details");
+const prize2 = document.querySelector(".prize-details2");
+const prize3 = document.querySelector(".prize-details3");
+
+const confirmed = document.getElementById("confirmed");
+const notConfirmed = document.getElementById("not-confirmed");
+
+async function getParticipant() {
+  const res = await fetch("api/v1/register");
+  const json = await res.json();
+
+  registeredTeam.innerHTML = `${json.length}/64`;
+  regTeam.innerHTML = `Tim : ${json.length}`;
+
+  if (json.length === 0) {
+    homeWraper.innerHTML = `<div class="no-participant">
+                            <h3>Belum Tersedia Saat Ini</h3>
+                        </div>`;
+  }
+
+  json.filter((t) => {
+    checkWinner(t, prize1, t.tournamentFirstWinner, tournamentFirstPrize);
+    checkWinner(t, prize2, t.tournamentSecondWinner, tournamentSecondPrize);
+    checkWinner(t, prize3, t.tournamentThirdWinner, tournamentThirdPrize);
+  });
+
+  json.forEach((t) => {
+    console.log(t.confirmed);
+    if (t.confirmed === true > 0) {
+      confirmed.style.display = "block";
+    }
+    if (t.confirmed === false > 0) {
+      notConfirmed.style.display = "block";
+    }
+  });
+}
+
+function checkWinner(data, field, conds, span) {
+  if (conds === true) {
+    field.style.background = `url(../logos/${data.logo.slice(5)})`;
+    field.style.backgroundSize = "80px";
+    field.style.backgroundRepeat = "no-repeat";
+    field.style.backgroundPosition = "center";
+    span.innerHTML = data.teamName;
+    span.style.fontSize = "18px";
+  }
+}
+
+async function getTourneyInfo() {
+  const res = await fetch("api/v1/tourney");
+  const json = await res.json();
+  json.map((tourney) => {
+    registrationStart.innerHTML = tourney.registrationStart;
+    tournamentName.innerHTML = tourney.tournamentName;
+    startDate.innerHTML = tourney.startDate;
+    tournamentFee.innerHTML = `Rp. ${new Intl.NumberFormat().format(
+      tourney.tournamentFee
+    )}`;
+    qualifierDay1.innerHTML = tourney.qualifierDay1;
+    qualifierDay2.innerHTML = tourney.qualifierDay2;
+    grandFinalDate.innerHTML = tourney.grandFinalDate;
+    tournamentFirstPrize.innerHTML = `Rp. ${new Intl.NumberFormat().format(
+      tourney.tournamentFirstPrize
+    )}`;
+    tournamentSecondPrize.innerHTML = `Rp. ${new Intl.NumberFormat().format(
+      tourney.tournamentSecondPrize
+    )}`;
+    tournamentThirdPrize.innerHTML = `Rp. ${new Intl.NumberFormat().format(
+      tourney.tournamentThirdPrize
+    )}`;
+    if (!tourney.showGroupStandings) {
+      menu1.innerHTML = `<div class="no-participant">
+                            <h3>Belum Tersedia Saat Ini</h3>
+                        </div>`;
+    }
+    if (!tourney.showKillStanding) {
+      menu2.innerHTML = `<div class="no-participant">
+                            <h3>Belum Tersedia Saat Ini</h3>
+                        </div>`;
+    }
+    if (!tourney.showGrandFinal) {
+      gfStanding.style.display = "none";
+    }
+    if (tourney.registrationClosed) {
+      btnWraper.innerHTML = `<a class="btn-disabled" type="button" disabled>Pendaftaran Tutup</a>`;
+      registrationButton.style.display = "none";
+    }
+  });
+}
+
+window.addEventListener("load", () => {
+  getTourneyInfo();
+  getParticipant();
+});
+
 //Menu
 function menuToggle() {
   const nav = document.getElementById("nav");
@@ -7,6 +120,24 @@ function menuToggle() {
 }
 const menu = document.getElementById("toggle");
 menu.addEventListener("click", menuToggle);
+
+// register button
+const registrationButton = document.querySelector(".btn-registered.top");
+window.addEventListener("scroll", () => {
+  if (window.pageYOffset > 350) {
+    registrationButton.classList.add("show");
+  } else {
+    registrationButton.classList.remove("show");
+  }
+
+  if (window.screen.width < 700) {
+    if (window.pageYOffset > 600) {
+      registrationButton.classList.add("show");
+    } else {
+      registrationButton.classList.remove("show");
+    }
+  }
+});
 
 // Standings collapsible
 let coll = document.getElementsByClassName("collapsible");
@@ -186,21 +317,3 @@ pos(3);
 pos(4);
 pos(5);
 pos(6);
-
-// register button
-const registrationButton = document.querySelector(".btn-registered.top");
-window.addEventListener("scroll", () => {
-  if (window.pageYOffset > 350) {
-    registrationButton.classList.add("show");
-  } else {
-    registrationButton.classList.remove("show");
-  }
-
-  if (window.screen.width < 700) {
-    if (window.pageYOffset > 600) {
-      registrationButton.classList.add("show");
-    } else {
-      registrationButton.classList.remove("show");
-    }
-  }
-});

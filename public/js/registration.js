@@ -1,24 +1,3 @@
-// Filepond image post
-FilePond.registerPlugin(
-  FilePondPluginImagePreview,
-  FilePondPluginImageResize,
-  FilePondPluginFileEncode,
-  FilePondPluginImageValidateSize,
-  FilePondPluginFileValidateType
-);
-
-FilePond.setOptions({
-  stylePanelAspectRatio: 120 / 120,
-  imageResizeTargetWidth: 120,
-  allowImageValidateSize: true,
-  imageValidateSizeLabelImageSizeTooBig: "Gambar Terlalu Besar",
-  imageValidateSizeMaxWidth: 500,
-  imageValidateSizeMaxHeight: 500,
-  acceptedFileTypes: ["image/png", "image/jpeg"],
-});
-
-FilePond.parse(document.body);
-
 function checkPhoneKey(key) {
   return (
     (key >= "0" && key <= "9") ||
@@ -46,6 +25,56 @@ const namaPemain3Input = document.getElementById("namaPemain3");
 const namaPemain4Input = document.getElementById("namaPemain4");
 const noHPInput = document.getElementById("noHP");
 const emailInput = document.getElementById("email");
+const formDiv = document.querySelector(".form");
+const logoInput = document.getElementById("logo");
+const prevImage = document.getElementById("imagePreviewImage");
+
+logoInput.addEventListener("change", () => {
+  if (validImageRes(event)) {
+    previewImage(event);
+  } else {
+    invalid(logoInput, "Res terlalu besar");
+  }
+});
+
+function validImageRes(ev) {
+  const img = new Image();
+  img.src = window.URL.createObjectURL(ev.target.files[0]);
+
+  img.addEventListener("load", () => {
+    window.URL.revokeObjectURL(img.src);
+    if (img.naturalWidth > 500 || img.naturalHeight > 500) {
+      return false;
+    }
+  });
+  return true;
+}
+
+function previewImage(ev) {
+  const reader = new FileReader();
+  const file = ev.target.files[0];
+  const size = file.size;
+  const type = file.type.indexOf("image");
+
+  reader.addEventListener("load", () => {
+    if (reader.readyState == 2) {
+      if (size > 100000) {
+        invalid(logoInput, "Ukuran terlalu besar");
+      } else if (type == -1) {
+        invalid(logoInput, "Format salah");
+      } else {
+        valid(logoInput);
+        prevImage.src = reader.result;
+        prevImage.style.display = "block";
+        logoInput.style.display = "none";
+      }
+    } else {
+      prevImage.src = null;
+      prevImage.style.display = null;
+    }
+  });
+  reader.readAsDataURL(file);
+}
 
 teamNameInput.focus();
 
@@ -97,7 +126,7 @@ function valid(field) {
   field.classList.remove("setErorr");
 }
 
-const uri = "/v1/api/register";
+const uri = "/api/v1/register";
 
 async function getParticipants() {
   const res = await fetch(uri);
@@ -108,6 +137,7 @@ async function getParticipants() {
         event.preventDefault();
         invalid(teamNameInput, "Nama Tim sudah terdaftar");
       }
+      localStorage.setItem("teamName", teamNameInput.value);
 
       if (
         singkatanTeamInput.value.toLowerCase() ===
@@ -265,10 +295,26 @@ async function getParticipants() {
         invalid(emailInput, "Email sudah terdaftar");
       } else {
         valid(emailInput);
+        localStorage.setItem("participantsEmail", emailInput.value);
       }
     });
   });
 }
+
+async function getTourneyInfo() {
+  const res = await fetch("api/v1/tourney");
+  const json = await res.json();
+  json.map((tourney) => {
+    if (tourney.registrationClosed) {
+      formDiv.innerHTML = `
+      <div class="registration-closed">
+      <h1 class="registration-closed-title">Registration Closed</h1>
+    </div>
+    `;
+    }
+  });
+}
 window.addEventListener("load", () => {
   getParticipants();
+  getTourneyInfo();
 });

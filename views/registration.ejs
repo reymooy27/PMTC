@@ -6,14 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>PUBG Mobile Terminator Weekly Challenge - Pendaftaran</title>
     <link rel="stylesheet" href="./css/style.css" />
-    <link
-      href="https://unpkg.com/filepond/dist/filepond.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-      rel="stylesheet"
-    />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
   </head>
 
@@ -30,17 +22,13 @@
       </div>
     </div>
     <!-- Pendaftaran -->
-    <%if(jumlahParticipant == batasPeserta){%>
-    <div class="registration-closed">
-      <h1 class="registration-closed-title">Registration Closed</h1>
-    </div>
-    <%}else{%>
     <div class="form">
       <form
         class="kiri"
         id="registrationForm"
         action="/registration"
         method="POST"
+        enctype="multipart/form-data"
       >
         <!--Info Team-->
         <h2 class="pendaftaran-title">Pendaftaran</h2>
@@ -79,18 +67,25 @@
           </div>
           <br />
           <div class="logo-input-wraper">
-            <div class="logotim" style="width: 150px;">
+            <div class="logotim">
               <label for="logo">Logo Tim</label>
               <br />
               <input
                 type="file"
                 id="logo"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="Masukan Logo Anda (150 x 150px)"
+                title="Masukan Logo Anda (500 x 500px)"
                 name="logo"
-                class="filepond"
+                accept="image/png"
               />
+              <span class="error-msg">error</span>
+              <div class="image-preview" id="imagePreview">
+                <img
+                  src=""
+                  alt="Image Preview"
+                  class="image-preview-image"
+                  id="imagePreviewImage"
+                />
+              </div>
             </div>
             <div class="logo-req">
               <ul>
@@ -303,32 +298,10 @@
             value="DAFTAR"
             id="submit"
           />
-          <span class="error-msg"></span>
         </div>
       </form>
     </div>
-    <%}%>
-    <script
-      defer
-      src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"
-    ></script>
-    <script
-      defer
-      src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"
-    ></script>
-    <script
-      defer
-      src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"
-    ></script>
-    <script
-      defer
-      src="https://unpkg.com/filepond-plugin-image-validate-size/dist/filepond-plugin-image-validate-size.js"
-    ></script>
-    <script
-      defer
-      src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"
-    ></script>
-    <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
     <script defer type="text/javascript" src="./js/registration.js"></script>
   </body>
 </html>
