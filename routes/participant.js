@@ -3,7 +3,8 @@ const router = express.Router();
 const Participant = require("../model/participant");
 const { registerValidation } = require("../utils/validation");
 const sendEmail = require("../utils/sendEmail");
-const uploadLogo = require("../utils/uploadLogo");
+const { upload } = require("../utils/uploadLogo");
+const cloudinary = require("cloudinary");
 
 const fs = require("fs");
 
@@ -15,7 +16,8 @@ router.get("/api/v1/register", async (req, res) => {
 });
 
 // registration/create new participant
-router.post("/registration", uploadLogo.single("logo"), async (req, res) => {
+router.post("/registration", upload, async (req, res) => {
+  console.log(req.file);
   //validation
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -93,7 +95,7 @@ router.post("/registration", uploadLogo.single("logo"), async (req, res) => {
   const participant = new Participant({
     teamName: req.body.teamName,
     singkatanTeam: req.body.singkatanTeam.toUpperCase(),
-    logo: req.file.path.slice(26),
+    logo: req.file.path,
     idPlayer: req.body.idPlayer,
     idPlayer2: req.body.idPlayer2,
     idPlayer3: req.body.idPlayer3,
@@ -165,8 +167,11 @@ router.delete("/participant/:id", async (req, res) => {
     _id: req.params.id,
   });
   if (participant) {
-    fs.unlink("public/" + participant.logo, (err) => {
-      if (err) throw err;
+    cloudinary.v2.uploader.destroy(`logo/${participant.teamName}`, function (
+      error,
+      result
+    ) {
+      console.log(result, error);
     });
     res.status(200).json("Berhasil dihapus");
   } else {

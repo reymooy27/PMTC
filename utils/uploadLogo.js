@@ -1,20 +1,20 @@
 const path = require("path");
 const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.resolve(__dirname, "../public/logos"));
-  },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      req.body.teamName +
-        "-" +
-        file.fieldname +
-        "-" +
-        Date.now() +
-        path.extname(file.originalname)
-    );
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "/logo",
+    allowedFormats: ["jpg", "png"],
+    public_id: (req, file) => req.body.teamName,
   },
 });
 
@@ -37,6 +37,6 @@ const upload = multer({
   fileFilter: (req, file, cb) => {
     checkFileType(file, cb);
   },
-});
+}).single("logo");
 
-module.exports = upload;
+module.exports.upload = upload;

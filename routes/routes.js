@@ -23,7 +23,7 @@ router.get("/registration", async (req, res) => {
   });
 });
 
-router.get("/admin", verify, async (req, res) => {
+router.get("/admin", async (req, res) => {
   await Participant.find().then((participants) => {
     res.render("admin", {
       participant: participants,
