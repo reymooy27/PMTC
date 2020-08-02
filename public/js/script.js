@@ -43,12 +43,17 @@ async function getParticipant() {
   });
 
   json.forEach((t) => {
-    console.log(t.confirmed);
     if (t.confirmed === true > 0) {
       confirmed.style.display = "block";
     }
     if (t.confirmed === false > 0) {
       notConfirmed.style.display = "block";
+    }
+  });
+
+  json.forEach((t) => {
+    if (t.inGroup === "A" > 0) {
+      console.log("a");
     }
   });
 }
@@ -123,21 +128,6 @@ menu.addEventListener("click", menuToggle);
 
 // register button
 const registrationButton = document.querySelector(".btn-registered.top");
-window.addEventListener("scroll", () => {
-  if (window.pageYOffset > 350) {
-    registrationButton.classList.add("show");
-  } else {
-    registrationButton.classList.remove("show");
-  }
-
-  if (window.screen.width < 700) {
-    if (window.pageYOffset > 600) {
-      registrationButton.classList.add("show");
-    } else {
-      registrationButton.classList.remove("show");
-    }
-  }
-});
 
 // Standings collapsible
 let coll = document.getElementsByClassName("collapsible");
@@ -210,10 +200,34 @@ tabs2.forEach((tab2) => {
   });
 });
 
+window.addEventListener("online", updateOnlineStatus);
+window.addEventListener("offline", updateOnlineStatus);
+
+function updateOnlineStatus(event) {
+  const navbar = document.querySelector(".navbar-responsive");
+  if (!navigator.onLine) {
+    navbar.classList.add("offline");
+  } else {
+    navbar.classList.remove("offline");
+  }
+}
+
 //back to top button
 const backToTopButton = document.getElementById("back-to-top");
-
 window.addEventListener("scroll", () => {
+  if (window.pageYOffset > 350) {
+    registrationButton.classList.add("show");
+  } else {
+    registrationButton.classList.remove("show");
+  }
+
+  if (window.screen.width < 700) {
+    if (window.pageYOffset > 600) {
+      registrationButton.classList.add("show");
+    } else {
+      registrationButton.classList.remove("show");
+    }
+  }
   if (window.pageYOffset > 1700) {
     if (!backToTopButton.classList.contains("btnEntrance")) {
       backToTopButton.classList.remove("btnExit");

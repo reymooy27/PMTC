@@ -4,9 +4,7 @@ const Participant = require("../model/participant");
 const { registerValidation } = require("../utils/validation");
 const sendEmail = require("../utils/sendEmail");
 const { upload } = require("../utils/uploadLogo");
-const cloudinary = require("cloudinary");
-
-const fs = require("fs");
+const deleteParticipant = require("../utils/deleteParticipant");
 
 //api
 router.get("/api/v1/register", async (req, res) => {
@@ -17,7 +15,6 @@ router.get("/api/v1/register", async (req, res) => {
 
 // registration/create new participant
 router.post("/registration", upload, async (req, res) => {
-  console.log(req.file);
   //validation
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -92,10 +89,11 @@ router.post("/registration", upload, async (req, res) => {
   }
 
   //create a new participant
+  const logoPath = req.file != null ? req.file.path : null;
   const participant = new Participant({
     teamName: req.body.teamName,
     singkatanTeam: req.body.singkatanTeam.toUpperCase(),
-    logo: req.file.path,
+    logo: logoPath,
     idPlayer: req.body.idPlayer,
     idPlayer2: req.body.idPlayer2,
     idPlayer3: req.body.idPlayer3,
@@ -162,21 +160,6 @@ router.put("/participant/:id", async (req, res) => {
   );
 });
 
-router.delete("/participant/:id", async (req, res) => {
-  const participant = await Participant.findByIdAndDelete({
-    _id: req.params.id,
-  });
-  if (participant) {
-    cloudinary.v2.uploader.destroy(`logo/${participant.teamName}`, function (
-      error,
-      result
-    ) {
-      console.log(result, error);
-    });
-    res.status(200).json("Berhasil dihapus");
-  } else {
-    res.status(500).json("Tidak dapat dihapus");
-  }
-});
+router.delete("/participant/:id", deleteParticipant);
 
 module.exports = router;

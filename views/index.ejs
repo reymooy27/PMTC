@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>PUBG Mobile Terminator Weekly Challenge</title>
+    <title>PUBG Mobile Kupang Terminator Challenge</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -25,7 +25,6 @@
             <div class="nav">
                 <a href="/">Home</a>
                 <a href="/registration">Pendaftaran</a>
-                <a href="#">Tentang</a>
                 <a href="https://forms.gle/y7rDmdaQY55YsLLF6">Lapor</a>
             </div>
         </nav>
@@ -347,7 +346,7 @@
                 </div>
 
                 <div id="menu1" data-tab-content2><br>
-                        <button class="collapsible">GRUP A</button>
+                        <button class="collapsible" id="grupA">GRUP A</button>
                         <div class="content">
                             <table class="content" id="standing-table-1">
                                 <tbody class="p-sm-0 m-sm-0">
@@ -374,7 +373,7 @@
                                 <% } %>
                             </table>
                         </div>
-                        <button class="collapsible">GRUP B</button>
+                        <button class="collapsible" id="grupB">GRUP B</button>
                         <div class="content">
                             <table class="content" id="standing-table-2">
                                 <tbody class="p-sm-0 m-sm-0">
@@ -401,7 +400,7 @@
                                 <% } %>
                             </table>
                         </div>
-                        <button class="collapsible">GRUP C</button>
+                        <button class="collapsible" id="grupC">GRUP C</button>
                         <div class="content">
                             <table class="content" id="standing-table-3">
                                 <tbody class="p-sm-0 m-sm-0">
@@ -428,7 +427,7 @@
                                 <% } %>
                             </table>
                         </div>
-                        <button class="collapsible">GRUP D</button>
+                        <button class="collapsible" id="grupD">GRUP D</button>
                         <div class="content">
                             <table class="content" id="standing-table-4">
                                 <tbody class="p-sm-0 m-sm-0">
@@ -498,7 +497,7 @@
                             <div class="logo-team"><img src="<%= participant[i].logo %>" alt=""></div>
                             <div class="team-name" style="margin-left: 10px;"><%= participant[i].playerName %>
                         </td>
-                        <td class="tot-pts"><%=participant[i].playerKill%></td>
+                        <td class="tot-pts"><%=participant[i].playerKill + participant[i].GFplayerKill%></td>
                     </tr>
                     <tr>
                         <td class="pos-6"></td>
@@ -506,7 +505,7 @@
                             <div class="logo-team"><img src="<%= participant[i].logo %>" alt=""></div>
                             <div class="team-name" style="margin-left: 10px;"><%= participant[i].playerName2 %>
                         </td>
-                        <td class="tot-pts"><%=participant[i].player2Kill%></td>
+                        <td class="tot-pts"><%=participant[i].player2Kill + participant[i].GFplayer2Kill%></td>
                     </tr>
                     <tr>
                         <td class="pos-6"></td>
@@ -514,7 +513,7 @@
                             <div class="logo-team"><img src="<%= participant[i].logo %>" alt=""></div>
                             <div class="team-name" style="margin-left: 10px;"><%= participant[i].playerName3 %>
                         </td>
-                        <td class="tot-pts"><%=participant[i].player3Kill%></td>
+                        <td class="tot-pts"><%=participant[i].player3Kill + participant[i].GFplayer3Kill%></td>
                     </tr>
                     <tr>
                         <td class="pos-6"></td>
@@ -522,7 +521,7 @@
                             <div class="logo-team"><img src="<%= participant[i].logo %>" alt=""></div>
                             <div class="team-name" style="margin-left: 10px;"><%= participant[i].playerName4 %>
                         </td>
-                        <td class="tot-pts"><%=participant[i].player4Kill%></td>
+                        <td class="tot-pts"><%=participant[i].player4Kill + participant[i].GFplayer4Kill%></td>
                     </tr>
                 <% } %> 
             </table>
@@ -536,7 +535,7 @@
                 mematuhi dan menjalankan segala peraturan yang ada.
             </p>
             <ol>
-                <li>
+                <li class="rules-li">
                     <h5>Peraturan Peserta</h5>
                 </li>
                 <ul>
@@ -568,7 +567,7 @@
                         <li class="ml-5">Semua peserta wajib menjunjung nilai Sportif dan Fairplay.</li>
                     </ul>
                 </ul>
-                <li>
+                <li class="rules-li">
                     <h5>Sistem Turnamen</h5>
                 </li>
                 <ul>
@@ -576,7 +575,7 @@
                     <li class="mb-2 ml-3">Turnamen PUBG Mobile menggunakan sistem scoring sheet dengan
                         dihitung total poin.</li>
                 </ul>
-                <li>
+                <li class="rules-li">
                     <h5>Pengaturan Match</h5>
                 </li>
                 <ul>
@@ -650,7 +649,7 @@
                     </tr>
                 </table>
 
-                <li>
+                <li class="rules-li">
                     <h5>Peraturan Turnamen</h5>
                 </li>
                 <ul>
@@ -693,7 +692,7 @@
                         <li class="ml-5">Rematch akan dilakukan apabila terjadi Force Majeure</li>
                     </ul>
                 </ul>
-                <li>
+                <li class="rules-li">
                     <h5>Prosedur Pertandingan</h5>
                 </li>
                 <ul>
@@ -710,7 +709,7 @@
                             peserta tersebut dizinkan untuk reconnect namun match tetap berjalan.</li>
                     </ul>
                 </ul>
-                <li>
+                <li class="rules-li">
                     <h5>Penalti dan Walk Out</h5>
                 </li>
                 <ul>
@@ -721,7 +720,7 @@
                     <li class="mb-2 ml-3">Peserta yang melanggar poin-poin peraturan di atas akan
                         diskualifikasi.</li>
                 </ul>
-                <li>
+                <li class="rules-li">
                     <h5>Hak Penyelenggara</h5>
                 </li>
                 <ul>
@@ -758,7 +757,7 @@
                     <h4>Diselenggarakan Oleh</h4>
                     <div class="content-2-wraper">
                         <img src="./img/profile.jpg" alt="" class="profile">
-                        <!-- <h5>r3tr0</h5> -->
+                        <h5>r3tr0</h5>
                     </div>
                 </div>
                 <div class="icon-social-wraper">
@@ -767,6 +766,11 @@
                     <a href="https://www.instagram.com/pmtc.official/" target="_blank"><img class="icon-social"
                             src="./img/iconmonstr-instagram-14-72.png" alt=""></a>
                 </div>
+            </div>
+            <div>
+                <p style="font-size: 12px;">
+                    Copyrigth © 2020 PUBG Mobile Terminator Challenge
+                </p>
             </div>
         </footer>
         </div>

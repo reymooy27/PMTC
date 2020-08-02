@@ -8,7 +8,7 @@ const route = require("./routes/routes");
 const tournamentRoutes = require("./routes/tournament");
 const userRoutes = require("./routes/user");
 const participantRoutes = require("./routes/participant");
-
+const deleteUnconfirmedParticipant = require("./utils/deleteUnconfirmedParticipant");
 const app = express();
 
 //config
@@ -17,6 +17,7 @@ dotenv.config();
 app.use(compression());
 app.use(helmet());
 app.use(cors());
+app.use(deleteUnconfirmedParticipant);
 
 const db_uri = process.env.DB_CONNECT;
 mongoose.connect(
