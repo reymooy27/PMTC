@@ -503,7 +503,7 @@ img {
   align-items: center;
   margin: 0px auto;
   padding: 10px;
-  height: 450px;
+  height: 400px;
   width: 100%;
   color: white;
   overflow: auto;
@@ -614,7 +614,7 @@ img {
   font-size: 0.9em;
 }
 #qualifier {
-  height: 100%;
+  height: 350px;
 }
 
 .qualifier-map-wraper {
