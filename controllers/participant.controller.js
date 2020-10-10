@@ -37,6 +37,12 @@ const createParticipant = async (req, res) => {
   if (idPlayerExist4)
     return res.status(400).send("ID Player 4 sudah terdaftar");
 
+  const idPlayerExist5 = await Participant.findOne({
+    idPlayer4: req.body.idPlayer5,
+  });
+  if (idPlayerExist5)
+    return res.status(400).send("ID Player 5 sudah terdaftar");
+
   const handphoneNumberExist = await Participant.findOne({
     handphoneNumber: req.body.handphoneNumber,
   });
@@ -51,30 +57,42 @@ const createParticipant = async (req, res) => {
   if (
     req.body.idPlayer === req.body.idPlayer2 ||
     req.body.idPlayer === req.body.idPlayer3 ||
-    req.body.idPlayer === req.body.idPlayer4
+    req.body.idPlayer === req.body.idPlayer4 ||
+    req.body.idPlayer === req.body.idPlayer5
   ) {
     return res.status(400).send("ID Player 1 sudah terdaftar");
   }
   if (
     req.body.idPlayer2 === req.body.idPlayer ||
     req.body.idPlayer2 === req.body.idPlayer3 ||
-    req.body.idPlayer2 === req.body.idPlayer4
+    req.body.idPlayer2 === req.body.idPlayer4 ||
+    req.body.idPlayer2 === req.body.idPlayer5
   ) {
     return res.status(400).send("ID Player 2 sudah terdaftar");
   }
   if (
     req.body.idPlayer3 === req.body.idPlayer ||
     req.body.idPlayer3 === req.body.idPlayer2 ||
-    req.body.idPlayer3 === req.body.idPlayer4
+    req.body.idPlayer3 === req.body.idPlayer4 ||
+    req.body.idPlayer3 === req.body.idPlayer5
   ) {
     return res.status(400).send("ID Player 3 sudah terdaftar");
   }
   if (
     req.body.idPlayer4 === req.body.idPlayer ||
     req.body.idPlayer4 === req.body.idPlayer2 ||
-    req.body.idPlayer4 === req.body.idPlayer3
+    req.body.idPlayer4 === req.body.idPlayer3 ||
+    req.body.idPlayer4 === req.body.idPlayer5
   ) {
     return res.status(400).send("ID Player 4 sudah terdaftar");
+  }
+  if (
+    req.body.idPlayer5 === req.body.idPlayer ||
+    req.body.idPlayer5 === req.body.idPlayer2 ||
+    req.body.idPlayer5 === req.body.idPlayer3 ||
+    req.body.idPlayer5 === req.body.idPlayer4
+  ) {
+    return res.status(400).send("ID Player 5 sudah terdaftar");
   }
 
   //create a new participant
@@ -87,10 +105,12 @@ const createParticipant = async (req, res) => {
     idPlayer2: req.body.idPlayer2,
     idPlayer3: req.body.idPlayer3,
     idPlayer4: req.body.idPlayer4,
+    idPlayer5: req.body.idPlayer5,
     playerName: req.body.playerName,
     playerName2: req.body.playerName2,
     playerName3: req.body.playerName3,
     playerName4: req.body.playerName4,
+    playerName5: req.body.playerName5,
     handphoneNumber: req.body.handphoneNumber,
     email: req.body.email,
   });
@@ -98,7 +118,7 @@ const createParticipant = async (req, res) => {
   try {
     const savedParticipant = await participant.save();
     sendEmail(req.body.email, req.body.teamName);
-    res.redirect("/redirect");
+    res.redirect("http://localhost:3000/registration/email-confirmation");
   } catch (err) {
     res.status(400).send(err);
   }
@@ -131,24 +151,28 @@ const updateParticipant = async (req, res) => {
           Number(req.body.playerKill) +
           Number(req.body.player2Kill) +
           Number(req.body.player3Kill) +
-          Number(req.body.player4Kill),
+          Number(req.body.player4Kill) +
+          Number(req.body.player5Kill),
         teamPlcPoint: req.body.teamPlcPoint,
         playerKill: req.body.playerKill,
         player2Kill: req.body.player2Kill,
         player3Kill: req.body.player3Kill,
         player4Kill: req.body.player4Kill,
+        player5Kill: req.body.player5Kill,
         inGroup: req.body.inGroup,
         qualifyToGrandFinal: req.body.qualifyToGrandFinal,
         GFteamKillPoint:
           Number(req.body.GFplayerKill) +
           Number(req.body.GFplayer2Kill) +
           Number(req.body.GFplayer3Kill) +
-          Number(req.body.GFplayer4Kill),
+          Number(req.body.GFplayer4Kill) +
+          Number(req.body.GFplayer5Kill),
         GFteamPlcPoint: req.body.GFteamPlcPoint,
         GFplayerKill: req.body.GFplayerKill,
         GFplayer2Kill: req.body.GFplayer2Kill,
         GFplayer3Kill: req.body.GFplayer3Kill,
         GFplayer4Kill: req.body.GFplayer4Kill,
+        GFplayer5Kill: req.body.GFplayer5Kill,
         tournamentFirstWinner: req.body.tournamentFirstWinner,
         tournamentSecondWinner: req.body.tournamentSecondWinner,
         tournamentThirdWinner: req.body.tournamentThirdWinner,

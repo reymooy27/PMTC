@@ -3,10 +3,12 @@ const label1 = document.querySelector('label[for="playerKill"]');
 const label2 = document.querySelector('label[for="player2Kill"]');
 const label3 = document.querySelector('label[for="player3Kill"]');
 const label4 = document.querySelector('label[for="player4Kill"]');
+const label5 = document.querySelector('label[for="player5Kill"]');
 const playerKill = document.getElementById("playerKill");
 const player2Kill = document.getElementById("player2Kill");
 const player3Kill = document.getElementById("player3Kill");
 const player4Kill = document.getElementById("player4Kill");
+const player5Kill = document.getElementById("player5Kill");
 const form = document.getElementById("form");
 const updtBttn = document.getElementById("update");
 const deltBttn = document.getElementById("delete");
@@ -20,10 +22,12 @@ const GFplayerKill = document.getElementById("GFplayerKill");
 const GFplayer2Kill = document.getElementById("GFplayer2Kill");
 const GFplayer3Kill = document.getElementById("GFplayer3Kill");
 const GFplayer4Kill = document.getElementById("GFplayer4Kill");
+const GFplayer5Kill = document.getElementById("GFplayer5Kill");
 const GFlabel1 = document.querySelector('label[for="GFplayerKill"]');
 const GFlabel2 = document.querySelector('label[for="GFplayer2Kill"]');
 const GFlabel3 = document.querySelector('label[for="GFplayer3Kill"]');
 const GFlabel4 = document.querySelector('label[for="GFplayer4Kill"]');
+const GFlabel5 = document.querySelector('label[for="GFplayer5Kill"]');
 const GFForm = document.getElementById("gf");
 const tournamentName = document.getElementById("tournamentName");
 const tournamentFirstPrize = document.getElementById("tournamentFirstPrize");
@@ -169,24 +173,28 @@ async function updateParticipant(tim) {
         Number(playerKill.value) +
         Number(player2Kill.value) +
         Number(player3Kill.value) +
-        Number(player4Kill.value),
+        Number(player4Kill.value) +
+        Number(player5Kill.value),
       teamPlcPoint: teamPlcPoint.value,
       playerKill: playerKill.value,
       player2Kill: player2Kill.value,
       player3Kill: player3Kill.value,
       player4Kill: player4Kill.value,
+      player5Kill: player5Kill.value,
       inGroup: inGroup.value,
       qualifyToGrandFinal: qualifyToGrandFinal.checked,
       GFteamKillPoint:
         Number(GFplayerKill.value) +
         Number(GFplayer2Kill.value) +
         Number(GFplayer3Kill.value) +
-        Number(GFplayer4Kill.value),
+        Number(GFplayer4Kill.value) +
+        Number(GFplayer5Kill.value),
       GFteamPlcPoint: GFteamPlcPoint.value,
       GFplayerKill: GFplayerKill.value,
       GFplayer2Kill: GFplayer2Kill.value,
       GFplayer3Kill: GFplayer3Kill.value,
       GFplayer4Kill: GFplayer4Kill.value,
+      GFplayer5Kill: GFplayer5Kill.value,
       tournamentFirstWinner: tournamentFirstWinner.checked,
       tournamentSecondWinner: tournamentSecondWinner.checked,
       tournamentThirdWinner: tournamentThirdWinner.checked,
@@ -222,20 +230,24 @@ select.addEventListener(
         label2.innerHTML = info.playerName2;
         label3.innerHTML = info.playerName3;
         label4.innerHTML = info.playerName4;
+        label5.innerHTML = info.playerName5;
         playerKill.value = info.playerKill;
         player2Kill.value = info.player2Kill;
         player3Kill.value = info.player3Kill;
         player4Kill.value = info.player4Kill;
+        player5Kill.value = info.player5Kill;
         inGroup.value = info.inGroup;
         GFteamPlcPoint.value = info.GFteamPlcPoint;
         GFlabel1.innerHTML = info.playerName;
         GFlabel2.innerHTML = info.playerName2;
         GFlabel3.innerHTML = info.playerName3;
         GFlabel4.innerHTML = info.playerName4;
+        GFlabel5.innerHTML = info.playerName5;
         GFplayerKill.value = info.GFplayerKill;
         GFplayer2Kill.value = info.GFplayer2Kill;
         GFplayer3Kill.value = info.GFplayer3Kill;
         GFplayer4Kill.value = info.GFplayer4Kill;
+        GFplayer5Kill.value = info.GFplayer5Kill;
         if (info.confirmed === true) {
           confirmed.checked = true;
         }

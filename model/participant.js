@@ -101,6 +101,23 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  idPlayer5: {
+    type: Number,
+    required: false,
+  },
+  playerName5: {
+    type: String,
+    required: false,
+    maxlength: 15,
+  },
+  player5Kill: {
+    type: Number,
+    default: 0,
+  },
+  GFplayer5Kill: {
+    type: Number,
+    default: 0,
+  },
 
   handphoneNumber: {
     type: Number,
