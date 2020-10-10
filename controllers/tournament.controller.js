@@ -9,8 +9,6 @@ const createTournament = async (req, res) => {
     tournamentFee: req.body.tournamentFee,
     registrationStart: req.body.registrationStart,
     startDate: req.body.startDate,
-    qualifierDay1: req.body.qualifierDay1,
-    qualifierDay2: req.body.qualifierDay2,
     grandFinalDate: req.body.grandFinalDate,
   });
 
@@ -33,8 +31,6 @@ const updateTournament = async (req, res) => {
         tournamentFee: req.body.tournamentFee,
         registrationStart: req.body.registrationStart,
         startDate: req.body.startDate,
-        qualifierDay1: req.body.qualifierDay1,
-        qualifierDay2: req.body.qualifierDay2,
         grandFinalDate: req.body.grandFinalDate,
         showGroupStandings: req.body.showGroupStandings,
         showGrandFinal: req.body.showGrandFinal,

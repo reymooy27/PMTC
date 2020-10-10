@@ -153,6 +153,10 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  inTournament:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tournament'
+  }
 });
 
 module.exports = mongoose.model("Participant", userSchema);

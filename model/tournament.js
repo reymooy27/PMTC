@@ -23,12 +23,6 @@ const tournamentSchema = new mongoose.Schema({
   startDate: {
     type: String,
   },
-  qualifierDay1: {
-    type: String,
-  },
-  qualifierDay2: {
-    type: String,
-  },
   grandFinalDate: {
     type: String,
   },
@@ -48,6 +42,10 @@ const tournamentSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  teams:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Participant'
+  }]
 });
 
 module.exports = mongoose.model("Tournament", tournamentSchema);
