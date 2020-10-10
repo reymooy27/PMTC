@@ -118,7 +118,7 @@ const createParticipant = async (req, res) => {
   try {
     const savedParticipant = await participant.save();
     sendEmail(req.body.email, req.body.teamName);
-    res.redirect(" https://pubgm-terminator-challenge.web.app/registration/email-confirmation");
+    res.redirect("https://pubgm-terminator-challenge.web.app/registration/email-confirmation");
   } catch (err) {
     res.status(400).send(err);
   }
