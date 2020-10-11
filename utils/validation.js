@@ -11,12 +11,12 @@ const registerValidation = (data) => {
     idPlayer2: Joi.number().integer().required(),
     idPlayer3: Joi.number().integer().required(),
     idPlayer4: Joi.number().integer().required(),
-    idPlayer5: Joi.number().integer().optional().allow(""),
+    idPlayer5: Joi.number().integer().optional().allow(''),
     playerName: Joi.string().max(15).required(),
     playerName2: Joi.string().max(15).required(),
     playerName3: Joi.string().max(15).required(),
     playerName4: Joi.string().max(15).required(),
-    playerName5: Joi.string().max(15).optional().allow(""),
+    playerName5: Joi.string().max(15).optional().allow(''),
     handphoneNumber: Joi.number().integer().required(),
     email: Joi.string()
       .email({

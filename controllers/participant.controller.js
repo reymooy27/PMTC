@@ -37,12 +37,6 @@ const createParticipant = async (req, res) => {
   if (idPlayerExist4)
     return res.status(400).send("ID Player 4 sudah terdaftar");
 
-  const idPlayerExist5 = await Participant.findOne({
-    idPlayer4: req.body.idPlayer5,
-  });
-  if (idPlayerExist5)
-    return res.status(400).send("ID Player 5 sudah terdaftar");
-
   const handphoneNumberExist = await Participant.findOne({
     handphoneNumber: req.body.handphoneNumber,
   });

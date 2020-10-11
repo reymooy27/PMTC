@@ -109,6 +109,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: false,
     maxlength: 15,
+
   },
   player5Kill: {
     type: Number,
