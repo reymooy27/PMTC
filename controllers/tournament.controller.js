@@ -1,15 +1,23 @@
 const Tournament = require("../model/tournament");
 
 const createTournament = async (req, res) => {
+  const {tournamentName,
+tournamentFirstPrize,
+tournamentSecondPrize,
+tournamentThirdPrize,
+tournamentFee,
+registrationStart,
+startDate,
+grandFinalDate} = req.body
   const tournament = new Tournament({
-    tournamentName: req.body.tournamentName,
-    tournamentFirstPrize: req.body.tournamentFirstPrize,
-    tournamentSecondPrize: req.body.tournamentSecondPrize,
-    tournamentThirdPrize: req.body.tournamentThirdPrize,
-    tournamentFee: req.body.tournamentFee,
-    registrationStart: req.body.registrationStart,
-    startDate: req.body.startDate,
-    grandFinalDate: req.body.grandFinalDate,
+    tournamentName,
+    tournamentFirstPrize,
+    tournamentSecondPrize,
+    tournamentThirdPrize,
+    tournamentFee,
+    registrationStart,
+    startDate,
+    grandFinalDate,
   });
 
   try {
@@ -20,22 +28,35 @@ const createTournament = async (req, res) => {
 };
 
 const updateTournament = async (req, res) => {
+  const {tournamentName,
+tournamentFirstPrize,
+tournamentSecondPrize,
+tournamentThirdPrize,
+tournamentFee,
+registrationStart,
+startDate,
+grandFinalDate,
+showGroupStandings,
+showGrandFinal,
+showKillStanding,
+registrationClosed} = req.body
+
   await Tournament.findByIdAndUpdate(
     { _id: "5ef4596040d71032dc8bc81d" },
     {
       $set: {
-        tournamentName: req.body.tournamentName,
-        tournamentFirstPrize: req.body.tournamentFirstPrize,
-        tournamentSecondPrize: req.body.tournamentSecondPrize,
-        tournamentThirdPrize: req.body.tournamentThirdPrize,
-        tournamentFee: req.body.tournamentFee,
-        registrationStart: req.body.registrationStart,
-        startDate: req.body.startDate,
-        grandFinalDate: req.body.grandFinalDate,
-        showGroupStandings: req.body.showGroupStandings,
-        showGrandFinal: req.body.showGrandFinal,
-        showKillStanding: req.body.showKillStanding,
-        registrationClosed: req.body.registrationClosed,
+        tournamentName,
+        tournamentFirstPrize,
+        tournamentSecondPrize,
+        tournamentThirdPrize,
+        tournamentFee,
+        registrationStart,
+        startDate,
+        grandFinalDate,
+        showGroupStandings,
+        showGrandFinal,
+        showKillStanding,
+        registrationClosed,
       },
     },
     { runValidators: true },
@@ -49,7 +70,14 @@ const updateTournament = async (req, res) => {
   );
 };
 
+const getAllTournament = async (req, res) => {
+  await Tournament.find().then((tourney) => {
+    res.json(tourney);
+  });
+}
+
 module.exports = {
   createTournament,
   updateTournament,
+  getAllTournament
 };

@@ -2,89 +2,103 @@ const Participant = require("../model/participant");
 const cloudinary = require("cloudinary");
 const { registerValidation } = require("../utils/validation");
 const sendEmail = require("../utils/sendEmail");
+const Tournament = require("../model/tournament");
 
 const createParticipant = async (req, res) => {
+  const {teamName,singkatanTeam,
+idPlayer,
+idPlayer2,
+idPlayer3,
+idPlayer4,
+idPlayer5,
+playerName,
+playerName2,
+playerName3,
+playerName4,
+playerName5,
+handphoneNumber,
+email } = req.body
   //validation
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   //check if the prticipant already exist
   const teamNameExist = await Participant.findOne({
-    teamName: req.body.teamName,
+    teamName,
   });
   if (teamNameExist) return res.status(400).send("Nama Tim sudah terdaftar");
 
   const idPlayerExist = await Participant.findOne({
-    idPlayer: req.body.idPlayer,
+    idPlayer,
   });
   if (idPlayerExist) return res.status(400).send("ID Player 1 sudah terdaftar");
 
   const idPlayerExist2 = await Participant.findOne({
-    idPlayer2: req.body.idPlayer2,
+    idPlayer2,
   });
   if (idPlayerExist2)
     return res.status(400).send("ID Player 2 sudah terdaftar");
 
   const idPlayerExist3 = await Participant.findOne({
-    idPlayer3: req.body.idPlayer3,
+    idPlayer3,
   });
   if (idPlayerExist3)
     return res.status(400).send("ID Player 3 sudah terdaftar");
 
   const idPlayerExist4 = await Participant.findOne({
-    idPlayer4: req.body.idPlayer4,
+    idPlayer4,
   });
   if (idPlayerExist4)
     return res.status(400).send("ID Player 4 sudah terdaftar");
 
   const handphoneNumberExist = await Participant.findOne({
-    handphoneNumber: req.body.handphoneNumber,
+    handphoneNumber,
   });
   if (handphoneNumberExist)
     return res.status(400).send("Nomor HP sudah terdaftar");
 
   const emailExist = await Participant.findOne({
-    email: req.body.email,
+    email,
   });
   if (emailExist) return res.status(400).send("Email sudah terdaftar");
 
   if (
-    req.body.idPlayer === req.body.idPlayer2 ||
-    req.body.idPlayer === req.body.idPlayer3 ||
-    req.body.idPlayer === req.body.idPlayer4 ||
-    req.body.idPlayer === req.body.idPlayer5
+    idPlayer === idPlayer2 ||
+    idPlayer === idPlayer3 ||
+    idPlayer === idPlayer4 ||
+    idPlayer === idPlayer5
   ) {
     return res.status(400).send("ID Player 1 sudah terdaftar");
   }
   if (
-    req.body.idPlayer2 === req.body.idPlayer ||
-    req.body.idPlayer2 === req.body.idPlayer3 ||
-    req.body.idPlayer2 === req.body.idPlayer4 ||
-    req.body.idPlayer2 === req.body.idPlayer5
+    idPlayer2 === idPlayer ||
+    idPlayer2 === idPlayer3 ||
+    idPlayer2 === idPlayer4 ||
+    idPlayer2 === idPlayer5
   ) {
     return res.status(400).send("ID Player 2 sudah terdaftar");
   }
   if (
-    req.body.idPlayer3 === req.body.idPlayer ||
-    req.body.idPlayer3 === req.body.idPlayer2 ||
-    req.body.idPlayer3 === req.body.idPlayer4 ||
-    req.body.idPlayer3 === req.body.idPlayer5
+    idPlayer3 === idPlayer ||
+    idPlayer3 === idPlayer2 ||
+    idPlayer3 === idPlayer4 ||
+    idPlayer3 === idPlayer5
   ) {
     return res.status(400).send("ID Player 3 sudah terdaftar");
   }
   if (
-    req.body.idPlayer4 === req.body.idPlayer ||
-    req.body.idPlayer4 === req.body.idPlayer2 ||
-    req.body.idPlayer4 === req.body.idPlayer3 ||
-    req.body.idPlayer4 === req.body.idPlayer5
+    idPlayer4 === idPlayer ||
+    idPlayer4 === idPlayer2 ||
+    idPlayer4 === idPlayer3 ||
+    idPlayer4 === idPlayer5
   ) {
     return res.status(400).send("ID Player 4 sudah terdaftar");
   }
   if (
-    req.body.idPlayer5 === req.body.idPlayer ||
-    req.body.idPlayer5 === req.body.idPlayer2 ||
-    req.body.idPlayer5 === req.body.idPlayer3 ||
-    req.body.idPlayer5 === req.body.idPlayer4
+    idPlayer5 === idPlayer ||
+    idPlayer5 === idPlayer2 ||
+    idPlayer5 === idPlayer3 ||
+    idPlayer5 === idPlayer4
   ) {
     return res.status(400).send("ID Player 5 sudah terdaftar");
   }
@@ -92,26 +106,30 @@ const createParticipant = async (req, res) => {
   //create a new participant
   const logoPath = req.file != null ? req.file.path : null;
   const participant = new Participant({
-    teamName: req.body.teamName,
-    singkatanTeam: req.body.singkatanTeam.toUpperCase(),
+    teamName,
+    singkatanTeam: singkatanTeam.toUpperCase(),
     logo: logoPath,
-    idPlayer: req.body.idPlayer,
-    idPlayer2: req.body.idPlayer2,
-    idPlayer3: req.body.idPlayer3,
-    idPlayer4: req.body.idPlayer4,
-    idPlayer5: req.body.idPlayer5,
-    playerName: req.body.playerName,
-    playerName2: req.body.playerName2,
-    playerName3: req.body.playerName3,
-    playerName4: req.body.playerName4,
-    playerName5: req.body.playerName5,
-    handphoneNumber: req.body.handphoneNumber,
-    email: req.body.email,
+    idPlayer,
+    idPlayer2,
+    idPlayer3,
+    idPlayer4,
+    idPlayer5,
+    playerName,
+    playerName2,
+    playerName3,
+    playerName4,
+    playerName5,
+    handphoneNumber,
+    email,
+    inTournament: '5ef4596040d71032dc8bc81d'
   });
 
   try {
     const savedParticipant = await participant.save();
-    sendEmail(req.body.email, req.body.teamName);
+    const teamByTournament = await Tournament.findById('5ef4596040d71032dc8bc81d')
+    teamByTournament.teams.push(participant)
+    await teamByTournament.save()
+    sendEmail(email, teamName);
     res.redirect("https://pubgm-terminator-challenge.web.app/registration/email-confirmation");
   } catch (err) {
     res.status(400).send(err);
@@ -137,40 +155,55 @@ const deleteParticipant = async (req, res, next) => {
 };
 
 const updateParticipant = async (req, res) => {
+  const { 
+playerKill,
+player2Kill,
+player3Kill,
+player4Kill,
+player5Kill,teamPlcPoint,inGroup,qualifyToGrandFinal,GFplayerKill,
+GFplayer2Kill,
+GFplayer3Kill,
+GFplayer4Kill,
+GFplayer5Kill,
+GFteamPlcPoint,tournamentFirstWinner,
+tournamentSecondWinner,
+tournamentThirdWinner,
+confirmed} = req.body
+
   await Participant.findByIdAndUpdate(
     { _id: req.params.id },
     {
       $set: {
         teamKillPoint:
-          Number(req.body.playerKill) +
-          Number(req.body.player2Kill) +
-          Number(req.body.player3Kill) +
-          Number(req.body.player4Kill) +
-          Number(req.body.player5Kill),
-        teamPlcPoint: req.body.teamPlcPoint,
-        playerKill: req.body.playerKill,
-        player2Kill: req.body.player2Kill,
-        player3Kill: req.body.player3Kill,
-        player4Kill: req.body.player4Kill,
-        player5Kill: req.body.player5Kill,
-        inGroup: req.body.inGroup,
-        qualifyToGrandFinal: req.body.qualifyToGrandFinal,
+          Number(playerKill) +
+          Number(player2Kill) +
+          Number(player3Kill) +
+          Number(player4Kill) +
+          Number(player5Kill),
+        teamPlcPoint,
+        playerKill,
+        player2Kill,
+        player3Kill,
+        player4Kill,
+        player5Kill,
+        inGroup,
+        qualifyToGrandFinal,
         GFteamKillPoint:
-          Number(req.body.GFplayerKill) +
-          Number(req.body.GFplayer2Kill) +
-          Number(req.body.GFplayer3Kill) +
-          Number(req.body.GFplayer4Kill) +
-          Number(req.body.GFplayer5Kill),
-        GFteamPlcPoint: req.body.GFteamPlcPoint,
-        GFplayerKill: req.body.GFplayerKill,
-        GFplayer2Kill: req.body.GFplayer2Kill,
-        GFplayer3Kill: req.body.GFplayer3Kill,
-        GFplayer4Kill: req.body.GFplayer4Kill,
-        GFplayer5Kill: req.body.GFplayer5Kill,
-        tournamentFirstWinner: req.body.tournamentFirstWinner,
-        tournamentSecondWinner: req.body.tournamentSecondWinner,
-        tournamentThirdWinner: req.body.tournamentThirdWinner,
-        confirmed: req.body.confirmed,
+          Number(GFplayerKill) +
+          Number(GFplayer2Kill) +
+          Number(GFplayer3Kill) +
+          Number(GFplayer4Kill) +
+          Number(GFplayer5Kill),
+        GFteamPlcPoint,
+        GFplayerKill,
+        GFplayer2Kill,
+        GFplayer3Kill,
+        GFplayer4Kill,
+        GFplayer5Kill,
+        tournamentFirstWinner,
+        tournamentSecondWinner,
+        tournamentThirdWinner,
+        confirmed,
       },
     },
     { runValidators: true },
@@ -184,8 +217,25 @@ const updateParticipant = async (req, res) => {
   );
 };
 
+const getAllTeam = async (req, res) => {
+  await Participant.find().then((participants) => {
+    res.json(participants);
+  });
+}
+
+const getTeamByID = async (req,res)=>{
+   const participant = await Participant.findById({ _id: req.params.id });
+  if (participant) {
+    res.json(participant);
+  }else{
+    res.status(404).json('Team yang anda cari tidak ada')
+  }
+}
+
 module.exports = {
   createParticipant,
   updateParticipant,
   deleteParticipant,
+  getAllTeam,
+  getTeamByID
 };

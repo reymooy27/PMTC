@@ -1,18 +1,12 @@
 const router = require("express").Router();
-const Tournament = require("../model/tournament");
 const tournamentCtrl = require("../controllers/tournament.controller");
 
-// api
-router.get("/api/v1/tourney", async (req, res) => {
-  await Tournament.find().then((tourney) => {
-    res.json(tourney);
-  });
-});
-
-// create tournament
+router.post("/api/v1/tournaments", tournamentCtrl.getAllTournament);
+router.post('/tournament/:id', async (req,res)=>{
+  const tournament = await Tournament.findById({ _id: req.params.id }).populate('teams')
+  res.json(tournament)
+})
 router.post("/tournament", tournamentCtrl.createTournament);
-
-// update tournament
 router.put("/tournament", tournamentCtrl.updateTournament);
 
 module.exports = router;
