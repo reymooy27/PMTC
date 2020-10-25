@@ -1,9 +1,9 @@
-const Participant = require("../model/participant");
+const Team = require("../model/team");
 const cloudinary = require("cloudinary");
 
 module.exports = async (req, res, next) => {
-  const participant = await Participant.find({ confirmed: false });
-  participant.forEach((p) => {
+  const team = await Team.find({ confirmed: false });
+  team.forEach((p) => {
     if (Date.now() - p.registerDate > 43200000) {
       cloudinary.v2.uploader.destroy(`logo/${p.teamName}`, (error, result) => {
         console.log(result, error);

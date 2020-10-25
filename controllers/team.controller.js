@@ -1,10 +1,10 @@
-const Participant = require("../model/participant");
+const Team = require("../model/team");
 const cloudinary = require("cloudinary");
 const { registerValidation } = require("../utils/validation");
 const sendEmail = require("../utils/sendEmail");
 const Tournament = require("../model/tournament");
 
-const createParticipant = async (req, res) => {
+const createTeam = async (req, res) => {
   const {teamName,singkatanTeam,
 idPlayer,
 idPlayer2,
@@ -23,41 +23,41 @@ email } = req.body
   if (error) return res.status(400).send(error.details[0].message);
 
   //check if the prticipant already exist
-  const teamNameExist = await Participant.findOne({
+  const teamNameExist = await Team.findOne({
     teamName,
   });
   if (teamNameExist) return res.status(400).send("Nama Tim sudah terdaftar");
 
-  const idPlayerExist = await Participant.findOne({
+  const idPlayerExist = await Team.findOne({
     idPlayer,
   });
   if (idPlayerExist) return res.status(400).send("ID Player 1 sudah terdaftar");
 
-  const idPlayerExist2 = await Participant.findOne({
+  const idPlayerExist2 = await Team.findOne({
     idPlayer2,
   });
   if (idPlayerExist2)
     return res.status(400).send("ID Player 2 sudah terdaftar");
 
-  const idPlayerExist3 = await Participant.findOne({
+  const idPlayerExist3 = await Team.findOne({
     idPlayer3,
   });
   if (idPlayerExist3)
     return res.status(400).send("ID Player 3 sudah terdaftar");
 
-  const idPlayerExist4 = await Participant.findOne({
+  const idPlayerExist4 = await Team.findOne({
     idPlayer4,
   });
   if (idPlayerExist4)
     return res.status(400).send("ID Player 4 sudah terdaftar");
 
-  const handphoneNumberExist = await Participant.findOne({
+  const handphoneNumberExist = await Team.findOne({
     handphoneNumber,
   });
   if (handphoneNumberExist)
     return res.status(400).send("Nomor HP sudah terdaftar");
 
-  const emailExist = await Participant.findOne({
+  const emailExist = await Team.findOne({
     email,
   });
   if (emailExist) return res.status(400).send("Email sudah terdaftar");
@@ -103,9 +103,9 @@ email } = req.body
     return res.status(400).send("ID Player 5 sudah terdaftar");
   }
 
-  //create a new participant
+  //create a new Team
   const logoPath = req.file != null ? req.file.path : null;
-  const participant = new Participant({
+  const team = new Team({
     teamName,
     singkatanTeam: singkatanTeam.toUpperCase(),
     logo: logoPath,
@@ -125,9 +125,9 @@ email } = req.body
   });
 
   try {
-    const savedParticipant = await participant.save();
+    const savedTeam = await team.save();
     const teamByTournament = await Tournament.findById('5ef4596040d71032dc8bc81d')
-    teamByTournament.teams.push(participant)
+    teamByTournament.teams.push(team)
     await teamByTournament.save()
     sendEmail(email, teamName);
     res.redirect("https://pubgm-terminator-challenge.web.app/registration/email-confirmation");
@@ -136,25 +136,30 @@ email } = req.body
   }
 };
 
-const deleteParticipant = async (req, res, next) => {
-  const participant = await Participant.findByIdAndDelete({
+const deleteTeam = async (req, res, next) => {
+  try {
+    const team = await Team.findByIdAndDelete({
     _id: req.params.id,
   });
-  if (participant) {
+  if (team) {
     cloudinary.v2.uploader.destroy(
-      `logo/${participant.teamName}`,
+      `logo/${team.teamName}`,
       (error, result) => {
-        console.log(result, error);
+       if(error){
+         throw error
+       }
       }
     );
+    await Tournament.updateOne({'teams': req.params.id},{'$pull':{'teams':req.params.id}})
     res.status(200).json("Berhasil dihapus");
     next();
-  } else {
+  }
+  } catch (error) {
     res.status(500).json("Tidak dapat dihapus");
   }
 };
 
-const updateParticipant = async (req, res) => {
+const updateTeam = async (req, res) => {
   const { 
 playerKill,
 player2Kill,
@@ -170,7 +175,8 @@ tournamentSecondWinner,
 tournamentThirdWinner,
 confirmed} = req.body
 
-  await Participant.findByIdAndUpdate(
+try{
+  await Team.findByIdAndUpdate(
     { _id: req.params.id },
     {
       $set: {
@@ -215,27 +221,36 @@ confirmed} = req.body
       }
     }
   );
+}
+catch(err){
+  res.status(500).json("Tidak dapat update");
+}
 };
 
 const getAllTeam = async (req, res) => {
-  await Participant.find().then((participants) => {
-    res.json(participants);
-  });
+  try {
+    const teams =  await Team.find()
+      res.json(teams);
+  } catch (error) {
+    res.status(404).json('Team yang anda cari tidak ada')
+  }
+  
 }
 
 const getTeamByID = async (req,res)=>{
-   const participant = await Participant.findById({ _id: req.params.id });
-  if (participant) {
-    res.json(participant);
-  }else{
+  try {
+   const team = await Team.findById({ _id: req.params.id });
+    res.json(team);
+  } catch (error) {
     res.status(404).json('Team yang anda cari tidak ada')
+    
   }
 }
 
 module.exports = {
-  createParticipant,
-  updateParticipant,
-  deleteParticipant,
+  createTeam,
+  updateTeam,
+  deleteTeam,
   getAllTeam,
-  getTeamByID
+  getTeamByID,
 };

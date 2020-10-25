@@ -4,22 +4,23 @@ const mongoose = require("mongoose");
 const compression = require("compression");
 const helmet = require("helmet");
 const cors = require("cors");
+const cookieParser = require('cookie-parser')
 const route = require("./routes/routes");
 const tournamentRoutes = require("./routes/tournament");
 const userRoutes = require("./routes/user");
-const participantRoutes = require("./routes/participant");
-const deleteUnconfirmedParticipant = require("./utils/deleteUnconfirmedParticipant");
+const teamRoutes = require("./routes/team");
+const deleteUnconfirmedTeam = require("./utils/deleteUnconfirmedTeam");
 const app = express();
-
-//config
-dotenv.config();
-
-app.use(compression());
-app.use(helmet());
-app.use(cors());
-app.use(deleteUnconfirmedParticipant);
-
+const port = process.env.PORT || 8000;
 const db_uri = process.env.DB_CONNECT;
+
+dotenv.config();
+app.use(compression());
+app.use(cookieParser())
+app.use(helmet());
+app.use(cors({credentials: true, origin: 'https://pubgm-terminator-challenge.web.app'}));
+app.use(deleteUnconfirmedTeam);
+
 mongoose.connect(
   db_uri,
   {
@@ -29,14 +30,11 @@ mongoose.connect(
   },
   (err) => {
     if (err) {
-      console.log("DB Error");
-    } else {
-      console.log("Database ON");
+      throw err
     }
   }
 );
 
-// middleware
 app.use(
   express.json({
     limit: "2mb",
@@ -52,13 +50,9 @@ app.use(express.static("public"));
 
 app.set("view engine", "ejs");
 
-// route
 app.use(route);
 app.use(tournamentRoutes);
 app.use(userRoutes);
-app.use(participantRoutes);
+app.use(teamRoutes);
 
-//port
-const port = process.env.PORT || 8000;
-
-app.listen(port, () => console.log("Server ON"));
+app.listen(port, ()=> console.log('server on'));

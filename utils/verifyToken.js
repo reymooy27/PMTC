@@ -1,22 +1,17 @@
+
 const jwt = require("jsonwebtoken");
 
-module.exports = async (req, res, next) => {
-  let bearerToken = req.headers["authorization"];
-
-  if (!bearerToken) return res.status(401).json({ msg: "Tidak Dapat Diakses" });
-
+module.exports = (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token)
+    return res.status(401).json("Access denied...No token provided...");
   try {
-    if (typeof bearerToken !== "undefined") {
-      const bearer = bearerToken.split(" ");
-      const token = bearer[1];
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+    req.user = decoded;
+    next();
+  } catch (er) {
 
-      const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-      req.user = verified;
-      await next();
-    } else {
-      res.status(500).json({ msg: "Invalid Token" });
-    }
-  } catch (err) {
-    res.status(500).json({ msg: "Invalid Token" });
+    res.clearCookie("token");
+    return res.status(400).json(er.message);
   }
 };

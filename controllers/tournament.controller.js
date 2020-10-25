@@ -23,7 +23,7 @@ grandFinalDate} = req.body
   try {
     const savedTournament = await tournament.save();
   } catch (error) {
-    console.log(error);
+    res.status(400).json('Tidak bisa membuat turnamen')
   }
 };
 
@@ -71,13 +71,27 @@ registrationClosed} = req.body
 };
 
 const getAllTournament = async (req, res) => {
-  await Tournament.find().then((tourney) => {
-    res.json(tourney);
-  });
+  try {
+    const tournaments = await Tournament.find()
+    res.json(tournaments)
+  } catch (error) {
+    res.status(404).json('Tournament yang anda cari tidak ada')
+  }
+ 
+}
+
+const getTournamentByID = async (req,res)=>{
+  try {
+    const tournament = await Tournament.findById({ _id: req.params.id }).populate('teams').exec()
+    res.json(tournament)
+  } catch (error) {
+    res.status(404).json('Tournament yang anda cari tidak ada')
+  }
 }
 
 module.exports = {
   createTournament,
   updateTournament,
-  getAllTournament
+  getAllTournament,
+  getTournamentByID
 };
