@@ -130,7 +130,7 @@ email } = req.body
     teamByTournament.teams.push(team)
     await teamByTournament.save()
     sendEmail(email, teamName);
-    res.redirect("https://pubgm-terminator-challenge.web.app/registration/email-confirmation");
+    res.redirect("http://localhost:3000/registration/email-confirmation");
   } catch (err) {
     res.status(400).send(err);
   }
@@ -150,7 +150,7 @@ const deleteTeam = async (req, res, next) => {
        }
       }
     );
-    await Tournament.updateOne({'teams': req.params.id},{'$pull':{'teams':req.params.id}})
+    await Tournament.updateOne({'teams': team._id},{'$pull':{'teams':team._id}})
     res.status(200).json("Berhasil dihapus");
     next();
   }

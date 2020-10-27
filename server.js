@@ -18,7 +18,7 @@ dotenv.config();
 app.use(compression());
 app.use(cookieParser())
 app.use(helmet());
-app.use(cors({credentials: true, origin: 'https://pubgm-terminator-challenge.web.app'}));
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(deleteUnconfirmedTeam);
 
 mongoose.connect(

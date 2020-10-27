@@ -1,27 +1,21 @@
 const Tournament = require("../model/tournament");
 
 const createTournament = async (req, res) => {
-  const {tournamentName,
-tournamentFirstPrize,
-tournamentSecondPrize,
-tournamentThirdPrize,
-tournamentFee,
-registrationStart,
-startDate,
-grandFinalDate} = req.body
+
   const tournament = new Tournament({
-    tournamentName,
-    tournamentFirstPrize,
-    tournamentSecondPrize,
-    tournamentThirdPrize,
-    tournamentFee,
-    registrationStart,
-    startDate,
-    grandFinalDate,
+    tournamentName: req.body.tournamentName,
+    tournamentFirstPrize: req.body.tournamentFirstPrize,
+    tournamentSecondPrize: req.body.tournamentSecondPrize,
+    tournamentThirdPrize: req.body.tournamentThirdPrize,
+    tournamentFee: req.body.tournamentFee,
+    registrationStart: req.body.registrationStart,
+    startDate: req.body.startDate,
+    grandFinalDate: req.body.grandFinalDate,
   });
 
   try {
-    const savedTournament = await tournament.save();
+    await tournament.save();
+    res.status(200).json('Berhasil membuat turnamen')
   } catch (error) {
     res.status(400).json('Tidak bisa membuat turnamen')
   }
@@ -42,7 +36,7 @@ showKillStanding,
 registrationClosed} = req.body
 
   await Tournament.findByIdAndUpdate(
-    { _id: "5ef4596040d71032dc8bc81d" },
+    { _id: req.params.id },
     {
       $set: {
         tournamentName,
