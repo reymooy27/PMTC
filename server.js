@@ -48,8 +48,6 @@ app.use(
 );
 app.use(express.static("public"));
 
-app.set("view engine", "ejs");
-
 app.use(route);
 app.use(tournamentRoutes);
 app.use(userRoutes);

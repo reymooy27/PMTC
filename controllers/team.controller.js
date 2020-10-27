@@ -121,16 +121,16 @@ email } = req.body
     playerName5,
     handphoneNumber,
     email,
-    inTournament: '5ef4596040d71032dc8bc81d'
+    inTournament: req.params.id
   });
 
   try {
     const savedTeam = await team.save();
-    const teamByTournament = await Tournament.findById('5ef4596040d71032dc8bc81d')
+    const teamByTournament = await Tournament.findById(req.params.id)
     teamByTournament.teams.push(team)
     await teamByTournament.save()
     sendEmail(email, teamName);
-    res.redirect("http://localhost:3000/registration/email-confirmation");
+    res.redirect("http://localhost:3000/email-confirmation");
   } catch (err) {
     res.status(400).send(err);
   }
