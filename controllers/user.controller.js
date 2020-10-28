@@ -3,6 +3,8 @@ const Team = require("../model/team");
 const bcrypt = require("bcrypt");
 const { loginValidation, signupValidation } = require("../utils/validation");
 const jwt = require("jsonwebtoken");
+const cloudinary = require("cloudinary");
+const Tournament = require("../model/tournament");
 
 const signUp = async (req, res) => {
   const { error } = signupValidation(req.body);
@@ -118,7 +120,6 @@ email } = req.body
   playerName5,
   handphoneNumber,
   email,
-  inTournament: '5ef4596040d71032dc8bc81d'
 });
 
   try {
@@ -127,17 +128,41 @@ email } = req.body
       {_id: req.params.id},
       {
       $push: {myTeam: team},
-      },
-      (err,r)=>{
-        if(err){
-          res.status(400).json({msg: 'Tidak bisa membuat team'})
-        }else{
-          res.status(200).json({msg: 'Berhasil membuat team'})
-        }
-      })
-    
+      },{new: true, upsert:true })
+    res.status(200).json('Berhasil membuat team')
   } catch (error) {
-    res.status(400).json({msg: 'Tidak bisa membuat team'})
+    res.status(400).json('Tidak bisa membuat team')
   }
 }
-module.exports = {signUp, login,logout,getUserByID,checkAuthUser,createTeam}
+
+const deleteTeam = async (req,res)=>{
+  try {
+    const team = await Team.findByIdAndDelete({
+    _id: req.params.teamId,
+  });
+  if (team) {
+    cloudinary.v2.uploader.destroy(
+      `logo/${team.teamName}`,
+      (error, result) => {
+      if(error){
+        throw error
+      }
+      }
+    );
+    await User.updateOne({'myTeam' : team._id},{'$pull':{'myTeam':team._id}})
+    res.status(200).json('Berhasil menghapus team')
+  }
+  } catch (error) {
+    res.status(400).json('Tidak bisa menghapus team')
+  }
+}
+
+const joinTournament = async (req,res)=>{
+  try {
+    await Tournament.updateOne({_id: req.params.idTournament},{'$push':{'teams':req.params.teamId}})
+    res.status(200).json('Berhasil menambahkan ke turnamen')
+  } catch (error) {
+    res.status(400).json('Gagal menambahkan ke turnamen')
+  }
+}
+module.exports = {signUp, login,logout,getUserByID,checkAuthUser,createTeam,deleteTeam,joinTournament}

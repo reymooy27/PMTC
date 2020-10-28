@@ -10,12 +10,11 @@ module.exports = async (req, res, next) => {
       cloudinary.v2.uploader.destroy(`logo/${p.teamName}`, (error, result) => {
         console.log(result, error);
       });
-      await Tournament.updateOne({'teams': p._id},{'$pull':{'teams':p._id}})
-      res.status(200).json("Berhasil dihapus");
       p.deleteOne((err, prod) => {
         if (err) console.log(err);
         console.log(`${prod.teamName} dihapus`);
       });
+      await Tournament.updateOne({'teams': p._id},{'$pull':{'teams':p._id}})
     }
   });
   next();

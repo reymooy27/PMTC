@@ -26,17 +26,17 @@ const tournamentSchema = new mongoose.Schema({
 
   },
   registrationStart: {
-    type: String,
+    type: Date,
     required: true
 
   },
   startDate: {
-    type: String,
+    type: Date,
     required: true
 
   },
   grandFinalDate: {
-    type: String,
+    type: Date,
   },
   showGroupStandings: {
     type: Boolean,
