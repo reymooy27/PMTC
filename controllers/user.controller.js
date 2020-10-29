@@ -58,6 +58,7 @@ const login = async (req, res) => {
         expiresIn: "2 days",
       }
     );
+    // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses'});
     res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
   }
   } catch (error) {
@@ -67,7 +68,8 @@ const login = async (req, res) => {
 
 const logout = (req,res)=>{
   try {
-    res.clearCookie("token");
+    // res.clearCookie("token");
+    res.clearCookie("token",{ httpOnly: true, sameSite: 'none', secure: true   });
     res.status(200).json({ success: true , msg: 'Berhasil logout'});
   } catch (error) {
   res.status(400).json({msg: 'Gagal logout'})
