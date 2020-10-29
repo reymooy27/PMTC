@@ -20,47 +20,47 @@ handphoneNumber,
 email } = req.body
   //validation
   const { error } = registerValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).json(error.details[0].message);
 
   //check if the prticipant already exist
   const teamNameExist = await Team.findOne({
     teamName,
   });
-  if (teamNameExist) return res.status(400).send("Nama Tim sudah terdaftar");
+  if (teamNameExist) return res.status(400).json("Nama Tim sudah terdaftar");
 
   const idPlayerExist = await Team.findOne({
     idPlayer,
   });
-  if (idPlayerExist) return res.status(400).send("ID Player 1 sudah terdaftar");
+  if (idPlayerExist) return res.status(400).json("ID Player 1 sudah terdaftar");
 
   const idPlayerExist2 = await Team.findOne({
     idPlayer2,
   });
   if (idPlayerExist2)
-    return res.status(400).send("ID Player 2 sudah terdaftar");
+    return res.status(400).json("ID Player 2 sudah terdaftar");
 
   const idPlayerExist3 = await Team.findOne({
     idPlayer3,
   });
   if (idPlayerExist3)
-    return res.status(400).send("ID Player 3 sudah terdaftar");
+    return res.status(400).json("ID Player 3 sudah terdaftar");
 
   const idPlayerExist4 = await Team.findOne({
     idPlayer4,
   });
   if (idPlayerExist4)
-    return res.status(400).send("ID Player 4 sudah terdaftar");
+    return res.status(400).json("ID Player 4 sudah terdaftar");
 
   const handphoneNumberExist = await Team.findOne({
     handphoneNumber,
   });
   if (handphoneNumberExist)
-    return res.status(400).send("Nomor HP sudah terdaftar");
+    return res.status(400).json("Nomor HP sudah terdaftar");
 
   const emailExist = await Team.findOne({
     email,
   });
-  if (emailExist) return res.status(400).send("Email sudah terdaftar");
+  if (emailExist) return res.status(400).json("Email sudah terdaftar");
 
   if (
     idPlayer === idPlayer2 ||
@@ -68,7 +68,7 @@ email } = req.body
     idPlayer === idPlayer4 ||
     idPlayer === idPlayer5
   ) {
-    return res.status(400).send("ID Player 1 sudah terdaftar");
+    return res.status(400).json("ID Player 1 sudah terdaftar");
   }
   if (
     idPlayer2 === idPlayer ||
@@ -76,7 +76,7 @@ email } = req.body
     idPlayer2 === idPlayer4 ||
     idPlayer2 === idPlayer5
   ) {
-    return res.status(400).send("ID Player 2 sudah terdaftar");
+    return res.status(400).json("ID Player 2 sudah terdaftar");
   }
   if (
     idPlayer3 === idPlayer ||
@@ -84,7 +84,7 @@ email } = req.body
     idPlayer3 === idPlayer4 ||
     idPlayer3 === idPlayer5
   ) {
-    return res.status(400).send("ID Player 3 sudah terdaftar");
+    return res.status(400).json("ID Player 3 sudah terdaftar");
   }
   if (
     idPlayer4 === idPlayer ||
@@ -92,7 +92,7 @@ email } = req.body
     idPlayer4 === idPlayer3 ||
     idPlayer4 === idPlayer5
   ) {
-    return res.status(400).send("ID Player 4 sudah terdaftar");
+    return res.status(400).json("ID Player 4 sudah terdaftar");
   }
   if (
     idPlayer5 === idPlayer ||
@@ -100,7 +100,7 @@ email } = req.body
     idPlayer5 === idPlayer3 ||
     idPlayer5 === idPlayer4
   ) {
-    return res.status(400).send("ID Player 5 sudah terdaftar");
+    return res.status(400).json("ID Player 5 sudah terdaftar");
   }
 
   //create a new Team
@@ -130,7 +130,7 @@ email } = req.body
     teamByTournament.teams.push(team)
     await teamByTournament.save()
     sendEmail(email, teamName);
-    res.redirect("http://localhost:3000/email-confirmation");
+    res.json('Berhasil mendaftar')
   } catch (err) {
     res.status(400).send(err);
   }
@@ -145,9 +145,9 @@ const deleteTeam = async (req, res, next) => {
     cloudinary.v2.uploader.destroy(
       `logo/${team.teamName}`,
       (error, result) => {
-       if(error){
-         throw error
-       }
+      if(error){
+        throw error
+      }
       }
     );
     await Tournament.updateOne({'teams': team._id},{'$pull':{'teams':team._id}})
