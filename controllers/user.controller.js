@@ -58,7 +58,7 @@ const login = async (req, res) => {
         expiresIn: "2 days",
       }
     );
-    res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: truegit   }).status(200).json({msg: 'Login Sukses'});
+    res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
   }
   } catch (error) {
     res.status(401).json('Login gagal');
