@@ -18,7 +18,7 @@ dotenv.config();
 app.use(compression());
 app.use(cookieParser())
 app.use(helmet());
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({credentials: true, origin: process.env.FRONTEND_URL}));
 app.use(deleteUnconfirmedTeam);
 
 mongoose.connect(
