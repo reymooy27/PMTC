@@ -3,6 +3,8 @@ const cloudinary = require("cloudinary");
 const { registerValidation } = require("../utils/validation");
 const sendEmail = require("../utils/sendEmail");
 const Tournament = require("../model/tournament");
+const Team2 = require("../model/team2");
+const User = require("../model/user");
 
 const createTeam = async (req, res) => {
   const {teamName,singkatanTeam,
@@ -22,45 +24,58 @@ email } = req.body
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).json(error.details[0].message);
 
-  //check if the prticipant already exist
-  const teamNameExist = await Team.findOne({
-    teamName,
-  });
-  if (teamNameExist) return res.status(400).json("Nama Tim sudah terdaftar");
+  const teams = await Team.find({inTournament: req.params.id});
 
-  const idPlayerExist = await Team.findOne({
-    idPlayer,
-  });
-  if (idPlayerExist) return res.status(400).json("ID Player 1 sudah terdaftar");
+  const checkTeamName = teams.map(t=>{
+    if( teamName === t.teamName){
+      return true
+    }
+  })
+  if(checkTeamName.includes(true)) return res.status(400).json('Nama Tim sudah terdaftar')
 
-  const idPlayerExist2 = await Team.findOne({
-    idPlayer2,
-  });
-  if (idPlayerExist2)
-    return res.status(400).json("ID Player 2 sudah terdaftar");
+  const checkPlayer1 = teams.map(t=>{
+    if( idPlayer === t.idPlayer ||
+        idPlayer === t.idPlayer2 ||
+        idPlayer === t.idPlayer3 ||
+        idPlayer === t.idPlayer4 ||
+        idPlayer === t.idPlayer5){
+          return true
+        }
+  })
+  if(checkPlayer1.includes(true)) return res.status(400).json('ID Player 1 sudah terdaftar')
 
-  const idPlayerExist3 = await Team.findOne({
-    idPlayer3,
-  });
-  if (idPlayerExist3)
-    return res.status(400).json("ID Player 3 sudah terdaftar");
+  const checkPlayer2 = teams.map(t=>{
+    if( idPlayer2 === t.idPlayer ||
+        idPlayer2 === t.idPlayer2 ||
+        idPlayer2 === t.idPlayer3 ||
+        idPlayer2 === t.idPlayer4 ||
+        idPlayer2 === t.idPlayer5){
+          return true
+        }
+  })
+  if(checkPlayer2.includes(true)) return res.status(400).json('ID Player 2 sudah terdaftar')
 
-  const idPlayerExist4 = await Team.findOne({
-    idPlayer4,
-  });
-  if (idPlayerExist4)
-    return res.status(400).json("ID Player 4 sudah terdaftar");
+  const checkPlayer3 = teams.map(t=>{
+    if( idPlayer3 === t.idPlayer ||
+        idPlayer3 === t.idPlayer2 ||
+        idPlayer3 === t.idPlayer3 ||
+        idPlayer3 === t.idPlayer4 ||
+        idPlayer3 === t.idPlayer5){
+          return true
+        }
+  })
+  if(checkPlayer3.includes(true)) return res.status(400).json('ID Player 3 sudah terdaftar')
 
-  const handphoneNumberExist = await Team.findOne({
-    handphoneNumber,
-  });
-  if (handphoneNumberExist)
-    return res.status(400).json("Nomor HP sudah terdaftar");
-
-  const emailExist = await Team.findOne({
-    email,
-  });
-  if (emailExist) return res.status(400).json("Email sudah terdaftar");
+  const checkPlayer4 = teams.map(t=>{
+    if( idPlayer4 === t.idPlayer ||
+        idPlayer4 === t.idPlayer2 ||
+        idPlayer4 === t.idPlayer3 ||
+        idPlayer4 === t.idPlayer4 ||
+        idPlayer4 === t.idPlayer5){
+          return true
+        }
+  })
+  if(checkPlayer4.includes(true)) return res.status(400).json('ID Player 4 sudah terdaftar')
 
   if (
     idPlayer === idPlayer2 ||
@@ -68,7 +83,7 @@ email } = req.body
     idPlayer === idPlayer4 ||
     idPlayer === idPlayer5
   ) {
-    return res.status(400).json("ID Player 1 sudah terdaftar");
+    return res.status(400).json("ID Player 1 sama");
   }
   if (
     idPlayer2 === idPlayer ||
@@ -76,7 +91,7 @@ email } = req.body
     idPlayer2 === idPlayer4 ||
     idPlayer2 === idPlayer5
   ) {
-    return res.status(400).json("ID Player 2 sudah terdaftar");
+    return res.status(400).json("ID Player 2 sama");
   }
   if (
     idPlayer3 === idPlayer ||
@@ -84,7 +99,7 @@ email } = req.body
     idPlayer3 === idPlayer4 ||
     idPlayer3 === idPlayer5
   ) {
-    return res.status(400).json("ID Player 3 sudah terdaftar");
+    return res.status(400).json("ID Player 3 sama");
   }
   if (
     idPlayer4 === idPlayer ||
@@ -92,7 +107,7 @@ email } = req.body
     idPlayer4 === idPlayer3 ||
     idPlayer4 === idPlayer5
   ) {
-    return res.status(400).json("ID Player 4 sudah terdaftar");
+    return res.status(400).json("ID Player 4 sama");
   }
   if (
     idPlayer5 === idPlayer ||
@@ -100,7 +115,7 @@ email } = req.body
     idPlayer5 === idPlayer3 ||
     idPlayer5 === idPlayer4
   ) {
-    return res.status(400).json("ID Player 5 sudah terdaftar");
+    return res.status(400).json("ID Player 5 sama");
   }
 
   //create a new Team
@@ -129,14 +144,17 @@ email } = req.body
     const teamByTournament = await Tournament.findById(req.params.id)
     teamByTournament.teams.push(team)
     await teamByTournament.save()
-    sendEmail(email, teamName);
+    sendEmail(email, teamName,teamByTournament.tournamentFee );
     res.json('Berhasil mendaftar')
-  } catch (err) {
-    res.status(400).send(err);
+  } catch (error) {
+    res.status(400).json('Gagal mendaftar');
   }
 };
 
 const deleteTeam = async (req, res, next) => {
+  const user = await User.findById({_id: req.user._id})
+  if(user.role !== 'ADMIN') return res.status(400).json('Tidak memiliki akses')
+
   try {
     const team = await Team.findByIdAndDelete({
     _id: req.params.id,
@@ -155,11 +173,14 @@ const deleteTeam = async (req, res, next) => {
     next();
   }
   } catch (error) {
-    res.status(500).json("Tidak dapat dihapus");
+    res.status(500).json("Gagal dihapus");
   }
 };
 
 const updateTeam = async (req, res) => {
+  const user = await User.findById({_id: req.user._id})
+  if(user.role !== 'ADMIN') return res.status(400).json('Tidak memiliki akses')
+
   const { 
 playerKill,
 player2Kill,
@@ -212,17 +233,10 @@ try{
         confirmed,
       },
     },
-    { runValidators: true },
-    (err, response) => {
-      if (err) {
-        res.status(500).json("Tidak dapat update");
-      } else {
-        res.status(200).json("Update berhasil");
-      }
-    }
-  );
+    { runValidators: true });
+    res.status(200).json("Update berhasil");
 }
-catch(err){
+catch(error){
   res.status(500).json("Tidak dapat update");
 }
 };
@@ -247,10 +261,23 @@ const getTeamByID = async (req,res)=>{
   }
 }
 
+const getTeam2ByID = async (req,res)=>{
+  try {
+   const team = await Team2.findById({ _id: req.params.id });
+    res.json(team);
+  } catch (error) {
+    res.status(404).json('Team yang anda cari tidak ada')
+    
+  }
+}
+
+
+
 module.exports = {
   createTeam,
   updateTeam,
   deleteTeam,
   getAllTeam,
   getTeamByID,
+  getTeam2ByID
 };

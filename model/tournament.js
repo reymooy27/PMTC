@@ -6,6 +6,19 @@ const tournamentSchema = new mongoose.Schema({
     default: "Test",
     required: true
   },
+  tournamentMode:{
+    type:String,
+    required: true
+  },
+  tournamentFormat:{
+    type: String,
+    required: true
+  },
+  tournamentPicture:{
+    type: String,
+    required: false,
+    default:'https://res.cloudinary.com/dzrpmwbhx/image/upload/v1604060952/default/unnamed_1_rllz4y.jpg'
+  },
   tournamentFirstPrize: {
     type: Number,
     required: true
@@ -38,6 +51,10 @@ const tournamentSchema = new mongoose.Schema({
   grandFinalDate: {
     type: Date,
   },
+  maxSlot:{
+    type: Number,
+    required: true
+  },
   showGroupStandings: {
     type: Boolean,
     default: false,
@@ -54,10 +71,32 @@ const tournamentSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  completed:{
+    type: Boolean,
+    default: false
+  },
   teams:[{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Team'
-  }]
+    ref: 'Team',
+  }],
+  rounds:[{
+    round:{
+      type: String,
+    },
+    time:{
+      type: Date
+    },
+    match:{
+      type: Number
+    },
+    map:{
+      type: String
+    }
+  }],
+  groups:{
+    type: Number,
+    default: 4
+  }
 });
 
 module.exports = mongoose.model("Tournament", tournamentSchema);

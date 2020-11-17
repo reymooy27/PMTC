@@ -5,6 +5,7 @@ const { loginValidation, signupValidation } = require("../utils/validation");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary");
 const Tournament = require("../model/tournament");
+const Team2 = require("../model/team2");
 
 const signUp = async (req, res) => {
   const { error } = signupValidation(req.body);
@@ -30,9 +31,9 @@ const signUp = async (req, res) => {
 
     try {
       const savedUser = await user.save();
-      res.json("Success SignUp");
+      res.json("Berhasil SignUp");
     } catch (error) {
-      res.status(500).json(error);
+      res.status(500).json("Gagal SignUp");
     }
   });
 }
@@ -58,7 +59,9 @@ const login = async (req, res) => {
         expiresIn: "2 days",
       }
     );
+    // Development
     // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses'});
+    // Production
     res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
   }
   } catch (error) {
@@ -68,7 +71,9 @@ const login = async (req, res) => {
 
 const logout = (req,res)=>{
   try {
+    // Development
     // res.clearCookie("token");
+    // Production
     res.clearCookie("token",{ httpOnly: true, sameSite: 'none', secure: true   });
     res.status(200).json({ success: true , msg: 'Berhasil logout'});
   } catch (error) {
@@ -78,7 +83,19 @@ const logout = (req,res)=>{
 
 const getUserByID = async (req,res)=>{
   try {
-    const user = await User.findById({ _id: req.params.id }, 'username _id profilePicture myTeam pubgMobileID').populate('myTeam')
+    const user = await User.findById({ _id: req.params.id }, 'username _id profilePicture inTeam myTeam friends inTournaments pubgMobileID role')
+    .populate({
+      path:'myTeam',
+      populate:{
+        path: 'roster',
+        model: 'User',
+        select: '_id username'
+      }
+    })
+    .populate('inTeam')
+    .populate('friends')
+    .populate('inTournaments')
+    .exec()
     res.json(user);
     
   } catch (error) {
@@ -91,46 +108,20 @@ const checkAuthUser = (req,res)=>{
 }
 
 const createTeam = async (req, res)=>{
-    const {teamName,singkatanTeam,
-idPlayer,
-idPlayer2,
-idPlayer3,
-idPlayer4,
-idPlayer5,
-playerName,
-playerName2,
-playerName3,
-playerName4,
-playerName5,
-handphoneNumber,
-email } = req.body
-  const logoPath = req.file != null ? req.file.path : null;
+  const teamExist = await Team2.findOne({teamName: req.body.teamName})
+  if(teamExist) return res.status(400).json('Nama tim sudah terpakai')
 
-  const team = new Team({
-  teamName,
-  singkatanTeam: singkatanTeam.toUpperCase(),
-  logo: logoPath,
-  idPlayer,
-  idPlayer2,
-  idPlayer3,
-  idPlayer4,
-  idPlayer5,
-  playerName,
-  playerName2,
-  playerName3,
-  playerName4,
-  playerName5,
-  handphoneNumber,
-  email,
-});
+  const team = new Team2(req.body);
 
   try {
-    await team.save()
-    await User.findByIdAndUpdate(
+    
+    const user = await User.findByIdAndUpdate(
       {_id: req.params.id},
       {
       $push: {myTeam: team},
       },{new: true, upsert:true })
+      team.roster.push(user)
+      await team.save()
     res.status(200).json('Berhasil membuat team')
   } catch (error) {
     res.status(400).json('Tidak bisa membuat team')
@@ -139,7 +130,7 @@ email } = req.body
 
 const deleteTeam = async (req,res)=>{
   try {
-    const team = await Team.findByIdAndDelete({
+    const team = await Team2.findByIdAndDelete({
     _id: req.params.teamId,
   });
   if (team) {
@@ -151,7 +142,8 @@ const deleteTeam = async (req,res)=>{
       }
       }
     );
-    await User.updateOne({'myTeam' : team._id},{'$pull':{'myTeam':team._id}})
+    await User.updateOne({'myTeam' : team._id,'inTeam': team._id},{'$pull':{'myTeam':team._id, 'inTeam': team._id}})
+    await Tournament.updateOne({'teams': team._id},{'$pull':{'teams':team._id}})
     res.status(200).json('Berhasil menghapus team')
   }
   } catch (error) {
@@ -159,12 +151,44 @@ const deleteTeam = async (req,res)=>{
   }
 }
 
+const addPlayerToTeam = async (req,res)=>{
+  
+  try {
+    const team = await Team2.findById({_id: req.params.teamID})
+    if(team.roster.includes(req.params.userID)) return res.status(400).json('Pemain sudah terdaftar dalam tim')
+
+    await Team2.updateOne({_id: req.params.teamID}, {'$push': {'roster': req.params.userID}})
+    await User.updateOne({_id: req.params.userID}, {'$push': {'inTeam': req.params.teamID}})
+    res.status(200).json('Berhasil menambahkan pemain ke tim')
+  } catch (error) {
+    res.status(400).json('Gagal menambahkan pemain ke tim')
+  }
+}
+
+const removePlayerFromTeam = async (req,res)=>{
+  try {
+    await Team2.updateOne({'roster': req.params.userID}, {'$pull': {'roster': req.params.userID}})
+    await User.updateOne({'inTeam': req.params.teamID}, {'$pull': {'inTeam': req.params.teamID}})
+    res.status(200).json('Berhasil menghapus pemain dari tim')
+  } catch (error) {
+    res.status(400).json('Gagal menghapus pemain dari tim')
+  }
+}
+
 const joinTournament = async (req,res)=>{
   try {
+    const tournament = await Tournament.findById({_id: req.params.idTournament})
+    if(tournament.teams.includes(req.params.teamId)) return res.status(400).json('Tim sudah terdaftar dalam turnamen')
+  
+    const teamRoster = await Team2.findById({_id: req.params.teamId})
+    if(teamRoster.roster.length < 4) return res.status(400).json('Tim ini tidak memiliki cukup pemain')
+
     await Tournament.updateOne({_id: req.params.idTournament},{'$push':{'teams':req.params.teamId}})
+    await Team2.updateOne({_id: req.params.teamId},{'$push':{'inTournaments':req.params.idTournament}})
+    await User.updateMany({'inTeam': req.params.teamId, 'myTeam': req.params.teamId}, {'$push':{'inTournaments': req.params.idTournament}})
     res.status(200).json('Berhasil menambahkan ke turnamen')
   } catch (error) {
     res.status(400).json('Gagal menambahkan ke turnamen')
   }
 }
-module.exports = {signUp, login,logout,getUserByID,checkAuthUser,createTeam,deleteTeam,joinTournament}
+module.exports = {signUp, login,logout,getUserByID,checkAuthUser,createTeam,deleteTeam,joinTournament,addPlayerToTeam,removePlayerFromTeam}

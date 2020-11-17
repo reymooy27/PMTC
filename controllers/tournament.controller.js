@@ -1,9 +1,20 @@
+const Team = require("../model/team");
 const Tournament = require("../model/tournament");
+const cloudinary = require("cloudinary");
+const User = require("../model/user");
+
 
 const createTournament = async (req, res) => {
+const user = await User.findById({_id: req.user._id})
+  if(user.role !== 'ADMIN') return res.status(400).json('Tidak memiliki akses')
+
+  const tournamentPicturePath = req.file != null ? req.file.path : 'https://res.cloudinary.com/dzrpmwbhx/image/upload/v1604060952/default/unnamed_1_rllz4y.jpg';
 
   const tournament = new Tournament({
     tournamentName: req.body.tournamentName,
+    tournamentMode: req.body.tournamentMode,
+    tournamentFormat: req.body.tournamentFormat,
+    tournamentPicture: tournamentPicturePath,
     tournamentFirstPrize: req.body.tournamentFirstPrize,
     tournamentSecondPrize: req.body.tournamentSecondPrize,
     tournamentThirdPrize: req.body.tournamentThirdPrize,
@@ -11,6 +22,9 @@ const createTournament = async (req, res) => {
     registrationStart: req.body.registrationStart,
     startDate: req.body.startDate,
     grandFinalDate: req.body.grandFinalDate,
+    maxSlot: req.body.maxSlot,
+    rounds: JSON.parse(req.body.rounds),
+    groups: req.body.groups
   });
 
   try {
@@ -22,7 +36,13 @@ const createTournament = async (req, res) => {
 };
 
 const updateTournament = async (req, res) => {
-  const {tournamentName,
+  const user = await User.findById({_id: req.user._id})
+  if(user.role !== 'ADMIN') return res.status(400).json('Tidak memiliki akses')
+
+  const {
+tournamentName,
+tournamentMode,
+tournamentFormat,
 tournamentFirstPrize,
 tournamentSecondPrize,
 tournamentThirdPrize,
@@ -30,16 +50,22 @@ tournamentFee,
 registrationStart,
 startDate,
 grandFinalDate,
+maxSlot,
 showGroupStandings,
 showGrandFinal,
 showKillStanding,
-registrationClosed} = req.body
+registrationClosed,
+completed,rounds,
+        groups} = req.body
 
-  await Tournament.findByIdAndUpdate(
+  try {
+    await Tournament.findByIdAndUpdate(
     { _id: req.params.id },
     {
       $set: {
         tournamentName,
+        tournamentMode,
+        tournamentFormat,
         tournamentFirstPrize,
         tournamentSecondPrize,
         tournamentThirdPrize,
@@ -47,22 +73,46 @@ registrationClosed} = req.body
         registrationStart,
         startDate,
         grandFinalDate,
+        maxSlot,
         showGroupStandings,
         showGrandFinal,
         showKillStanding,
         registrationClosed,
+        completed,
+        rounds,
+        groups
       },
     },
-    { runValidators: true },
-    (err, response) => {
-      if (err) {
-        res.status(500).json("Tidak dapat update");
-      } else {
-        res.status(200).json("Update berhasil");
-      }
-    }
-  );
+    { runValidators: true });
+    res.status(200).json('Berhasil mengupdate')
+  } catch (error) {
+    res.status(400).json('Gagal mengupdate')
+  }
+  
 };
+
+const deleteTournament = async (req, res)=>{
+  const user = await User.findById({_id: req.user._id})
+  if(user.role !== 'ADMIN') return res.status(400).json('Tidak memiliki akses')
+  
+  try {
+    const tournament = await Tournament.findByIdAndDelete({_id: req.params.id})
+    if(tournament){
+      cloudinary.v2.uploader.destroy(
+        `tournamentPicture/${tournament.tournamentName}`,
+        (error, result) => {
+        if(error){
+          throw error
+        }
+        }
+      );
+      await Team.updateOne({'inTournament': tournament._id},{'$set':{'inTournament': null}},{overwrite: true})
+      res.status(200).json('Berhasil menghapus turnamen')
+    }
+  } catch (error) {
+    res.status(400).json('Gagal menghapus turnamen')
+  }
+}
 
 const getAllTournament = async (req, res) => {
   try {
@@ -71,12 +121,13 @@ const getAllTournament = async (req, res) => {
   } catch (error) {
     res.status(404).json('Tournament yang anda cari tidak ada')
   }
- 
 }
 
 const getTournamentByID = async (req,res)=>{
   try {
-    const tournament = await Tournament.findById({ _id: req.params.id }).populate('teams').exec()
+    const tournament = await Tournament.findById({ _id: req.params.id })
+    .populate('teams')
+    .exec()
     res.json(tournament)
   } catch (error) {
     res.status(404).json('Tournament yang anda cari tidak ada')
@@ -86,6 +137,7 @@ const getTournamentByID = async (req,res)=>{
 module.exports = {
   createTournament,
   updateTournament,
+  deleteTournament,
   getAllTournament,
   getTournamentByID
 };

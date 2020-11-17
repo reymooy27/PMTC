@@ -19,11 +19,27 @@ const user = new mongoose.Schema({
   },
   myTeam:[{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Team'
+    ref: 'Team2'
+  }],
+  inTeam:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Team2'
+  }],
+  friends:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+  inTournaments:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tournament'
   }],
   pubgMobileID:{
     type: Number,
     required: false
+  },
+  role:{
+    type: String,
+    default: 'USER'
   }
 });
 

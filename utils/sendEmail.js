@@ -29,7 +29,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-function sendEmail(email, teamName) {
+function sendEmail(email, teamName,tournamentFee) {
   transporter.sendMail(
     {
       from: "PUBG Mobile Terminator Challenge <gdrrey@gmail.com>",
@@ -63,13 +63,14 @@ function sendEmail(email, teamName) {
         border-radius: 10px;
       "
     >
-      <h3>Hi <strong style="color: #00ddaa;">${teamName}!</strong></h3>
+      <h3>Hi Tim <strong style="color: #00ddaa;">${teamName}</strong>!</h3>
       <h3>Selesaikan pendaftaran tim anda</h3>
       <p>
         Biaya pendaftaran sebesar
-        <strong style="color: #00ddaa;">Rp. 50.000</strong>
+        <strong style="color: #00ddaa;">Rp. ${new Intl.NumberFormat().format(tournamentFee)}</strong>
       </p>
-      <p>BRI : <strong style="color: #00ddaa;">92929292xx92929xx</strong></p>
+      <p>BRI : <strong style="color: #00ddaa;">4670 01 032110 53 1</strong></p>
+      <p>Atas nama : ERNIANA LONA</p>
 
       <br />
       <p>
@@ -77,6 +78,8 @@ function sendEmail(email, teamName) {
         yang tersedia di atas selambat-lambatnya 12 jam sejak diterimanya email
         konfirmasi ini
       </p>
+      <p>Setelah itu anda dapat mengirimkan bukti pembayaran berupa screenshot/foto 
+      ke Whatsapp <b style="color: #00ddaa;">0822 3781 3869</b> untuk menyelesaikan proses pendaftaran yang akan dikonfirmasi oleh admin</p>
       <p>
         Punya pertanyaan? Anda mengalami kendala? Hubungi kami di Whatsapp
         <b style="color: #00ddaa;">0822 3781 3869</b> atau email ke
