@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
   const team = await Team.find({ confirmed: false });
   team.forEach(async (p) => {
     if (Date.now() - p.registerDate > 43200000) {
-      cloudinary.v2.uploader.destroy(`logo/${p.teamName}`, (error, result) => {
+      cloudinary.v2.uploader.destroy(`logo/${p.teamName}-${p.inTournament}`, (error, result) => {
         console.log(result, error);
       });
       p.deleteOne((err, prod) => {

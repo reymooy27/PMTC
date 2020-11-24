@@ -14,7 +14,7 @@ const storage = new CloudinaryStorage({
   params: {
     folder: "/logo",
     allowedFormats: ["jpg", "png"],
-    public_id: (req, file) => req.body.teamName,
+    public_id: (req, file) => `${req.body.teamName}-${req.params.id}`,
   },
 });
 

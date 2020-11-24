@@ -34,86 +34,86 @@ email } = req.body
   if(checkTeamName.includes(true)) return res.status(400).json('Nama Tim sudah terdaftar')
 
   const checkPlayer1 = teams.map(t=>{
-    if( idPlayer === t.idPlayer ||
-        idPlayer === t.idPlayer2 ||
-        idPlayer === t.idPlayer3 ||
-        idPlayer === t.idPlayer4 ||
-        idPlayer === t.idPlayer5){
+    if( Number(idPlayer) === Number(t.idPlayer) ||
+        Number(idPlayer) === Number(t.idPlayer2) ||
+        Number(idPlayer) === Number(t.idPlayer3) ||
+        Number(idPlayer) === Number(t.idPlayer4) ||
+        Number(idPlayer)=== Number(t.idPlayer5)){
           return true
         }
   })
   if(checkPlayer1.includes(true)) return res.status(400).json('ID Player 1 sudah terdaftar')
 
   const checkPlayer2 = teams.map(t=>{
-    if( idPlayer2 === t.idPlayer ||
-        idPlayer2 === t.idPlayer2 ||
-        idPlayer2 === t.idPlayer3 ||
-        idPlayer2 === t.idPlayer4 ||
-        idPlayer2 === t.idPlayer5){
+    if( Number(idPlayer2) === Number(t.idPlayer) ||
+        Number(idPlayer2) === Number(t.idPlayer2) ||
+        Number(idPlayer2) === Number(t.idPlayer3) ||
+        Number(idPlayer2) === Number(t.idPlayer4) ||
+        Number(idPlayer2) === Number(t.idPlayer5)){
           return true
         }
   })
   if(checkPlayer2.includes(true)) return res.status(400).json('ID Player 2 sudah terdaftar')
 
   const checkPlayer3 = teams.map(t=>{
-    if( idPlayer3 === t.idPlayer ||
-        idPlayer3 === t.idPlayer2 ||
-        idPlayer3 === t.idPlayer3 ||
-        idPlayer3 === t.idPlayer4 ||
-        idPlayer3 === t.idPlayer5){
+    if( Number(idPlayer3) === Number(t.idPlayer) ||
+        Number(idPlayer3) === Number(t.idPlayer2) ||
+        Number(idPlayer3) === Number(t.idPlayer3) ||
+        Number(idPlayer3) === Number(t.idPlayer4) ||
+        Number(idPlayer3) === Number(t.idPlayer5)){
           return true
         }
   })
   if(checkPlayer3.includes(true)) return res.status(400).json('ID Player 3 sudah terdaftar')
 
   const checkPlayer4 = teams.map(t=>{
-    if( idPlayer4 === t.idPlayer ||
-        idPlayer4 === t.idPlayer2 ||
-        idPlayer4 === t.idPlayer3 ||
-        idPlayer4 === t.idPlayer4 ||
-        idPlayer4 === t.idPlayer5){
+    if( Number(idPlayer4) === Number(t.idPlayer) ||
+        Number(idPlayer4) === Number(t.idPlayer2) ||
+        Number(idPlayer4) === Number(t.idPlayer3) ||
+        Number(idPlayer4) === Number(t.idPlayer4) ||
+        Number(idPlayer4) === Number(t.idPlayer5)){
           return true
         }
   })
   if(checkPlayer4.includes(true)) return res.status(400).json('ID Player 4 sudah terdaftar')
 
   if (
-    idPlayer === idPlayer2 ||
-    idPlayer === idPlayer3 ||
-    idPlayer === idPlayer4 ||
-    idPlayer === idPlayer5
+    Number(idPlayer)=== Number(idPlayer2) ||
+    Number(idPlayer)=== Number(idPlayer3) ||
+    Number(idPlayer)=== Number(idPlayer4) ||
+    Number(idPlayer)=== Number(idPlayer5)
   ) {
     return res.status(400).json("ID Player 1 sama");
   }
   if (
-    idPlayer2 === idPlayer ||
-    idPlayer2 === idPlayer3 ||
-    idPlayer2 === idPlayer4 ||
-    idPlayer2 === idPlayer5
+    Number(idPlayer2) === Number(idPlayer) ||
+    Number(idPlayer2) === Number(idPlayer3) ||
+    Number(idPlayer2) === Number(idPlayer4) ||
+    Number(idPlayer2) === Number(idPlayer5)
   ) {
     return res.status(400).json("ID Player 2 sama");
   }
   if (
-    idPlayer3 === idPlayer ||
-    idPlayer3 === idPlayer2 ||
-    idPlayer3 === idPlayer4 ||
-    idPlayer3 === idPlayer5
+    Number(idPlayer3) === Number(idPlayer) ||
+    Number(idPlayer3) === Number(idPlayer2) ||
+    Number(idPlayer3) === Number(idPlayer4) ||
+    Number(idPlayer3) === Number(idPlayer5)
   ) {
     return res.status(400).json("ID Player 3 sama");
   }
   if (
-    idPlayer4 === idPlayer ||
-    idPlayer4 === idPlayer2 ||
-    idPlayer4 === idPlayer3 ||
-    idPlayer4 === idPlayer5
+    Number(idPlayer4) === Number(idPlayer) ||
+    Number(idPlayer4) === Number(idPlayer2) ||
+    Number(idPlayer4) === Number(idPlayer3) ||
+    Number(idPlayer4) === Number(idPlayer5)
   ) {
     return res.status(400).json("ID Player 4 sama");
   }
   if (
-    idPlayer5 === idPlayer ||
-    idPlayer5 === idPlayer2 ||
-    idPlayer5 === idPlayer3 ||
-    idPlayer5 === idPlayer4
+    Number(idPlayer5) === Number(idPlayer) ||
+    Number(idPlayer5) === Number(idPlayer2) ||
+    Number(idPlayer5) === idPlayer3 ||
+    Number(idPlayer5) === Number(idPlayer4)
   ) {
     return res.status(400).json("ID Player 5 sama");
   }
@@ -156,12 +156,12 @@ const deleteTeam = async (req, res, next) => {
   if(user.role !== 'ADMIN') return res.status(400).json('Tidak memiliki akses')
 
   try {
-    const team = await Team.findByIdAndDelete({
+    const team = await Team.findById({
     _id: req.params.id,
   });
   if (team) {
     cloudinary.v2.uploader.destroy(
-      `logo/${team.teamName}`,
+      `logo/${team.teamName}-${team.inTournament}`,
       (error, result) => {
       if(error){
         throw error
@@ -169,6 +169,7 @@ const deleteTeam = async (req, res, next) => {
       }
     );
     await Tournament.updateOne({'teams': team._id},{'$pull':{'teams':team._id}})
+    team.remove()
     res.status(200).json("Berhasil dihapus");
     next();
   }
@@ -197,8 +198,7 @@ tournamentThirdWinner,
 confirmed} = req.body
 
 try{
-  await Team.findByIdAndUpdate(
-    { _id: req.params.id },
+  await Team.findByIdAndUpdate({ _id: req.params.id },
     {
       $set: {
         teamKillPoint:
@@ -243,7 +243,7 @@ catch(error){
 
 const getAllTeam = async (req, res) => {
   try {
-    const teams =  await Team.find()
+    const teams =  await Team.find().lean()
       res.json(teams);
   } catch (error) {
     res.status(404).json('Team yang anda cari tidak ada')
@@ -253,7 +253,7 @@ const getAllTeam = async (req, res) => {
 
 const getTeamByID = async (req,res)=>{
   try {
-   const team = await Team.findById({ _id: req.params.id });
+   const team = await Team.findById({ _id: req.params.id }).lean();
     res.json(team);
   } catch (error) {
     res.status(404).json('Team yang anda cari tidak ada')
@@ -263,7 +263,7 @@ const getTeamByID = async (req,res)=>{
 
 const getTeam2ByID = async (req,res)=>{
   try {
-   const team = await Team2.findById({ _id: req.params.id });
+   const team = await Team2.findById({ _id: req.params.id }).lean();
     res.json(team);
   } catch (error) {
     res.status(404).json('Team yang anda cari tidak ada')

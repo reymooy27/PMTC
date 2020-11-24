@@ -38,7 +38,7 @@ const tournamentSchema = new mongoose.Schema({
     required: true
 
   },
-  registrationStart: {
+  registrationEnd: {
     type: Date,
     required: true
 
@@ -47,9 +47,6 @@ const tournamentSchema = new mongoose.Schema({
     type: Date,
     required: true
 
-  },
-  grandFinalDate: {
-    type: Date,
   },
   maxSlot:{
     type: Number,

@@ -19,9 +19,8 @@ const user = await User.findById({_id: req.user._id})
     tournamentSecondPrize: req.body.tournamentSecondPrize,
     tournamentThirdPrize: req.body.tournamentThirdPrize,
     tournamentFee: req.body.tournamentFee,
-    registrationStart: req.body.registrationStart,
+    registrationEnd: req.body.registrationEnd,
     startDate: req.body.startDate,
-    grandFinalDate: req.body.grandFinalDate,
     maxSlot: req.body.maxSlot,
     rounds: JSON.parse(req.body.rounds),
     groups: req.body.groups
@@ -47,9 +46,8 @@ tournamentFirstPrize,
 tournamentSecondPrize,
 tournamentThirdPrize,
 tournamentFee,
-registrationStart,
+registrationEnd,
 startDate,
-grandFinalDate,
 maxSlot,
 showGroupStandings,
 showGrandFinal,
@@ -70,9 +68,8 @@ completed,rounds,
         tournamentSecondPrize,
         tournamentThirdPrize,
         tournamentFee,
-        registrationStart,
+        registrationEnd,
         startDate,
-        grandFinalDate,
         maxSlot,
         showGroupStandings,
         showGrandFinal,
@@ -96,7 +93,7 @@ const deleteTournament = async (req, res)=>{
   if(user.role !== 'ADMIN') return res.status(400).json('Tidak memiliki akses')
   
   try {
-    const tournament = await Tournament.findByIdAndDelete({_id: req.params.id})
+    const tournament = await Tournament.findById({_id: req.params.id})
     if(tournament){
       cloudinary.v2.uploader.destroy(
         `tournamentPicture/${tournament.tournamentName}`,
@@ -107,6 +104,7 @@ const deleteTournament = async (req, res)=>{
         }
       );
       await Team.updateOne({'inTournament': tournament._id},{'$set':{'inTournament': null}},{overwrite: true})
+      tournament.remove()
       res.status(200).json('Berhasil menghapus turnamen')
     }
   } catch (error) {
@@ -117,6 +115,8 @@ const deleteTournament = async (req, res)=>{
 const getAllTournament = async (req, res) => {
   try {
     const tournaments = await Tournament.find()
+    .select('tournamentName tournamentPicture tournamentFirstPrize tournamentSecondPrize tournamentThirdPrize startDate tournamentMode teams maxSlot completed')
+    .lean()
     res.json(tournaments)
   } catch (error) {
     res.status(404).json('Tournament yang anda cari tidak ada')
@@ -127,6 +127,7 @@ const getTournamentByID = async (req,res)=>{
   try {
     const tournament = await Tournament.findById({ _id: req.params.id })
     .populate('teams')
+    .lean()
     .exec()
     res.json(tournament)
   } catch (error) {
