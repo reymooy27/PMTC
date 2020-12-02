@@ -7,7 +7,7 @@ const Team2 = require("../model/team2");
 const User = require("../model/user");
 
 const createTeam = async (req, res) => {
-  const {teamName,singkatanTeam,
+  const {teamName,
 idPlayer,
 idPlayer2,
 idPlayer3,
@@ -122,7 +122,6 @@ email } = req.body
   const logoPath = req.file != null ? req.file.path : null;
   const team = new Team({
     teamName,
-    singkatanTeam: singkatanTeam.toUpperCase(),
     logo: logoPath,
     idPlayer,
     idPlayer2,

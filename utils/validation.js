@@ -5,7 +5,6 @@ const Joi = require("@hapi/joi");
 const registerValidation = (data) => {
   const schema = Joi.object({
     teamName: Joi.string().required(),
-    singkatanTeam: Joi.string().max(5).required(),
     logo: Joi.optional(),
     idPlayer: Joi.number().integer().required(),
     idPlayer2: Joi.number().integer().required(),

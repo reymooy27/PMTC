@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const tournamentSchema = new mongoose.Schema({
+  game:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Game',
+  },
   tournamentName: {
     type: String,
     default: "Test",

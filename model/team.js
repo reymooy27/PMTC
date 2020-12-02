@@ -5,11 +5,6 @@ const teamSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  singkatanTeam: {
-    type: String,
-    required: true,
-    maxlength: 5,
-  },
   teamKillPoint: {
     type: Number,
     default: 0,

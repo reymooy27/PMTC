@@ -9,6 +9,7 @@ const route = require("./routes/routes");
 const tournamentRoutes = require("./routes/tournament");
 const userRoutes = require("./routes/user");
 const teamRoutes = require("./routes/team");
+const gameRoutes = require('./routes/game')
 const deleteUnconfirmedTeam = require("./utils/deleteUnconfirmedTeam");
 const app = express();
 const port = process.env.PORT || 8000;
@@ -22,7 +23,7 @@ app.use(helmet());
 app.use(cors({credentials: true, origin: process.env.FRONTEND_URL}));
 // Development
 // app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
-app.use(deleteUnconfirmedTeam);
+// app.use(deleteUnconfirmedTeam);
 
 mongoose.connect(
   db_uri,
@@ -55,5 +56,6 @@ app.use(route);
 app.use(tournamentRoutes);
 app.use(userRoutes);
 app.use(teamRoutes);
+app.use(gameRoutes);
 
 app.listen(port, ()=> console.log('server on'));
