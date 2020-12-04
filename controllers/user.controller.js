@@ -108,6 +108,22 @@ const checkAuthUser = (req,res)=>{
   res.json({success : true, msg : 'User diautentikasi', user: req.user})
 }
 
+const updateProfilePicture = async (req,res)=>{
+  const user = await User.findById({_id: req.params.id})
+  const picturePath = req.file != null ? req.file.path : null;
+
+  try {
+    if(user){
+    user.profilePicture = picturePath
+    await user.save()
+    res.status(200).json('Berhasil mengupload gambar')
+    }
+  } catch (error) {
+    res.status(400).json('Gagal mengupload gambar')
+  }
+
+}
+
 const createTeam = async (req, res)=>{
   const teamExist = await Team2.findOne({teamName: req.body.teamName})
   if(teamExist) return res.status(400).json('Nama tim sudah terpakai')
@@ -195,4 +211,4 @@ const joinTournament = async (req,res)=>{
     res.status(400).json('Gagal menambahkan ke turnamen')
   }
 }
-module.exports = {signUp, login,logout,getUserByID,checkAuthUser,createTeam,deleteTeam,joinTournament,addPlayerToTeam,removePlayerFromTeam}
+module.exports = {signUp, login,logout,getUserByID,checkAuthUser,createTeam,deleteTeam,joinTournament,addPlayerToTeam,removePlayerFromTeam,updateProfilePicture}
