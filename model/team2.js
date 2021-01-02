@@ -7,7 +7,16 @@ const team2 = new mongoose.Schema({
   },
   teamLogo:{
     type: String,
-    required: false
+    required: false,
+    // default: 
+  },
+  createdAt:{
+    type: Date,
+    default: Date.now()
+  },
+  createdBy:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
   roster: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -17,6 +26,10 @@ const team2 = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Tournament'
   }],
+  tournamentStatistic:[{
+    type: String,
+    default: null
+  }]
 })
 
 module.exports = mongoose.model('Team2',team2);
