@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary");
 const Tournament = require("../model/tournament");
 const Team2 = require("../model/team2");
+const PUBGMobileStats = require('../model/pubgMobileStats')
 
 const signUp = async (req, res) => {
   const { error } = signupValidation(req.body);
@@ -24,7 +25,7 @@ const signUp = async (req, res) => {
   const saltRounds = 10;
   bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
     const user = new User({
-      username: req.body.username,
+      username: req.body.username,     
       password: hash,
       email: req.body.email
     });
@@ -81,20 +82,22 @@ const logout = (req,res)=>{
   }
 }
 
+const getAllUser = async (req,res)=>{
+  try {
+    const users = await User.find().sort({username: 1}).lean().select('username profilePicture').exec()
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(400).json('Pemain yang anda cari tidak ada')
+  }
+}
+
 const getUserByID = async (req,res)=>{
   try {
     const user = await User.findById({ _id: req.params.id })
-    .select('username profilePicture inTeam myTeam friends inTournaments pubgMobileID role')
-    .populate({
-      path:'myTeam',
-      populate:{
-        path: 'roster',
-        model: 'User',
-        select: '_id username'
-      }
-    })
+    .select('username profilePicture myTeam friends inTournaments role birthDate bio socialMedia pubgMobileStats')
+    .populate('pubgMobileStats')
+    .populate('myTeam')
     .populate('inTournaments')
-    .populate('inTeam')
     .populate('friends')
     .exec()
     res.json(user);
@@ -121,7 +124,19 @@ const updateProfilePicture = async (req,res)=>{
   } catch (error) {
     res.status(400).json('Gagal mengupload gambar')
   }
+}
 
+const updateUserProfile = async (req,res)=>{
+  const user = await User.findById({_id: req.params.id})
+  try {
+    if(user){
+    user.set(req.body)
+    await user.save()
+    return res.status(200).json('Berhasil mengupdate profil anda')
+    }
+  } catch (error) {
+    res.status(400).json('Gagal mengupdate profil anda')
+  }
 }
 
 const createTeam = async (req, res)=>{
@@ -155,9 +170,8 @@ const deleteTeam = async (req,res)=>{
       }
       }
     );
-    const updateUser = User.updateOne({'myTeam' : team._id,'inTeam': team._id},{'$pull':{'myTeam':team._id, 'inTeam': team._id}})
-    const updateTournament = Tournament.updateOne({'teams': team._id},{'$pull':{'teams':team._id}})
-    await Promise.all([updateUser, updateTournament])
+    await User.updateMany({'myTeam' : team._id}, {'$pull':{'myTeam' : team._id}})
+    await Tournament.updateOne({'teams': team._id},{'$pull':{'teams':team._id}})
     team.remove()
     res.status(200).json('Berhasil menghapus team')
   }
@@ -172,9 +186,8 @@ const addPlayerToTeam = async (req,res)=>{
     const team = await Team2.findById({_id: req.params.teamID})
     if(team.roster.includes(req.params.userID)) return res.status(400).json('Pemain sudah terdaftar dalam tim')
 
-    const updateTeam = Team2.updateOne({_id: req.params.teamID}, {'$push': {'roster': req.params.userID}})
-    const updateUser = User.updateOne({_id: req.params.userID}, {'$push': {'inTeam': req.params.teamID}})
-    await Promise.all([updateTeam, updateUser])
+    await Team2.updateOne({_id: req.params.teamID}, {'$push': {'roster': req.params.userID}})
+    await User.updateOne({_id: req.params.userID}, {'$push': {'myTeam': req.params.teamID}})
     res.status(200).json('Berhasil menambahkan pemain ke tim')
   } catch (error) {
     res.status(400).json('Gagal menambahkan pemain ke tim')
@@ -183,9 +196,8 @@ const addPlayerToTeam = async (req,res)=>{
 
 const removePlayerFromTeam = async (req,res)=>{
   try {
-    const updateTeam = Team2.updateOne({'roster': req.params.userID}, {'$pull': {'roster': req.params.userID}})
-    const updateUser = User.updateOne({'inTeam': req.params.teamID}, {'$pull': {'inTeam': req.params.teamID}})
-    await Promise.all([updateTeam, updateUser])
+    await Team2.updateOne({'roster': req.params.userID}, {'$pull': {'roster': req.params.userID}})
+    await User.updateOne({'myTeam': req.params.teamID}, {'$pull': {'myTeam': req.params.teamID}})
     res.status(200).json('Berhasil menghapus pemain dari tim')
   } catch (error) {
     res.status(400).json('Gagal menghapus pemain dari tim')
@@ -194,21 +206,66 @@ const removePlayerFromTeam = async (req,res)=>{
 
 const joinTournament = async (req,res)=>{
   try {
-    const tournament = Tournament.findById({_id: req.params.idTournament})
-    const teamRoster = Team2.findById({_id: req.params.teamId})
-    await Promise.all([tournament, teamRoster])
+    const promisetournament = Tournament.findById({_id: req.params.idTournament})
+    const promiseteamRoster = Team2.findById({_id: req.params.teamId})
+    const [tournament, teamRoster] = await Promise.all([promisetournament, promiseteamRoster])
 
     if(tournament.teams.includes(req.params.teamId)) return res.status(400).json('Tim sudah terdaftar dalam turnamen')
     if(teamRoster.roster.length < 4) return res.status(400).json('Tim ini tidak memiliki cukup pemain')
 
-    const updateTournament = Tournament.updateOne({_id: req.params.idTournament},{'$push':{'teams':req.params.teamId}})
-    const updateTeam = Team2.updateOne({_id: req.params.teamId},{'$push':{'inTournaments':req.params.idTournament}})
-    const updateUser = User.updateMany({'inTeam': req.params.teamId, 'myTeam': req.params.teamId}, {'$push':{'inTournaments': req.params.idTournament}})
-    await Promise.all([updateTournament, updateTeam, updateUser])
+    await Tournament.updateOne({_id: req.params.idTournament},{'$push':{'teams':req.params.teamId}})
+    await Team2.updateOne({_id: req.params.teamId},{'$push':{'inTournaments':req.params.idTournament}})
+    await User.updateMany({'myTeam': req.params.teamId}, {'$push':{'inTournaments': req.params.idTournament}})
     
     res.status(200).json('Berhasil menambahkan ke turnamen')
   } catch (error) {
     res.status(400).json('Gagal menambahkan ke turnamen')
   }
 }
-module.exports = {signUp, login,logout,getUserByID,checkAuthUser,createTeam,deleteTeam,joinTournament,addPlayerToTeam,removePlayerFromTeam,updateProfilePicture}
+
+const addAccountPUBGMobile = async (req,res)=>{
+  try {
+    const user = await User.findById({_id: req.params.id})
+    if(user.pubgMobileStats != null) return res.status(400).json('PUBG Mobile sudah ditambahkan')
+    const pubgmStats = new PUBGMobileStats({
+      nickInGamePUBGMobile: req.body.nickInGamePUBGMobile,
+      idInGamePUBGMobile: req.body.idInGamePUBGMobile,
+      userID: user._id
+    })
+    await pubgmStats.save()
+    user.set({pubgMobileStats: pubgmStats})
+    await user.save()
+    res.status(200).json('Berhasil menambahkan akun game')
+  } catch (error) {
+    res.status(400).json('Gagal menambahkan akun game')
+  }
+}
+
+const updateUserPubgMobileStats = async (req,res)=>{
+  try {
+    const stats = await PUBGMobileStats.findOne({userID: req.params.id})
+    if(!stats) return res.status(404).json('User belum memiliki statistik')
+    stats.set(req.body)
+    await stats.save()
+    res.status(200).json('Berhasil memperbarui statistik')
+  } catch (error) {
+    res.status(400).json('Gagal memperbarui statistik')
+  }
+}
+module.exports = {
+  signUp, 
+  login,
+  logout,
+  getAllUser,
+  getUserByID,
+  checkAuthUser,
+  createTeam,
+  deleteTeam,
+  joinTournament,
+  addPlayerToTeam,
+  removePlayerFromTeam,
+  updateProfilePicture,
+  updateUserProfile,
+  addAccountPUBGMobile,
+  updateUserPubgMobileStats
+}
