@@ -262,7 +262,10 @@ const getTeamByID = async (req,res)=>{
 
 const getTeam2ByID = async (req,res)=>{
   try {
-   const team = await Team2.findById({ _id: req.params.id }).lean();
+   const team = await Team2.findById({ _id: req.params.id }).lean().populate({
+     path:'roster',
+     select:'_id username profilePicture'
+   });
     res.json(team);
   } catch (error) {
     res.status(404).json('Team yang anda cari tidak ada')
