@@ -15,13 +15,9 @@ const user = new mongoose.Schema({
   },
   profilePicture:{
     type: String,
-    required: false
+    default: null
   },
   myTeam:[{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Team2'
-  }],
-  inTeam:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Team2'
   }],
@@ -33,13 +29,43 @@ const user = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Tournament'
   }],
-  pubgMobileID:{
-    type: Number,
-    required: false
-  },
   role:{
     type: String,
     default: 'USER'
+  },
+  bio:{
+    type: String,
+      default: ''
+  },
+  socialMedia:{
+    facebook: {
+      type: String,
+      default: ''
+    },
+    twitter: {
+      type: String,
+      default: ''
+    },
+    instagram: {
+      type: String,
+      default: ''
+    },
+    youtube: {
+      type: String,
+      default: ''
+    }
+  },
+  birthDate:{
+    type: Date,
+    default: ''
+  },
+  pubgMobileStats:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'PUBGMobileStats'
+  },
+  verified:{
+    type: Boolean,
+    default: false
   }
 });
 
