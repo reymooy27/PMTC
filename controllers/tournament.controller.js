@@ -38,49 +38,10 @@ const updateTournament = async (req, res) => {
   const user = await User.findById({_id: req.user._id})
   if(user.role !== 'ADMIN') return res.status(400).json('Tidak memiliki akses')
 
-  const {
-tournamentName,
-tournamentMode,
-tournamentFormat,
-tournamentFirstPrize,
-tournamentSecondPrize,
-tournamentThirdPrize,
-tournamentFee,
-registrationEnd,
-startDate,
-maxSlot,
-showGroupStandings,
-showGrandFinal,
-showKillStanding,
-registrationClosed,
-completed,rounds,
-        groups} = req.body
-
+  const turnamen = await Tournament.findById({_id: req.params.id})
   try {
-    await Tournament.findByIdAndUpdate(
-    { _id: req.params.id },
-    {
-      $set: {
-        tournamentName,
-        tournamentMode,
-        tournamentFormat,
-        tournamentFirstPrize,
-        tournamentSecondPrize,
-        tournamentThirdPrize,
-        tournamentFee,
-        registrationEnd,
-        startDate,
-        maxSlot,
-        showGroupStandings,
-        showGrandFinal,
-        showKillStanding,
-        registrationClosed,
-        completed,
-        rounds,
-        groups
-      },
-    },
-    { runValidators: true });
+    turnamen.set(req.body)
+    turnamen.save()
     res.status(200).json('Berhasil mengupdate')
   } catch (error) {
     res.status(400).json('Gagal mengupdate')
@@ -115,7 +76,8 @@ const deleteTournament = async (req, res)=>{
 const getAllTournament = async (req, res) => {
   try {
     const tournaments = await Tournament.find()
-    .select('tournamentName tournamentPicture tournamentFirstPrize tournamentSecondPrize tournamentThirdPrize startDate tournamentMode teams maxSlot completed')
+    .select('tournamentName tournamentPicture tournamentFirstPrize tournamentSecondPrize tournamentThirdPrize startDate tournamentMode teams maxSlot status')
+    .sort({startDate: -1})
     .lean()
     res.json(tournaments)
   } catch (error) {
