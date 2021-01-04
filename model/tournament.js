@@ -23,6 +23,15 @@ const tournamentSchema = new mongoose.Schema({
     required: false,
     default:'https://res.cloudinary.com/dzrpmwbhx/image/upload/v1604060952/default/unnamed_1_rllz4y.jpg'
   },
+  description:{
+    type:String,
+    default: ''
+  },
+  information:{
+    type: String,
+    default: ''
+  },
+
   tournamentFirstPrize: {
     type: Number,
     required: true
@@ -72,9 +81,9 @@ const tournamentSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  completed:{
-    type: Boolean,
-    default: false
+  status:{
+    type: String,
+    default: 'OPEN'
   },
   teams:[{
     type: mongoose.Schema.Types.ObjectId,
@@ -97,7 +106,19 @@ const tournamentSchema = new mongoose.Schema({
   groups:{
     type: Number,
     default: 4
-  }
+  },
+  // admins:[{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User'
+  // }]
+  admins:[{
+    name:{
+      type:String
+    },
+    whatsapp:{
+      type: Number
+    }
+  }]
 });
 
 module.exports = mongoose.model("Tournament", tournamentSchema);
