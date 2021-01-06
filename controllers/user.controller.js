@@ -7,6 +7,7 @@ const cloudinary = require("cloudinary");
 const Tournament = require("../model/tournament");
 const Team2 = require("../model/team2");
 const PUBGMobileStats = require('../model/pubgMobileStats')
+const axios = require('axios').default;
 
 const signUp = async (req, res) => {
   const { error } = signupValidation(req.body);
@@ -61,21 +62,74 @@ const login = async (req, res) => {
       }
     );
     // Development
-    // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses'});
+    res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses'});
     // Production
-    res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+    // res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
   }
   } catch (error) {
     res.status(401).json('Login gagal');
   }
 }
 
+const loginWithFacebook = async (req,res)=>{
+  try {
+    const {userID, accessToken} = req.body
+    const urlGraphFB = `https://graph.facebook.com/v9.0/${userID}/?fields=id,name,email&access_token=${accessToken}`
+    await axios.get(urlGraphFB)
+    .then(async (response)=>{
+      const user = await User.findOne({'facebook.id': response.data.id})
+        if(user){
+          const token = jwt.sign(
+            { _id: user._id },
+            process.env.TOKEN_SECRET,
+            {
+              expiresIn: "2 days",
+            }
+          );
+          // Development
+          res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Facebook'});
+          // Production
+          // res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+        }else{
+          const password = await bcrypt.hash(response.data.email, 10)
+          const newUser = new User({
+            username: response.data.name,
+            email: response.data.email,
+            password: password,
+            facebook: {
+              id: response.data.id,
+              token: accessToken,
+              email: response.data.email,
+              name: response.data.name
+            }
+          })
+          newUser.save()
+
+          const token = jwt.sign(
+          { _id: newUser._id },
+          process.env.TOKEN_SECRET,
+          {
+            expiresIn: "2 days",
+          }
+          );
+          // Development
+          res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Facebook'});
+          // Production
+        // res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+        }
+    })
+    .catch(err=> console.log(err))
+  } catch (error) {
+    res.status(400).json('Gagal Login dengan Facebook')
+  }
+}
+
 const logout = (req,res)=>{
   try {
     // Development
-    // res.clearCookie("token");
+    res.clearCookie("token");
     // Production
-    res.clearCookie("token",{ httpOnly: true, sameSite: 'none', secure: true   });
+    // res.clearCookie("token",{ httpOnly: true, sameSite: 'none', secure: true   });
     res.status(200).json({ success: true , msg: 'Berhasil logout'});
   } catch (error) {
   res.status(400).json({msg: 'Gagal logout'})
@@ -94,7 +148,7 @@ const getAllUser = async (req,res)=>{
 const getUserByID = async (req,res)=>{
   try {
     const user = await User.findById({ _id: req.params.id })
-    .select('username profilePicture myTeam friends inTournaments role birthDate bio socialMedia pubgMobileStats')
+    .select('-password')
     .populate('pubgMobileStats')
     .populate('myTeam')
     .populate('inTournaments')
@@ -255,6 +309,7 @@ const updateUserPubgMobileStats = async (req,res)=>{
 module.exports = {
   signUp, 
   login,
+  loginWithFacebook,
   logout,
   getAllUser,
   getUserByID,
