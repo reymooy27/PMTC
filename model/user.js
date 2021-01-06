@@ -66,7 +66,25 @@ const user = new mongoose.Schema({
   verified:{
     type: Boolean,
     default: false
-  }
+  },
+  facebook: {
+    id: {
+      type: String,
+      default: ''
+    },
+    token: {
+      type: String,
+      default: ''
+    },
+    email: {
+      type: String,
+      default: ''
+    },
+    name: {
+      type: String,
+      default: ''
+    },
+  },
 });
 
 module.exports = mongoose.model("User", user);
