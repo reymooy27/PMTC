@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^17.1.0",
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "cloudinary": "^1.22.0",
     "compression": "^1.7.4",
@@ -18,7 +19,6 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-session": "^1.17.1",
     "googleapis": "^52.1.0",
     "helmet": "^3.23.3",
     "jsonwebtoken": "^8.5.1",
@@ -26,8 +26,6 @@
     "multer": "^1.4.2",
     "multer-storage-cloudinary": "^4.0.0",
     "nodemailer": "^6.4.10",
-    "passport": "^0.4.1",
-    "passport-facebook": "^3.0.0",
     "pm2": "^2.10.4"
   },
   "engines": {
