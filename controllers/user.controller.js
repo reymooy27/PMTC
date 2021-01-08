@@ -8,6 +8,9 @@ const Tournament = require("../model/tournament");
 const Team2 = require("../model/team2");
 const PUBGMobileStats = require('../model/pubgMobileStats')
 const axios = require('axios').default;
+const {OAuth2Client} = require('google-auth-library');
+
+const client = new OAuth2Client(process.env.CLIENT_ID)
 
 const signUp = async (req, res) => {
   const { error } = signupValidation(req.body);
@@ -122,6 +125,65 @@ const loginWithFacebook = async (req,res)=>{
   } catch (error) {
     res.status(400).json('Gagal Login dengan Facebook')
   }
+}
+
+const loginWithGoogle = async(req,res)=>{
+  try {
+  const {tokenId} = req.body
+
+  client.verifyIdToken({idToken: tokenId, audience: process.env.CLIENT_ID})
+  .then(async (response)=>{
+    const {email_verified,name,email} = response.payload
+    if(email_verified){
+      const user = await User.findOne({'google.email': email})
+      if(user){
+        const token = jwt.sign(
+        { _id: user._id },
+        process.env.TOKEN_SECRET,
+        {
+          expiresIn: "2 days",
+        }
+        );
+        // Development
+        res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Google'});
+        // Production
+        // res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+      }else{
+        const password = await bcrypt.hash(email, 10)
+        const newUser = new User({
+          username: name,
+          email: email,
+          password: password,
+          google: {
+            email_verified,
+            email,
+            name
+          }
+        })
+        newUser.save()
+
+        const token = jwt.sign(
+        { _id: newUser._id },
+        process.env.TOKEN_SECRET,
+        {
+          expiresIn: "2 days",
+        }
+        );
+        // Development
+        res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Google'});
+        // Production
+        // res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+      }
+    }else{
+    res.status(400).json('Email belum diverifikasi')
+    }
+  })
+  .catch(err=> console.log(err))
+
+  } catch (error) {
+    res.status(400).json('Gagal login dengan Google')
+  }
+
 }
 
 const logout = (req,res)=>{
@@ -310,6 +372,7 @@ module.exports = {
   signUp, 
   login,
   loginWithFacebook,
+  loginWithGoogle,
   logout,
   getAllUser,
   getUserByID,

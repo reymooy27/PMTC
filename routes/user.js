@@ -15,6 +15,7 @@ router.post("/team/:teamID/user/:userID/add",verify, userCtrl.addPlayerToTeam);
 router.post("/team/:teamID/user/:userID/remove",verify, userCtrl.removePlayerFromTeam);
 router.post("/tournament/:idTournament/team/:teamId/join",verify, userCtrl.joinTournament);
 router.post("/signup",userCtrl.signUp );
+router.post("/login/google", userCtrl.loginWithGoogle);
 router.post("/login/facebook", userCtrl.loginWithFacebook);
 router.post("/login", userCtrl.login);
 router.get("/logout", userCtrl.logout);

@@ -85,6 +85,21 @@ const user = new mongoose.Schema({
       default: ''
     },
   },
+  google: {
+    email_verified:{
+      type:Boolean,
+      default: false
+    },
+    email: {
+      type: String,
+      default: ''
+    },
+    name: {
+      type: String,
+      default: ''
+    },
+  },
+  
 });
 
 module.exports = mongoose.model("User", user);
