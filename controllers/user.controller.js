@@ -65,9 +65,9 @@ const login = async (req, res) => {
       }
     );
     // Development
-    res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses'});
+    // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses'});
     // Production
-    // res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+    res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
   }
   } catch (error) {
     res.status(401).json('Login gagal');
@@ -90,9 +90,9 @@ const loginWithFacebook = async (req,res)=>{
             }
           );
           // Development
-          res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Facebook'});
+          // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Facebook'});
           // Production
-          // res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+          res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
         }else{
           const password = await bcrypt.hash(response.data.email, 10)
           const newUser = new User({
@@ -116,9 +116,9 @@ const loginWithFacebook = async (req,res)=>{
           }
           );
           // Development
-          res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Facebook'});
+          // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Facebook'});
           // Production
-        // res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+        res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
         }
     })
     .catch(err=> console.log(err))
@@ -145,9 +145,9 @@ const loginWithGoogle = async(req,res)=>{
         }
         );
         // Development
-        res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Google'});
+        // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Google'});
         // Production
-        // res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+        res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
       }else{
         const password = await bcrypt.hash(email, 10)
         const newUser = new User({
@@ -170,9 +170,9 @@ const loginWithGoogle = async(req,res)=>{
         }
         );
         // Development
-        res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Google'});
+        // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Google'});
         // Production
-        // res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+        res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
       }
     }else{
     res.status(400).json('Email belum diverifikasi')
@@ -189,9 +189,9 @@ const loginWithGoogle = async(req,res)=>{
 const logout = (req,res)=>{
   try {
     // Development
-    res.clearCookie("token");
+    // res.clearCookie("token");
     // Production
-    // res.clearCookie("token",{ httpOnly: true, sameSite: 'none', secure: true   });
+    res.clearCookie("token",{ httpOnly: true, sameSite: 'none', secure: true   });
     res.status(200).json({ success: true , msg: 'Berhasil logout'});
   } catch (error) {
   res.status(400).json({msg: 'Gagal logout'})
