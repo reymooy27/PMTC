@@ -23,11 +23,11 @@ const sendMessage = async (req,res)=>{
     }else{
       const newConversation = new Conversations({
         recipients: [req.user._id,req.params.id],
-        lastMessage: req.body.lastMessage
+        lastMessage: req.body.message
       })
       newConversation.save()
       const message = new Chat({
-        conversation: conversation._id,
+        conversation: newConversation._id,
         to: req.params.id,
         from: req.user._id,
         message: req.body.message,
@@ -41,9 +41,14 @@ const sendMessage = async (req,res)=>{
   }
 }
 
-const getUserConversation = async (req,res)=>{
+const getUserConversationMessages = async (req,res)=>{
   try {
-    const messages = await Chat.find({conversation: req.params.id}).lean()
+    const messages = await Chat.find({
+      $or: [
+          { $and: [{ to: req.user._id }, { from: req.params.id }] },
+          { $and: [{ to: req.params.id }, { from: req.user._id }] },
+      ],
+        }).lean()
     res.status(200).json(messages)
   } catch (error) {
     res.status(400).json('Gagal mendapatkan pesan')
@@ -52,7 +57,6 @@ const getUserConversation = async (req,res)=>{
 
 const getUserChatList = async (req,res)=>{
   try {
-    console.log(req.user._id);
     const conversationList = await Conversations.find(
       {
         recipients:{
@@ -72,6 +76,6 @@ const getUserChatList = async (req,res)=>{
 
 module.exports = {
   sendMessage,
-  getUserConversation,
+  getUserConversationMessages,
   getUserChatList
 }
