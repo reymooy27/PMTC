@@ -28,6 +28,7 @@ const user = await User.findById({_id: req.user._id})
 
   try {
     await tournament.save();
+    req.io.sockets.emit('createTournament', 'Turnamen dibuat')
     res.status(200).json('Berhasil membuat turnamen')
   } catch (error) {
     res.status(400).json('Tidak bisa membuat turnamen')
@@ -42,6 +43,7 @@ const updateTournament = async (req, res) => {
   try {
     turnamen.set(req.body)
     turnamen.save()
+    req.io.sockets.emit('updateTournament', 'Turnamen diupdate')
     res.status(200).json('Berhasil mengupdate')
   } catch (error) {
     res.status(400).json('Gagal mengupdate')
@@ -66,6 +68,7 @@ const deleteTournament = async (req, res)=>{
       );
       await Team.updateOne({'inTournament': tournament._id},{'$set':{'inTournament': null}},{overwrite: true})
       tournament.remove()
+      req.io.sockets.emit('deleteTournament', 'Turnamen dihapus')  
       res.status(200).json('Berhasil menghapus turnamen')
     }
   } catch (error) {
