@@ -144,7 +144,8 @@ email } = req.body
     teamByTournament.teams.push(team)
     await teamByTournament.save()
     sendEmail(email, teamName,teamByTournament.tournamentFee );
-    res.json('Berhasil mendaftar')
+    req.io.sockets.emit('registTournament', 'Daftar turnamen')
+    res.status(200).json('Berhasil mendaftar')
   } catch (error) {
     res.status(400).json('Gagal mendaftar');
   }
