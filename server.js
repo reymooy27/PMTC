@@ -13,6 +13,7 @@ const userRoutes = require("./routes/user");
 const teamRoutes = require("./routes/team");
 const gameRoutes = require('./routes/game');
 const chatRoutes = require('./routes/chat')
+const friendRequestRoutes = require('./routes/friendRequest')
 const deleteUnconfirmedTeam = require("./utils/deleteUnconfirmedTeam");
 const app = express();
 const port = process.env.PORT || 8000;
@@ -74,6 +75,7 @@ app.use(userRoutes);
 app.use(teamRoutes);
 app.use(gameRoutes);
 app.use(chatRoutes);
+app.use(friendRequestRoutes);
 
 io.on("connection", (socket) => {
   socket.on('click',(arg)=>{
