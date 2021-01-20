@@ -13,7 +13,7 @@ const conversationsSchema = new mongoose.Schema({
 },{
   timestamps:{
     createdAt: true,
-    updatedAt: false
+    updatedAt: true
   }
 }
 )
