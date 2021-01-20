@@ -68,6 +68,7 @@ const getUserChatList = async (req,res)=>{
         model: 'User',
         select: { '_id': 1,'username':1, 'profilePicture': 1},
       })
+      .sort({'updatedAt': -1})
     res.status(200).json(conversationList)
   } catch (error) {
     res.status(400).json('Gagal mendapatkan pesan')
