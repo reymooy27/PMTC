@@ -234,6 +234,7 @@ try{
       },
     },
     { runValidators: true });
+    req.io.sockets.emit('updateTeam', 'Tim diupdate')
     res.status(200).json("Update berhasil");
 }
 catch(error){
