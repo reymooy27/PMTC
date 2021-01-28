@@ -12,6 +12,8 @@ const {OAuth2Client} = require('google-auth-library');
 
 const client = new OAuth2Client(process.env.CLIENT_ID)
 
+const setting = process.env.NODE_ENV === 'production' ? { httpOnly: true, sameSite: 'none', secure: true} : { httpOnly: true}
+
 const signUp = async (req, res) => {
   const { error } = signupValidation(req.body);
   if (error) return res.status(401).json(error.details[0].message);
@@ -64,10 +66,7 @@ const login = async (req, res) => {
         expiresIn: "2 days",
       }
     );
-    // Development
-    // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses'});
-    // Production
-    res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+    res.cookie("token", token, setting).status(200).json({msg: 'Login Sukses'});
   }
   } catch (error) {
     res.status(401).json('Login gagal');
@@ -89,10 +88,7 @@ const loginWithFacebook = async (req,res)=>{
               expiresIn: "2 days",
             }
           );
-          // Development
-          // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Facebook'});
-          // Production
-          res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+          res.cookie("token", token, setting).status(200).json({msg: 'Login Sukses'});
         }else{
           const password = await bcrypt.hash(response.data.email, 10)
           const newUser = new User({
@@ -115,10 +111,7 @@ const loginWithFacebook = async (req,res)=>{
             expiresIn: "2 days",
           }
           );
-          // Development
-          // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Facebook'});
-          // Production
-        res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+        res.cookie("token", token, setting).status(200).json({msg: 'Login Sukses'});
         }
     })
     .catch(err=> console.log(err))
@@ -144,10 +137,7 @@ const loginWithGoogle = async(req,res)=>{
           expiresIn: "2 days",
         }
         );
-        // Development
-        // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Google'});
-        // Production
-        res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+        res.cookie("token", token, setting).status(200).json({msg: 'Login Sukses dengan Google'});
       }else{
         const password = await bcrypt.hash(email, 10)
         const newUser = new User({
@@ -169,10 +159,7 @@ const loginWithGoogle = async(req,res)=>{
           expiresIn: "2 days",
         }
         );
-        // Development
-        // res.cookie("token", token, { httpOnly: true  }).status(200).json({msg: 'Login Sukses dengan Google'});
-        // Production
-        res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true   }).status(200).json({msg: 'Login Sukses'});
+        res.cookie("token", token, setting).status(200).json({msg: 'Login Sukses dengan Google'});
       }
     }else{
     res.status(400).json('Email belum diverifikasi')
@@ -188,10 +175,7 @@ const loginWithGoogle = async(req,res)=>{
 
 const logout = (req,res)=>{
   try {
-    // Development
-    // res.clearCookie("token");
-    // Production
-    res.clearCookie("token",{ httpOnly: true, sameSite: 'none', secure: true   });
+    res.clearCookie("token",setting);
     res.status(200).json({ success: true , msg: 'Berhasil logout'});
   } catch (error) {
   res.status(400).json({msg: 'Gagal logout'})
@@ -210,11 +194,15 @@ const getAllUser = async (req,res)=>{
 const getUserByID = async (req,res)=>{
   try {
     const user = await User.findById({ _id: req.params.id })
-    .select('-password')
+    .select('-password -facebook -google')
     .populate('pubgMobileStats')
     .populate('myTeam')
     .populate('inTournaments')
-    .populate('friends')
+    .populate({
+      path: 'friends',
+      model: 'User',
+      select: { '_id': 1,'username':1, 'profilePicture': 1},
+    })
     .exec()
     res.json(user);
     

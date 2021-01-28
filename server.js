@@ -14,15 +14,17 @@ const teamRoutes = require("./routes/team");
 const gameRoutes = require('./routes/game');
 const chatRoutes = require('./routes/chat')
 const friendRequestRoutes = require('./routes/friendRequest')
-const deleteUnconfirmedTeam = require("./utils/deleteUnconfirmedTeam");
+// const deleteUnconfirmedTeam = require("./utils/deleteUnconfirmedTeam");
 const app = express();
 const port = process.env.PORT || 8000;
 const db_uri = process.env.DB_CONNECT;
 
+const frontendURL = process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : "http://localhost:3000"
+
 const server = http.createServer(app);
 const io = socketio(server,{
   cors: {
-    origin: "http://localhost:3000",
+    origin: frontendURL,
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -32,10 +34,7 @@ dotenv.config();
 app.use(compression());
 app.use(cookieParser())
 app.use(helmet());
-// Production
-// app.use(cors({credentials: true, origin: process.env.FRONTEND_URL}));
-// Development
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({credentials: true, origin: frontendURL}));
 // app.use(deleteUnconfirmedTeam);
 app.use(function (req, res, next) {
   req.io = io;
@@ -76,14 +75,5 @@ app.use(teamRoutes);
 app.use(gameRoutes);
 app.use(chatRoutes);
 app.use(friendRequestRoutes);
-
-io.on("connection", (socket) => {
-  socket.on('click',(arg)=>{
-    console.log(arg);
-  })
-  socket.on('disconnecting',(reason)=>{
-    console.log('disconnecting');
-  })
-});
 
 server.listen(port, ()=> console.log('server on'));
