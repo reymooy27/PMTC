@@ -9,6 +9,7 @@ const socketio = require('socket.io')
 const cookieParser = require('cookie-parser')
 const route = require("./routes/routes");
 const tournamentRoutes = require("./routes/tournament");
+const authRoutes = require('./routes/auth')
 const userRoutes = require("./routes/user");
 const teamRoutes = require("./routes/team");
 const gameRoutes = require('./routes/game');
@@ -69,6 +70,7 @@ app.use(
 app.use(express.static("public"));
 
 app.use(route);
+app.use(authRoutes);
 app.use(tournamentRoutes);
 app.use(userRoutes);
 app.use(teamRoutes);

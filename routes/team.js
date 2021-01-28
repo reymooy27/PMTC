@@ -9,5 +9,9 @@ router.get("/team2/:id",teamCtrl.getTeam2ByID);
 router.post("/team/create/:id", upload, teamCtrl.createTeam);
 router.put("/team/update/:id", verify, teamCtrl.updateTeam);
 router.delete("/team/delete/:id", verify, teamCtrl.deleteTeam);
+router.post("/user/:id/team/create", verify, teamCtrl.createUserTeam);
+router.delete("/user/team/:teamId/delete",verify, teamCtrl.deleteUserTeam);
+router.post("/team/:teamID/user/:userID/add",verify, teamCtrl.addPlayerToTeam);
+router.post("/team/:teamID/user/:userID/remove",verify, teamCtrl.removePlayerFromTeam);
 
 module.exports = router;

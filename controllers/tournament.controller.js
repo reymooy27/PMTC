@@ -2,6 +2,7 @@ const Team = require("../model/team");
 const Tournament = require("../model/tournament");
 const cloudinary = require("cloudinary");
 const User = require("../model/user");
+const Team2 = require("../model/team2");
 
 
 const createTournament = async (req, res) => {
@@ -61,9 +62,9 @@ const deleteTournament = async (req, res)=>{
       cloudinary.v2.uploader.destroy(
         `tournamentPicture/${tournament.tournamentName}`,
         (error, result) => {
-        if(error){
-          throw error
-        }
+          if(error){
+            throw error
+          }
         }
       );
       await Team.updateOne({'inTournament': tournament._id},{'$set':{'inTournament': null}},{overwrite: true})
@@ -100,10 +101,29 @@ const getTournamentByID = async (req,res)=>{
   }
 }
 
+const joinTournament = async (req,res)=>{
+  try {
+    const promisetournament = Tournament.findById({_id: req.params.idTournament})
+    const promiseteamRoster = Team2.findById({_id: req.params.teamId})
+    const [tournament, teamRoster] = await Promise.all([promisetournament, promiseteamRoster])
+
+    if(tournament.teams.includes(req.params.teamId)) return res.status(400).json('Tim sudah terdaftar dalam turnamen')
+    if(teamRoster.roster.length < 4) return res.status(400).json('Tim ini tidak memiliki cukup pemain')
+
+    await Tournament.updateOne({_id: req.params.idTournament},{'$push':{'teams':req.params.teamId}})
+    await Team2.updateOne({_id: req.params.teamId},{'$push':{'inTournaments':req.params.idTournament}})
+    await User.updateMany({'myTeam': req.params.teamId}, {'$push':{'inTournaments': req.params.idTournament}})
+    res.status(200).json('Berhasil menambahkan ke turnamen')
+  } catch (error) {
+    res.status(400).json('Gagal menambahkan ke turnamen')
+  }
+}
+
 module.exports = {
   createTournament,
   updateTournament,
   deleteTournament,
   getAllTournament,
-  getTournamentByID
+  getTournamentByID,
+  joinTournament
 };

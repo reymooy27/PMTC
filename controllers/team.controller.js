@@ -245,7 +245,7 @@ catch(error){
 const getAllTeam = async (req, res) => {
   try {
     const teams =  await Team.find().lean()
-      res.json(teams);
+    res.json(teams);
   } catch (error) {
     res.status(404).json('Team yang anda cari tidak ada')
   }
@@ -254,7 +254,7 @@ const getAllTeam = async (req, res) => {
 
 const getTeamByID = async (req,res)=>{
   try {
-   const team = await Team.findById({ _id: req.params.id }).lean();
+  const team = await Team.findById({ _id: req.params.id }).lean();
     res.json(team);
   } catch (error) {
     res.status(404).json('Team yang anda cari tidak ada')
@@ -264,14 +264,78 @@ const getTeamByID = async (req,res)=>{
 
 const getTeam2ByID = async (req,res)=>{
   try {
-   const team = await Team2.findById({ _id: req.params.id }).lean().populate({
-     path:'roster',
-     select:'_id username profilePicture'
-   });
+  const team = await Team2.findById({ _id: req.params.id }).lean().populate({
+    path:'roster',
+    select:'_id username profilePicture'
+  });
     res.json(team);
   } catch (error) {
     res.status(404).json('Team yang anda cari tidak ada')
     
+  }
+}
+
+
+const createUserTeam = async (req, res)=>{
+  const teamExist = await Team2.findOne({teamName: req.body.teamName})
+  if(teamExist) return res.status(400).json('Nama tim sudah terpakai')
+
+  const team = new Team2(req.body);
+
+  try {
+    const user = await User.findByIdAndUpdate({_id: req.params.id},{$push: {myTeam: team},},{new: true, upsert:true })
+    team.roster.push(user)
+    await team.save()
+    res.status(200).json('Berhasil membuat team')
+  } catch (error) {
+    res.status(400).json('Tidak bisa membuat team')
+  }
+}
+
+const deleteUserTeam = async (req,res)=>{
+  try {
+    const team = await Team2.findById({
+    _id: req.params.teamId,
+  });
+  if (team) {
+    cloudinary.v2.uploader.destroy(
+      `logo/${team.teamName}-${team.inTournament}`,
+      (error, result) => {
+      if(error){
+        throw error
+      }
+      }
+    );
+    await User.updateMany({'myTeam' : team._id}, {'$pull':{'myTeam' : team._id}})
+    await Tournament.updateOne({'teams': team._id},{'$pull':{'teams':team._id}})
+    team.remove()
+    res.status(200).json('Berhasil menghapus team')
+  }
+  } catch (error) {
+    res.status(400).json('Tidak bisa menghapus team')
+  }
+}
+
+const addPlayerToTeam = async (req,res)=>{
+  try {
+    const team = await Team2.findById({_id: req.params.teamID})
+    if(team.roster.includes(req.params.userID)) return res.status(400).json('Pemain sudah terdaftar dalam tim')
+
+    await Team2.updateOne({_id: req.params.teamID}, {'$push': {'roster': req.params.userID}})
+    await User.updateOne({_id: req.params.userID}, {'$push': {'myTeam': req.params.teamID}})
+    res.status(200).json('Berhasil menambahkan pemain ke tim')
+  } catch (error) {
+    res.status(400).json('Gagal menambahkan pemain ke tim')
+  }
+}
+
+const removePlayerFromTeam = async (req,res)=>{
+  try {
+    await Team2.updateOne({'roster': req.params.userID}, {'$pull': {'roster': req.params.userID}})
+    await User.updateOne({'myTeam': req.params.teamID}, {'$pull': {'myTeam': req.params.teamID}})
+    res.status(200).json('Berhasil menghapus pemain dari tim')
+  } catch (error) {
+    res.status(400).json('Gagal menghapus pemain dari tim')
   }
 }
 
@@ -283,5 +347,9 @@ module.exports = {
   deleteTeam,
   getAllTeam,
   getTeamByID,
-  getTeam2ByID
+  getTeam2ByID,
+  createUserTeam,
+  deleteUserTeam,
+  addPlayerToTeam,
+  removePlayerFromTeam,
 };
