@@ -3,8 +3,13 @@ const User = require('../model/user')
 
 const sendFriendRequest = async (req,res)=>{
   try {
-    const request = await FR.findOne({from: req.user._id, to: req.params.id})
-    if(request && request.pending === true) return res.status(400).json('Permintaan anda sudah terkirim')
+    const request = await FR.findOne({
+      $or: [
+          { $and: [{ to: req.user._id }, { from: req.params.id }] },
+          { $and: [{ to: req.params.id }, { from: req.user._id }] },
+      ],
+        })
+    if(request) return res.status(400).json('Permintaan anda sudah terkirim')
 
     const newRequest = new FR({
       from: req.user._id,
