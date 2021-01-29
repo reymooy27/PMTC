@@ -14,6 +14,7 @@ const userRoutes = require("./routes/user");
 const teamRoutes = require("./routes/team");
 const gameRoutes = require('./routes/game');
 const chatRoutes = require('./routes/chat')
+const notificationRoutes = require('./routes/notification')
 const friendRequestRoutes = require('./routes/friendRequest')
 // const deleteUnconfirmedTeam = require("./utils/deleteUnconfirmedTeam");
 const app = express();
@@ -76,6 +77,7 @@ app.use(userRoutes);
 app.use(teamRoutes);
 app.use(gameRoutes);
 app.use(chatRoutes);
+app.use(notificationRoutes);
 app.use(friendRequestRoutes);
 
 server.listen(port, ()=> console.log('server on'));

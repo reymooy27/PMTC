@@ -1,5 +1,6 @@
 const FR = require('../model/friendRequest')
 const User = require('../model/user')
+const Notification = require('../model/notification')
 
 const sendFriendRequest = async (req,res)=>{
   try {
@@ -17,6 +18,13 @@ const sendFriendRequest = async (req,res)=>{
     })
     newRequest.save()
     req.io.sockets.emit('sendFriendRequest', newRequest._id)
+    const newNotification = new Notification({
+      sender: req.user._id,
+      message: 'Anda memiliki permintaan pertemanan baru',
+      recievers: [req.params.id]
+    })
+    newNotification.save()
+    req.io.sockets.emit('notification', newNotification._id)
     res.status(200).json('Berhasil mengirim permintaan pertemanan')
   } catch (error) {
     res.status(400).json('Gagal mengirim permintaan pertemanan')
@@ -31,12 +39,18 @@ const updateFriendRequest = async (req,res)=>{
     request.save()
     if(request.accepted === true){
       const user = await User.findById({_id: request.from})
-      user.friends.push(request.to)
+      user.friends.push(request.to )
       user.save()
       const friends = await User.findById({_id: request.to})
       friends.friends.push(request.from)
       friends.save()
       req.io.sockets.emit('updateFriendRequest', request._id)
+      const newNotification = new Notification({
+        message: 'Permintaan pertemanan anda diterima',
+        recievers: [req.user._id]
+      })
+      newNotification.save()
+      req.io.sockets.emit('notification', newNotification._id)
       return res.status(200).json('Permintaan pertemanan anda diterima')
     }else{
       req.io.sockets.emit('updateFriendRequest', request._id)
