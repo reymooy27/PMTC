@@ -63,22 +63,7 @@ const updateFriendRequest = async (req,res)=>{
 
 const getFriendRequests = async (req,res)=>{
   try {
-    const requests = await FR.find({
-      $or: [
-          { $and: [{ from: req.user._id}]},
-          { $and: [{ to: req.user._id }]},
-      ],
-    })
-    .populate({
-        path: 'from',
-        model: 'User',
-        select: { '_id': 1,'username':1, 'profilePicture': 1},
-      })
-      .populate({
-        path: 'to',
-        model: 'User',
-        select: { '_id': 1,'username':1, 'profilePicture': 1},
-      })
+    const requests = await FR.findOne({$and:[{from: req.user._id},{to: req.params.id}]})
     res.status(200).json(requests)
   } catch (error) {
     res.status(400).json('Gagal mendapatkan permintaan pertemanan')
