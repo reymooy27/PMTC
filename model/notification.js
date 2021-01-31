@@ -23,6 +23,18 @@ const notificationSchema = new mongoose.Schema({
       default: Date.now
     }
   }],
+  link: {
+    type: String,
+    default: '/'
+  },
+  action:[{
+    actionType: {
+      type: String
+    },
+    actionLink:{
+      type: String
+    }
+  }]
 },{
   timestamps:{
     createdAt: true,
