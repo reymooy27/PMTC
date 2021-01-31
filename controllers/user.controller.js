@@ -1,4 +1,5 @@
 const User = require("../model/user");
+const FR = require('../model/friendRequest')
 
 const getAllUser = async (req,res)=>{
   try {
@@ -55,9 +56,27 @@ const updateUserProfile = async (req,res)=>{
   }
 }
 
+const unFriend = async (req,res)=>{
+  try {
+    await User.updateOne({_id: req.user._id},{'$pull': {'friends': req.params.id}})
+    await User.updateOne({_id: req.params.id},{'$pull': {'friends': req.user._id}})
+    const requests = await FR.findOne({
+      $or:[
+        { $and:[{from: req.user._id},{to: req.params.id}]},
+        { $and:[{from: req.params.id},{to: req.user._id}]},
+      ]})
+    requests.remove()
+    req.io.sockets.emit('unFriend', 'Berhasil membatalkan pertemanan')
+    res.status(200).json('Berhasil membatalkan pertemanan')
+  } catch (error) {
+    res.status(400).json('Gagal membatalkan pertemanan')
+  }
+}
+
 module.exports = {
   getAllUser,
   getUserByID,
   updateProfilePicture,
   updateUserProfile,
+  unFriend
 }
