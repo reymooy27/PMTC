@@ -21,7 +21,18 @@ const sendFriendRequest = async (req,res)=>{
     const newNotification = new Notification({
       sender: req.user._id,
       message: 'Anda memiliki permintaan pertemanan baru',
-      recievers: [req.params.id]
+      recievers: [req.params.id],
+      link: `/profile/${req.user._id}`,
+      action: [
+        {
+          actionType: 'Terima',
+          actionLink: `/friendRequest/update/${newRequest._id}`
+        },
+        {
+          actionType: 'Tolak',
+          actionLink: `/friendRequest/update/${newRequest._id}`
+        },
+    ]
     })
     newNotification.save()
     req.io.sockets.emit('notification', newNotification._id)
@@ -37,27 +48,45 @@ const updateFriendRequest = async (req,res)=>{
     request.accepted = req.body.accepted
     request.pending = false
     request.save()
+    const notif = await Notification.findOne({$and: [{sender: request.from}, {recievers: [req.user._id]},{message: 'Anda memiliki permintaan pertemanan baru'}]})
     if(request.accepted === true){
+      notif.remove()
       const user = await User.findById({_id: request.from})
       user.friends.push(request.to )
       user.save()
       const friends = await User.findById({_id: request.to})
       friends.friends.push(request.from)
       friends.save()
-      req.io.sockets.emit('updateFriendRequest', request._id)
+      req.io.sockets.emit('friendRequest', request._id)
       const newNotification = new Notification({
+        sender: request.to,
         message: 'Permintaan pertemanan anda diterima',
-        recievers: [req.user._id]
+        recievers: [request.from],
+        link: `/profile/${request.to}`
       })
       newNotification.save()
       req.io.sockets.emit('notification', newNotification._id)
       return res.status(200).json('Permintaan pertemanan anda diterima')
     }else{
-      req.io.sockets.emit('updateFriendRequest', request._id)
+      notif.remove()
+      request.remove()
+      req.io.sockets.emit('notification', 'Permintaan pertemanan anda ditolak')
       return res.status(200).json('Permintaan pertemanan anda ditolak')
     }
   } catch (error) {
     res.status(400).json('Gagal mengudate permintaan pertemanan')
+  }
+}
+
+const cancelFriendRequest = async (req,res)=>{
+  try {
+    const requests = await FR.findOne({$and:[{from: req.user._id},{to: req.params.id}]})
+    const notif = await Notification.findOne({$and: [{sender: req.user._id}, {recievers: [req.params.id]}]})
+    notif.remove()
+    requests.remove()
+    res.status(200).json('Berhasil membatalkan permintaan pertemanan')
+  } catch (error) {
+    res.status(400).json('Gagal membatalkan permintaan pertemanan')
   }
 }
 
@@ -73,5 +102,6 @@ const getFriendRequests = async (req,res)=>{
 module.exports = {
   sendFriendRequest,
   updateFriendRequest,
+  cancelFriendRequest,
   getFriendRequests
 }
