@@ -6,15 +6,16 @@ const sendFriendRequest = async (req,res)=>{
   try {
     const request = await FR.findOne({
       $or: [
-          { $and: [{ to: req.user._id }, { from: req.params.id }] },
-          { $and: [{ to: req.params.id }, { from: req.user._id }] },
+          { $and: [{ to: req.user._id }, { from: req.params.id }, {requestType: 'FRIEND_REQUEST'}] },
+          { $and: [{ to: req.params.id }, { from: req.user._id }, {requestType: 'FRIEND_REQUEST'}] },
       ],
         })
     if(request) return res.status(400).json('Permintaan anda sudah terkirim')
 
     const newRequest = new FR({
       from: req.user._id,
-      to: req.params.id
+      to: req.params.id,
+      requestType: 'FRIEND_REQUEST'
     })
     newRequest.save()
     req.io.sockets.emit('sendFriendRequest', newRequest._id)
@@ -80,10 +81,11 @@ const updateFriendRequest = async (req,res)=>{
 
 const cancelFriendRequest = async (req,res)=>{
   try {
-    const requests = await FR.findOne({$and:[{from: req.user._id},{to: req.params.id}]})
+    const requests = await FR.findOne({$and:[{from: req.user._id},{to: req.params.id},{requestType: 'FRIEND_REQUEST'}]})
     const notif = await Notification.findOne({$and: [{sender: req.user._id}, {recievers: [req.params.id]}]})
     notif.remove()
     requests.remove()
+    req.io.sockets.emit('notification', 'Berhasil membatalkan permintaan pertemanan')
     res.status(200).json('Berhasil membatalkan permintaan pertemanan')
   } catch (error) {
     res.status(400).json('Gagal membatalkan permintaan pertemanan')
@@ -92,7 +94,8 @@ const cancelFriendRequest = async (req,res)=>{
 
 const getFriendRequests = async (req,res)=>{
   try {
-    const requests = await FR.findOne({$and:[{from: req.user._id},{to: req.params.id}]})
+    const requests = await FR.findOne({$and:[{from: req.user._id}, {to: req.params.id}, {requestType: 'FRIEND_REQUEST'}]})
+    req.io.sockets.emit('notification', 'Berhasil mendapatkan permintaan pertemanan')
     res.status(200).json(requests)
   } catch (error) {
     res.status(400).json('Gagal mendapatkan permintaan pertemanan')

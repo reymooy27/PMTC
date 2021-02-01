@@ -16,6 +16,10 @@ const friendRequestSchema = new mongoose.Schema({
   pending:{
     type: Boolean,
     default: true
+  },
+  requestType:{
+    type: String,
+    default: ''
   }
 },{
   timestamps:{
