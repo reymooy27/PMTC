@@ -12,6 +12,9 @@ const sendFriendRequest = async (req,res)=>{
         })
     if(request) return res.status(400).json('Permintaan anda sudah terkirim')
 
+    const isFriends = await User.findOne({$and:[{_id: req.user._id}, {'friends': req.params.id}]})
+    if(isFriends) return res.status(400).json('Sudah menjadi teman')
+
     const newRequest = new FR({
       from: req.user._id,
       to: req.params.id,
@@ -46,12 +49,8 @@ const sendFriendRequest = async (req,res)=>{
 const updateFriendRequest = async (req,res)=>{
   try {
     const request = await FR.findById({_id: req.params.id})
-    request.accepted = req.body.accepted
-    request.pending = false
-    request.save()
     const notif = await Notification.findOne({$and: [{sender: request.from}, {recievers: [req.user._id]},{message: 'Anda memiliki permintaan pertemanan baru'}]})
-    if(request.accepted === true){
-      notif.remove()
+    if(req.body.accepted === true){
       const user = await User.findById({_id: request.from})
       user.friends.push(request.to )
       user.save()
@@ -66,6 +65,8 @@ const updateFriendRequest = async (req,res)=>{
         link: `/profile/${request.to}`
       })
       newNotification.save()
+      notif.remove()
+      request.remove()
       req.io.sockets.emit('notification', newNotification._id)
       return res.status(200).json('Permintaan pertemanan anda diterima')
     }else{
@@ -82,7 +83,7 @@ const updateFriendRequest = async (req,res)=>{
 const cancelFriendRequest = async (req,res)=>{
   try {
     const requests = await FR.findOne({$and:[{from: req.user._id},{to: req.params.id},{requestType: 'FRIEND_REQUEST'}]})
-    const notif = await Notification.findOne({$and: [{sender: req.user._id}, {recievers: [req.params.id]}]})
+    const notif = await Notification.findOne({$and: [{sender: req.user._id}, {recievers: [req.params.id]},{message: 'Anda memiliki permintaan pertemanan baru'}]})
     notif.remove()
     requests.remove()
     req.io.sockets.emit('notification', 'Berhasil membatalkan permintaan pertemanan')
