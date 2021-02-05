@@ -20,6 +20,10 @@ const friendRequestSchema = new mongoose.Schema({
   requestType:{
     type: String,
     default: ''
+  },
+  teamId:{
+    type:  mongoose.Schema.Types.ObjectId,
+    ref: 'Team2',
   }
 },{
   timestamps:{
