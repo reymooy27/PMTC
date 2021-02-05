@@ -12,6 +12,7 @@ const getNotifications = async (req,res)=> {
     model: 'User',
     select:{'_id': 1, 'username': 1, 'profilePicture': 1}
   })
+  .sort({'createdAt': -1})
   .lean()
     res.status(200).json(notifications)
   } catch (error) {
