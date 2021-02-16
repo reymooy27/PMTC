@@ -21,13 +21,12 @@ const app = express();
 const port = process.env.PORT || 8000;
 const db_uri = process.env.DB_CONNECT;
 
+const frontendURL = process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : "http://localhost:3000"
+
 const server = http.createServer(app);
 const io = socketio(server,{
   cors: {
-    // Production
-    origin: process.env.FRONTEND_URL,
-    // Development
-    // origin: "http://localhost:3000",
+    origin: frontendURL,
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -37,10 +36,7 @@ dotenv.config();
 app.use(compression());
 app.use(cookieParser())
 app.use(helmet());
-// Production
-app.use(cors({credentials: true, origin: process.env.FRONTEND_URL}));
-// Development
-// app.use(cors({credentials: true, origin: "http://localhost:3000"}));
+app.use(cors({credentials: true, origin: frontendURL}));
 // app.use(deleteUnconfirmedTeam);
 app.use(function (req, res, next) {
   req.io = io;
