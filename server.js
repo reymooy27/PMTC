@@ -25,6 +25,7 @@ const frontendURL = process.env.NODE_ENV === 'production' ? process.env.FRONTEND
 
 const server = http.createServer(app);
 const io = socketio(server,{
+  transports: ['websocket'],
   cors: {
     origin: frontendURL,
     methods: ["GET", "POST"],
