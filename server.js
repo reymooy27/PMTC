@@ -6,6 +6,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const http = require('http');
 const socketio = require('socket.io')
+const redis = require("socket.io-redis");
 const cookieParser = require('cookie-parser')
 const route = require("./routes/routes");
 const tournamentRoutes = require("./routes/tournament");
@@ -32,6 +33,8 @@ const io = socketio(server,{
     credentials: true
   }
 });
+
+io.adapter(redis({ host: "localhost", port: 6379 }));
 
 dotenv.config();
 app.use(compression());
