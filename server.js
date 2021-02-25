@@ -33,7 +33,7 @@ const io = socketio(server,{
   }
 });
 
-io.adapter(redis({ host: process.env.REDIS_URL, port: 6379 }));
+// io.adapter(redis({ host: process.env.REDIS_URL, port: 6379 }));
 
 dotenv.config();
 app.use(compression());
