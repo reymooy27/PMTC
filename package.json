@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "pm2": "pm2-runtime start ecosystem.config.js --env production",
+    "start": "node server.js",
     "server": "nodemon server.js"
   },
   "author": "Rey Mooy",
