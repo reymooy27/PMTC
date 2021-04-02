@@ -33,7 +33,7 @@ function checkFileType(file, cb) {
 
 const tournamentPicture = multer({
   storage: storage,
-  limits: { fileSize: 300000 },
+  limits: { fileSize: 30000000 },
   fileFilter: (req, file, cb) => {
     checkFileType(file, cb);
   },
