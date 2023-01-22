@@ -107,17 +107,9 @@ const tournamentSchema = new mongoose.Schema({
     type: Number,
     default: 4
   },
-  // admins:[{
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'User'
-  // }]
   admins:[{
-    name:{
-      type:String
-    },
-    whatsapp:{
-      type: Number
-    }
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }]
 });
 

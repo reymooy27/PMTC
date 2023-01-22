@@ -17,6 +17,7 @@ const getUserByID = async (req,res)=>{
     .populate('pubgMobileStats')
     .populate('myTeam')
     .populate('inTournaments')
+    .populate('tournaments')
     .populate({
       path: 'friends',
       model: 'User',

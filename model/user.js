@@ -25,6 +25,10 @@ const user = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }],
+  tournaments:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tournament'
+  }],
   inTournaments:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Tournament'
