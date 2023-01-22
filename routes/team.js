@@ -3,12 +3,7 @@ const { upload } = require("../utils/uploadLogo");
 const teamCtrl = require("../controllers/team.controller");
 const verify = require('../utils/verifyToken');
 
-router.get("/api/v1/teams", teamCtrl.getAllTeam);
-router.get("/team/:id",teamCtrl.getTeamByID);
 router.get("/team2/:id",teamCtrl.getTeam2ByID);
-router.post("/team/create/:id", upload, teamCtrl.createTeam);
-router.put("/team/update/:id", verify, teamCtrl.updateTeam);
-router.delete("/team/delete/:id", verify, teamCtrl.deleteTeam);
 router.post("/user/:id/team/create", verify, teamCtrl.createUserTeam);
 router.delete("/user/team/:teamId/delete",verify, teamCtrl.deleteUserTeam);
 router.post("/team/invite/:id",verify, teamCtrl.teamInvite);
